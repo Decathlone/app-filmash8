@@ -11,4 +11,7 @@ git cmake gcc g++ libboost-math-dev
 ## Installing
 
 ```bash
-git clone https://github.com/kansoftware/Tra
+git clone https://github.com/kansoftware/TradingBasics.git
+cd TradingBasics
+mkdir build; cd build
+cmake -DCMAKE_
