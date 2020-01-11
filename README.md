@@ -1,3 +1,5 @@
 # Trading basics library
 
-## Abou
+## About
+
+This is classes, types and functions for creating trading strategies and 
