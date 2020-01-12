@@ -14,4 +14,4 @@ git cmake gcc g++ libboost-math-dev
 git clone https://github.com/kansoftware/TradingBasics.git
 cd TradingBasics
 mkdir build; cd build
-cmake -DCMAKE_
+cmake -DCMAKE_C_FLAGS="-O3 -march=native -DNDEBUG" -DCMAKE_CXX_FLAGS="-O3 -mar
