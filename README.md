@@ -28,4 +28,8 @@ cmake -DBOOST_ROOT=/you_path_to_boost/boost ..
 
 ## Testing
 
-```b
+```bash
+cd ..
+mkdir buildtest; cd buildtest
+cmake -DBUILD_TESTING=ON ..
+cmake -
