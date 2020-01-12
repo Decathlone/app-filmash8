@@ -19,4 +19,7 @@ cmake --build . -- -j 4
 
 ```
 
-For correct work need 
+For correct work need package libboost-math-dev or you can set BOOST_ROOT variable.
+
+```bash
+cmak
