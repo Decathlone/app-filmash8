@@ -22,4 +22,10 @@ cmake --build . -- -j 4
 For correct work need package libboost-math-dev or you can set BOOST_ROOT variable.
 
 ```bash
-cmak
+cmake -DBOOST_ROOT=/you_path_to_boost/boost ..
+
+```
+
+## Testing
+
+```b
