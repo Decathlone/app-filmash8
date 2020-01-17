@@ -32,4 +32,11 @@ cmake -DBOOST_ROOT=/you_path_to_boost/boost ..
 cd ..
 mkdir buildtest; cd buildtest
 cmake -DBUILD_TESTING=ON ..
-cmake -
+cmake --build . -- -j 4
+make test
+
+```
+
+## Usage
+
+Into your project incl
