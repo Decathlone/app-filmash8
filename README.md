@@ -39,4 +39,5 @@ make test
 
 ## Usage
 
-Into your project incl
+Into your project include folder TradingBasics/include. Add builded lib to your project.
+The sample f
