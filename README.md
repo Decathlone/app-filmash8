@@ -40,4 +40,7 @@ make test
 ## Usage
 
 Into your project include folder TradingBasics/include. Add builded lib to your project.
-The sample f
+The sample for cmake:
+
+```cmake
+set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/
