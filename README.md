@@ -43,4 +43,7 @@ Into your project include folder TradingBasics/include. Add builded lib to your 
 The sample for cmake:
 
 ```cmake
-set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/
+set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/TradingBasics/" )
+
+add_library(TRADING_BASICS SHARED IMPORTED)
+set_tar
