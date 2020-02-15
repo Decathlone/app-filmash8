@@ -46,4 +46,5 @@ The sample for cmake:
 set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/TradingBasics/" )
 
 add_library(TRADING_BASICS SHARED IMPORTED)
-set_tar
+set_target_properties(TRADING_BASICS PROPERTIES
+    IMPORTED_LOCATION "${
