@@ -51,4 +51,11 @@ set_target_properties(TRADING_BASICS PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${TRADING_BASICS_PATH}include"
 )
 
-target_link_libraries( #YOUR_TARGET_PROJE
+target_link_libraries( #YOUR_TARGET_PROJECT# TRADING_BASICS )
+
+```
+
+or
+
+```cmake
+set( TRADING_BASICS_PATH "#YO
