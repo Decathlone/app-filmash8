@@ -58,4 +58,5 @@ target_link_libraries( #YOUR_TARGET_PROJECT# TRADING_BASICS )
 or
 
 ```cmake
-set( TRADING_BASICS_PATH "#YO
+set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/TradingBasics/" )
+include_directories( "${TRADING_BASICS_P
