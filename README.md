@@ -59,4 +59,5 @@ or
 
 ```cmake
 set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/TradingBasics/" )
-include_directories( "${TRADING_BASICS_P
+include_directories( "${TRADING_BASICS_PATH}include" )
+link_directories( "${TRADING_BASICS_PATH}build" )
