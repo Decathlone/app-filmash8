@@ -1,4 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "Comparers.h"
-#inc
+#include "DelphisRound.h"
+#include "Prices.h"
+
+//---------------------------
