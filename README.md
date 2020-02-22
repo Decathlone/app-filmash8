@@ -61,3 +61,6 @@ or
 set( TRADING_BASICS_PATH "#YOUR_PATH_TO#/TradingBasics/" )
 include_directories( "${TRADING_BASICS_PATH}include" )
 link_directories( "${TRADING_BASICS_PATH}build" )
+
+target_link_libraries( #YOUR_TARGET_PROJECT# -lTradingBasics )
+```
