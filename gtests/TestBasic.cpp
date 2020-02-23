@@ -5,4 +5,6 @@
 #include "Prices.h"
 
 //------------------------------------------------------------------------------------------
-TEST( 
+TEST( Basic, testCompare ) {
+    EXPECT_TRUE( IsGreat( 5.6, 5.5 ) );
+    EXPE
