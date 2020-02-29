@@ -12,3 +12,5 @@ TEST( Basic, testCompare ) {
     
     
     EXPECT_FALSE( IsLess( 5.6, 5.5 ) );
+    EXPECT_FALSE( IsLess( 5.5, 5.5 ) );
+    EXPECT_TRUE( IsLess( 5.5, 5.6 ) );
