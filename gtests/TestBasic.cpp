@@ -25,4 +25,6 @@ TEST( Basic, testCompare ) {
 
 //------------------------------------------------------------------------------------------
 TEST( Basic, testPrice ) {
-    EXPECT_TRUE( IsValidPrice( 5.5 ) 
+    EXPECT_TRUE( IsValidPrice( 5.5 ) );
+    EXPECT_TRUE( IsValidPrice( 0.02 ) );
+    EX
