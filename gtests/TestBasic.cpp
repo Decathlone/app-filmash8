@@ -29,4 +29,8 @@ TEST( Basic, testPrice ) {
     EXPECT_TRUE( IsValidPrice( 0.02 ) );
     EXPECT_TRUE( IsValidPrice( 300000.0 ) );
     
-    EXPECT_FALSE( IsValidPrice( 0.0 )
+    EXPECT_FALSE( IsValidPrice( 0.0 ) );
+    EXPECT_FALSE( IsValidPrice( -1.0 ) );
+}
+
+//-------------------------
