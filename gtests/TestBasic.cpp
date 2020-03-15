@@ -37,4 +37,6 @@ TEST( Basic, testPrice ) {
 TEST( Basic, testSpread ) {
     EXPECT_TRUE( isValidSpreadValue( 55.5 ) );
     EXPECT_TRUE( isValidSpreadValue( 0.0 ) );
-    EXPECT_TRUE( isVali
+    EXPECT_TRUE( isValidSpreadValue( -5.5 ) );
+    
+    EXPECT_FALSE( isValidSpreadValue( 100000.0 ) )
