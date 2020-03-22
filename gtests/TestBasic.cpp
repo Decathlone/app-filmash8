@@ -42,3 +42,5 @@ TEST( Basic, testSpread ) {
     EXPECT_FALSE( isValidSpreadValue( 100000.0 ) );
     EXPECT_FALSE( isValidSpreadValue( -100000.0 ) );
 }
+
+//------------------------------------------------------------------------
