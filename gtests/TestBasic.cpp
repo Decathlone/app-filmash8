@@ -53,4 +53,6 @@ TEST( Basic, testRound ) {
     EXPECT_EQ( Ceil( 5.6 ), 6 );
     EXPECT_EQ( Ceil( 5.4 ), 6 );
     EXPECT_EQ( Ceil( -5.6 ), -5 );
-  
+    EXPECT_EQ( Ceil( -5.4 ), -5 );
+    
+    EXPECT_EQ( Trunc(
