@@ -60,4 +60,6 @@ TEST( Basic, testRound ) {
     EXPECT_EQ( Trunc( -5.6 ), -6 );
     EXPECT_EQ( Trunc( -5.4 ), -6 );
     
-    EXPECT_TRUE( i
+    EXPECT_TRUE( isPositiveValue( 55.5 ) );
+    EXPECT_TRUE( isPositiveValue( 0.00005 ) );
+    E
