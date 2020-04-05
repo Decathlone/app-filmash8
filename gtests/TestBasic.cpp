@@ -62,4 +62,5 @@ TEST( Basic, testRound ) {
     
     EXPECT_TRUE( isPositiveValue( 55.5 ) );
     EXPECT_TRUE( isPositiveValue( 0.00005 ) );
-    E
+    EXPECT_FALSE( isPositiveValue( 0.0 ) );
+    EXPECT_FALSE(
