@@ -4,4 +4,7 @@
 #include "PnlAction.h"
 #include "DelphisRound.h"
 #include "VolatilityBuffer.h"
-#i
+#include "VolatilityBarBuffer.h"
+#include "RubberBuffer.h"
+
+//-----------------
