@@ -11,4 +11,5 @@
 TPriceSeries GetSimplePnl(){
     TPriceSeries lPnLs( 10 );
 
- 
+    for( size_t i=0; i<lPnLs.size(); ++i ) {
+        TSimpleTick l
