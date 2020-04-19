@@ -15,3 +15,10 @@ TPriceSeries GetSimplePnl(){
         TSimpleTick lTick {
             gStartingTime + ToDouble(i)*gOneDay,
             1.0,
+            2.0
+        };
+
+        lPnLs[ i ] = lTick;
+    }
+    
+    re
