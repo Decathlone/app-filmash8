@@ -12,4 +12,6 @@ TPriceSeries GetSimplePnl(){
     TPriceSeries lPnLs( 10 );
 
     for( size_t i=0; i<lPnLs.size(); ++i ) {
-        TSimpleTick l
+        TSimpleTick lTick {
+            gStartingTime + ToDouble(i)*gOneDay,
+            1.0,
