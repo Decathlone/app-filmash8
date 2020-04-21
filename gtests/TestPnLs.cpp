@@ -21,4 +21,7 @@ TPriceSeries GetSimplePnl(){
         lPnLs[ i ] = lTick;
     }
     
-    re
+    return lPnLs;
+}
+
+//--------------------------------------------------------------------
