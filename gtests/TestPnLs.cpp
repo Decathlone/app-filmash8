@@ -30,4 +30,7 @@ TEST( PnLs, PnLsToMoneyResult ) {
     const TPriceSeries lPnLs( GetSimplePnl() );
     
     EXPECT_EQ( PnLsToMoneyResult( lPnLs, false ), 10.0 );
-    EXPECT_EQ( PnLsToMoneyResult( lPn
+    EXPECT_EQ( PnLsToMoneyResult( lPnLs, true ), 20.0 );
+}
+
+//---------------------------
