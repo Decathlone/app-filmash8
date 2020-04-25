@@ -25,4 +25,8 @@ TPriceSeries GetSimplePnl(){
 }
 
 //------------------------------------------------------------------------------------------
-TEST( PnLs, PnLsToMoneyResult ) 
+TEST( PnLs, PnLsToMoneyResult ) {
+
+    const TPriceSeries lPnLs( GetSimplePnl() );
+    
+    EXPECT_EQ( PnLsToM
