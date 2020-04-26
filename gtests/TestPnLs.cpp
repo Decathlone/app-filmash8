@@ -34,4 +34,6 @@ TEST( PnLs, PnLsToMoneyResult ) {
 }
 
 //------------------------------------------------------------------------------------------
-TEST( PnLs,
+TEST( PnLs, PnlsToDaily ) {
+
+    const TPriceSeries lPnLs( GetSimplePnl
