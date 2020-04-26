@@ -39,4 +39,7 @@ TEST( PnLs, PnlsToDaily ) {
     const TPriceSeries lPnLs( GetSimplePnl() );
     const TPriceSeries lPnls_Daily( PnlsToDaily(lPnLs) );
     
-    EXPE
+    EXPECT_EQ( lPnLs.size(), lPnls_Daily.size() );
+    
+    double lCumPnl = 0.0;
+    f
