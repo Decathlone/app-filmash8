@@ -43,4 +43,5 @@ TEST( PnLs, PnlsToDaily ) {
     
     double lCumPnl = 0.0;
     for( size_t i = 0; i<lPnLs.size(); ++i ){
-        lCumPnl +
+        lCumPnl += lPnLs[i].Price*lPnLs[i].Volume;
+        EXPECT_EQ( lCumPnl, lPn
