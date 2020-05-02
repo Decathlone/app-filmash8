@@ -42,4 +42,5 @@ TEST( PnLs, PnlsToDaily ) {
     EXPECT_EQ( lPnLs.size(), lPnls_Daily.size() );
     
     double lCumPnl = 0.0;
-    f
+    for( size_t i = 0; i<lPnLs.size(); ++i ){
+        lCumPnl +
