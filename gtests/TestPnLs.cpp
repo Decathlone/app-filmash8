@@ -50,4 +50,8 @@ TEST( PnLs, PnlsToDaily ) {
 }
 
 //------------------------------------------------------------------------------------------
-TEST( PnLs, PnLsAmplifier 
+TEST( PnLs, PnLsAmplifier ) {
+
+    const TPriceSeries lPnLs( GetSimplePnl() );
+    
+    const 
