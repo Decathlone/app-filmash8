@@ -54,4 +54,5 @@ TEST( PnLs, PnLsAmplifier ) {
 
     const TPriceSeries lPnLs( GetSimplePnl() );
     
-    const 
+    const TPriceSeries lPnLs_amp( PnLsAmplifier( lPnLs, {1,2,4} ) );
+    EXPECT_EQ(
