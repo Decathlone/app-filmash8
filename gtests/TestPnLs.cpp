@@ -61,4 +61,5 @@ TEST( PnLs, PnLsAmplifier ) {
     EXPECT_EQ( lPnLs_amp.back().Price, lPnLs.back().Price );
     
     
-    const TPriceSeries lPnLs_amp2( PnLsAmplifier( l
+    const TPriceSeries lPnLs_amp2( PnLsAmplifier( lPnLs, {1,2,4}, gStartingTime, gStartingTime + gOneDay * 10.0 ) );
+    
