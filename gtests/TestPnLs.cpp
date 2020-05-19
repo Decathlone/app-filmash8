@@ -62,4 +62,5 @@ TEST( PnLs, PnLsAmplifier ) {
     
     
     const TPriceSeries lPnLs_amp2( PnLsAmplifier( lPnLs, {1,2,4}, gStartingTime, gStartingTime + gOneDay * 10.0 ) );
-    
+    EXPECT_EQ( lPnLs_amp2.size(), 22 );
+    EXPECT_GE( lPnLs_amp2.size()
