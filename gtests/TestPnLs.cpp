@@ -75,4 +75,5 @@ TEST( PnLs, PnLsAmplifier ) {
     EXPECT_EQ( lPnLs_amp3.back().Price, lPnLs.back().Price );
     
     
-    const TPriceSeries lPnLs_amp4( PnLsAmplifier
+    const TPriceSeries lPnLs_amp4( PnLsAmplifier( lPnLs, {1,1,1} ) );
+    EXPECT_EQ( lPnLs_amp4.size(), lPnLs.size()
