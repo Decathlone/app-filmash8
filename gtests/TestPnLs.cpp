@@ -80,4 +80,5 @@ TEST( PnLs, PnLsAmplifier ) {
     EXPECT_EQ( lPnLs_amp4.front().Price, lPnLs.front().Price );
     EXPECT_EQ( lPnLs_amp4.back().Price, lPnLs.back().Price );
     
-//    for( co
+//    for( const TSimpleTick& lTick : lPnLs_amp4 ){
+//        std::cout << l
