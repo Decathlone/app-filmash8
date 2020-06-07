@@ -87,3 +87,5 @@ TEST( PnLs, PnLsAmplifier ) {
 
 //------------------------------------------------------------------------------------------
 TEST( ITime, main ) {
+    EXPECT_EQ( ITime(""), 0.0 );
+    EXPECT_EQ( ITime("00:00"
