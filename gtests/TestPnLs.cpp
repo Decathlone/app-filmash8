@@ -90,4 +90,5 @@ TEST( ITime, main ) {
     EXPECT_EQ( ITime(""), 0.0 );
     EXPECT_EQ( ITime("00:00"), 0.0 );
     EXPECT_EQ( ITime("10:00"), 36000.0 );
-    EX
+    EXPECT_EQ( ITime("10:01:01"), 36061.0 );
+    EXPECT_EQ( ITime(1592826299), 42299.0 ); //Mon, 
