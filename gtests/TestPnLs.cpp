@@ -95,4 +95,7 @@ TEST( ITime, main ) {
 }
 
 //------------------------------------------------------------------------------------------
-TEST( VolatilityBuffer, main )
+TEST( VolatilityBuffer, main ) {
+    TVolatilityBuffer<double> lbuf(5);
+    EXPECT_FALSE( lbuf.isFill() );
+    EXPEC
