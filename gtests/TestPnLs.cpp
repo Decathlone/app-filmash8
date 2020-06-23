@@ -98,4 +98,5 @@ TEST( ITime, main ) {
 TEST( VolatilityBuffer, main ) {
     TVolatilityBuffer<double> lbuf(5);
     EXPECT_FALSE( lbuf.isFill() );
-    EXPEC
+    EXPECT_TRUE( std::isnan(lbuf.getMax()) );
+    for (size_t i = 0; i 
