@@ -101,4 +101,6 @@ TEST( VolatilityBuffer, main ) {
     EXPECT_TRUE( std::isnan(lbuf.getMax()) );
     for (size_t i = 0; i < 4; i++) {
         EXPECT_FALSE( lbuf.add( ToDouble(i) ) );
-        EXPECT
+        EXPECT_TRUE( std::isnan(lbuf.getErr()) );
+    }
+    EXPECT_
