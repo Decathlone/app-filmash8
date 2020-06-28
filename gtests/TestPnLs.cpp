@@ -103,4 +103,5 @@ TEST( VolatilityBuffer, main ) {
         EXPECT_FALSE( lbuf.add( ToDouble(i) ) );
         EXPECT_TRUE( std::isnan(lbuf.getErr()) );
     }
-    EXPECT_
+    EXPECT_TRUE( lbuf.add( ToDouble(4) ) );
+    EXPECT_NEAR( lbuf.getErr(), 0.7559289, 
