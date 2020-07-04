@@ -106,4 +106,8 @@ TEST( VolatilityBuffer, main ) {
     EXPECT_TRUE( lbuf.add( ToDouble(4) ) );
     EXPECT_NEAR( lbuf.getErr(), 0.7559289, 0.0000001 );
     EXPECT_EQ( lbuf.getMin(), 0 );
-    EXP
+    EXPECT_EQ( lbuf.getMax(), 4 );
+    EXPECT_EQ( lbuf.getMean(), 2 );
+}
+
+//-----
