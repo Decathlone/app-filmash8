@@ -110,4 +110,4 @@ TEST( VolatilityBuffer, main ) {
     EXPECT_EQ( lbuf.getMean(), 2 );
 }
 
-//-----
+//--------------------------------------------------------
