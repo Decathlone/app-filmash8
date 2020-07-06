@@ -113,4 +113,6 @@ TEST( VolatilityBuffer, main ) {
 //------------------------------------------------------------------------------------------
 TEST( VolatilityBarBuffer, main ) {
     TVolatilityBarBuffer lbuf(5);
-    EXPECT_FALSE( lbuf.isFill()
+    EXPECT_FALSE( lbuf.isFill() );
+    EXPECT_TRUE( std::isnan(lbuf.getMax()) );
+    for (size_t i = 0; i < 4;
