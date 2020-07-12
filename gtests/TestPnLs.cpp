@@ -116,4 +116,7 @@ TEST( VolatilityBarBuffer, main ) {
     EXPECT_FALSE( lbuf.isFill() );
     EXPECT_TRUE( std::isnan(lbuf.getMax()) );
     for (size_t i = 0; i < 4; i++) {
-        EXPECT_FALSE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i),ToDouble(i),ToDouble(i),To
+        EXPECT_FALSE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i),ToDouble(i),ToDouble(i),ToDouble(i),1.0} ) );
+        EXPECT_TRUE( std::isnan(lbuf.getErr()) );
+    }
+   
