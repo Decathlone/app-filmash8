@@ -122,4 +122,8 @@ TEST( VolatilityBarBuffer, main ) {
     EXPECT_TRUE( lbuf.add( TSimpleBar{gStartingTime+4.0,4.0,4.0,4.0,4.0,1.0} ) );
     //EXPECT_NEAR( lbuf.getErr(), 0.7559289, 0.0000001 );
     EXPECT_EQ( lbuf.getMin(), 0 );
-    EXPECT_EQ( lbuf.g
+    EXPECT_EQ( lbuf.getMax(), 4 );
+    EXPECT_EQ( lbuf.getMean(), 0 );
+}
+
+//-----------------------
