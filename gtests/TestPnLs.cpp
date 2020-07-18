@@ -127,4 +127,5 @@ TEST( VolatilityBarBuffer, main ) {
 }
 
 //------------------------------------------------------------------------------------------
-T
+TEST( VolatilityBarRollBuffer, main ) {
+    TVolatilityBarRo
