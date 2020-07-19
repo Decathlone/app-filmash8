@@ -128,4 +128,7 @@ TEST( VolatilityBarBuffer, main ) {
 
 //------------------------------------------------------------------------------------------
 TEST( VolatilityBarRollBuffer, main ) {
-    TVolatilityBarRo
+    TVolatilityBarRollBuffer lbuf(5);
+    EXPECT_FALSE( lbuf.isFill() );
+    
+    for 
