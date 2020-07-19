@@ -131,4 +131,5 @@ TEST( VolatilityBarRollBuffer, main ) {
     TVolatilityBarRollBuffer lbuf(5);
     EXPECT_FALSE( lbuf.isFill() );
     
-    for 
+    for (size_t i = 0; i < 4; i++) {
+        EXPECT_FALSE( lbuf.add( TSimpleBar{g
