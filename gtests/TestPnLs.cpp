@@ -132,4 +132,5 @@ TEST( VolatilityBarRollBuffer, main ) {
     EXPECT_FALSE( lbuf.isFill() );
     
     for (size_t i = 0; i < 4; i++) {
-        EXPECT_FALSE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i)*2+1.0,ToDouble(i)*2+1
+        EXPECT_FALSE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i)*2+1.0,ToDouble(i)*2+1.0,ToDouble(i),ToDouble(i),1.0} ) );
+        EXPECT_TRUE( std::isnan(lbuf.getE
