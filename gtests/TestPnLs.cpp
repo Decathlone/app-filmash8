@@ -141,4 +141,5 @@ TEST( VolatilityBarRollBuffer, main ) {
     EXPECT_EQ( lbuf.getMax(), 4.0 );
     EXPECT_TRUE( lbuf.isFill() );
 
-  
+    EXPECT_EQ( lbuf.getMean(), 2.2 );
+    EXPECT_NEAR( lbuf.getErr(), 
