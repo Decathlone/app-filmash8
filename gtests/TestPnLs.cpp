@@ -143,4 +143,7 @@ TEST( VolatilityBarRollBuffer, main ) {
 
     EXPECT_EQ( lbuf.getMean(), 2.2 );
     EXPECT_NEAR( lbuf.getErr(), 0.623355, 0.000001 );
-    //d <- c(1,2,3,4,1);sqrt(sum((d - mean(d)
+    //d <- c(1,2,3,4,1);sqrt(sum((d - mean(d))^2)/(length(d)-1.5))/sqrt(length(d))
+
+    for (size_t i = 0; i < 4; i++) {
+        EXP
