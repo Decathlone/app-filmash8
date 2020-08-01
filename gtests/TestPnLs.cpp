@@ -147,4 +147,8 @@ TEST( VolatilityBarRollBuffer, main ) {
 
     for (size_t i = 0; i < 4; i++) {
         EXPECT_TRUE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i)+1.0,ToDouble(i)+1.0,ToDouble(i),ToDouble(i),1.0} ) );
-        EXPECT
+        EXPECT_TRUE( lbuf.isFill() );
+    }
+
+    EXPECT_EQ( lbuf.getMean(), 1.0 );
+    EXPECT_NEAR( l
