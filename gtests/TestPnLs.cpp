@@ -146,4 +146,5 @@ TEST( VolatilityBarRollBuffer, main ) {
     //d <- c(1,2,3,4,1);sqrt(sum((d - mean(d))^2)/(length(d)-1.5))/sqrt(length(d))
 
     for (size_t i = 0; i < 4; i++) {
-        EXPECT_TRUE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i)+1.0,ToDou
+        EXPECT_TRUE( lbuf.add( TSimpleBar{gStartingTime+ToDouble(i),ToDouble(i)+1.0,ToDouble(i)+1.0,ToDouble(i),ToDouble(i),1.0} ) );
+        EXPECT
