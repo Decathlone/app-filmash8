@@ -155,4 +155,5 @@ TEST( VolatilityBarRollBuffer, main ) {
 }
 
 //------------------------------------------------------------------------------------------
-T
+TEST( RubberBuffer, main ) {
+    TRubberBuffer<double> lbuf(3);
