@@ -159,4 +159,5 @@ TEST( RubberBuffer, main ) {
     TRubberBuffer<double> lbuf(3);
     EXPECT_FALSE( lbuf.isFill() );
     EXPECT_FALSE( lbuf.calcStats() );
-    for (size
+    for (size_t i = 1; i < 11; i++) {
+        lbuf.add(ToDouble( i ));
