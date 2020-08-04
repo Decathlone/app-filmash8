@@ -161,3 +161,7 @@ TEST( RubberBuffer, main ) {
     EXPECT_FALSE( lbuf.calcStats() );
     for (size_t i = 1; i < 11; i++) {
         lbuf.add(ToDouble( i ));
+    }
+
+    EXPECT_TRUE( lbuf.isFill() );
+    EXPECT_TRUE( std::isnan(lb
