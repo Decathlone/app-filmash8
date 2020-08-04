@@ -164,4 +164,7 @@ TEST( RubberBuffer, main ) {
     }
 
     EXPECT_TRUE( lbuf.isFill() );
-    EXPECT_TRUE( std::isnan(lb
+    EXPECT_TRUE( std::isnan(lbuf.getSD()) );
+
+    EXPECT_TRUE( lbuf.calcStats() );
+    EXPECT_NEAR( l
