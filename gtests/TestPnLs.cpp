@@ -167,4 +167,6 @@ TEST( RubberBuffer, main ) {
     EXPECT_TRUE( std::isnan(lbuf.getSD()) );
 
     EXPECT_TRUE( lbuf.calcStats() );
-    EXPECT_NEAR( l
+    EXPECT_NEAR( lbuf.getSD(), 3.02765, 0.00001 );
+    EXPECT_EQ( lbuf.getMean(), 5.5 );
+    EXPEC
