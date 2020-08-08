@@ -169,4 +169,7 @@ TEST( RubberBuffer, main ) {
     EXPECT_TRUE( lbuf.calcStats() );
     EXPECT_NEAR( lbuf.getSD(), 3.02765, 0.00001 );
     EXPECT_EQ( lbuf.getMean(), 5.5 );
-    EXPEC
+    EXPECT_EQ( lbuf.getMin(), 1.0 );
+    EXPECT_EQ( lbuf.getMax(), 10.0 );
+}
+//------
