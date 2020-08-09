@@ -1,4 +1,7 @@
 #include <string>
 #include <gtest/gtest.h>
 
-#include "
+#include "StringHasher.h"
+#include "DelphisRound.h"
+
+//------------------------------------------
