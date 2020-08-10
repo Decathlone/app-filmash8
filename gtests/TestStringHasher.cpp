@@ -5,4 +5,7 @@
 #include "DelphisRound.h"
 
 //------------------------------------------------------------------------------------------
-TEST( StringHash
+TEST( StringHasher, testCounter ) {
+    EXPECT_GE( GetSymbolsCount(), 60U );
+    
+    size_t lIdx = 0;
