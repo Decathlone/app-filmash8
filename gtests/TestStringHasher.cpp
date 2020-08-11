@@ -9,3 +9,5 @@ TEST( StringHasher, testCounter ) {
     EXPECT_GE( GetSymbolsCount(), 60U );
     
     size_t lIdx = 0;
+    for( size_t i=0; i<100; ++i ){
+        EXPECT_NE( GetSymbolByIdx( lIdx++ 
