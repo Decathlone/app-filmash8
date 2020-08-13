@@ -11,4 +11,7 @@ TEST( StringHasher, testCounter ) {
     size_t lIdx = 0;
     for( size_t i=0; i<100; ++i ){
         EXPECT_NE( GetSymbolByIdx( lIdx++ ) , '_' );
-        if( lIdx >= GetSymbolsCount() ) { lIdx
+        if( lIdx >= GetSymbolsCount() ) { lIdx = 0; }
+    }
+    
+    EXPECT_EQ( GetSymbolByIdx( GetSymbo
