@@ -14,4 +14,7 @@ TEST( StringHasher, testCounter ) {
         if( lIdx >= GetSymbolsCount() ) { lIdx = 0; }
     }
     
-    EXPECT_EQ( GetSymbolByIdx( GetSymbo
+    EXPECT_EQ( GetSymbolByIdx( GetSymbolsCount() + 1 ) , '_' );
+}
+
+//---------------------------------------------------
