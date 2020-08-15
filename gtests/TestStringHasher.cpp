@@ -17,4 +17,5 @@ TEST( StringHasher, testCounter ) {
     EXPECT_EQ( GetSymbolByIdx( GetSymbolsCount() + 1 ) , '_' );
 }
 
-//---------------------------------------------------
+//------------------------------------------------------------------------------------------
+TEST( StringHasher, tes
