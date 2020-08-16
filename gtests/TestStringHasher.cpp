@@ -20,4 +20,6 @@ TEST( StringHasher, testCounter ) {
 //------------------------------------------------------------------------------------------
 TEST( StringHasher, testStrToInt ) {
     
-    std::string lHash( IntToCode( ToInt( GetSymbols
+    std::string lHash( IntToCode( ToInt( GetSymbolsCount() / 2 ) ) );
+    EXPECT_EQ( lHash.size(), 1U );
+    
