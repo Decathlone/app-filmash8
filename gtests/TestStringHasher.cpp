@@ -18,4 +18,6 @@ TEST( StringHasher, testCounter ) {
 }
 
 //------------------------------------------------------------------------------------------
-TEST( StringHasher, tes
+TEST( StringHasher, testStrToInt ) {
+    
+    std::string lHash( IntToCode( ToInt( GetSymbols
