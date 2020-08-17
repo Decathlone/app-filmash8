@@ -26,4 +26,5 @@ TEST( StringHasher, testStrToInt ) {
     lHash.assign ( IntToCode( ToInt( GetSymbolsCount() + 2 ) ) );
     EXPECT_EQ( lHash.size(), 2U );
     
-    lHash.assign ( IntToCode( ToInt( 
+    lHash.assign ( IntToCode( ToInt( GetSymbolsCount() * GetSymbolsCount() + 2 ) ) );
+    EXPECT_EQ( lHash.size(),
