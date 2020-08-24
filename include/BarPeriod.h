@@ -1,4 +1,7 @@
 /**
  * \file BarPeriod.h
  * \brief Модуль хранящий в себе типы периодов для баров и основные методы работы с ними
- * \author kan <kansoftware.
+ * \author kan <kansoftware.ru>
+ * \since 2016-12-19
+ * \date 2021-05-31
+ * Модуль используется неизменн
