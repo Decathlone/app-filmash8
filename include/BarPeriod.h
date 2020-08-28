@@ -8,4 +8,9 @@
  */
 
 #ifndef BARPERIOD_H
-#define B
+#define BARPERIOD_H
+
+#include <string>
+#include <cassert>
+
+enum class TBarPer
