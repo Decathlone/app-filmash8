@@ -13,4 +13,8 @@
 #include <string>
 #include <cassert>
 
-enum class TBarPer
+enum class TBarPeriod { 
+    minValue = 0,
+    Minute = 1,
+    Minute5 = 2,
+    
