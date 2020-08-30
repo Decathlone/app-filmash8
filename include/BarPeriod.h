@@ -17,4 +17,8 @@ enum class TBarPeriod {
     minValue = 0,
     Minute = 1,
     Minute5 = 2,
-    
+    Minute10 = 3,
+    Minute15 = 4,
+    Hour = 5,
+    Hour4 = 6,
+    Day 
