@@ -21,4 +21,9 @@ enum class TBarPeriod {
     Minute15 = 4,
     Hour = 5,
     Hour4 = 6,
-    Day 
+    Day = 7,
+    Week = 8,
+    Second = 9,
+    maxValue };
+    
+const
