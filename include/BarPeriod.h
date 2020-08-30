@@ -26,4 +26,4 @@ enum class TBarPeriod {
     Second = 9,
     maxValue };
     
-const
+constexpr double gOutBarPeriod[ static_cast<size_t>( TBar
