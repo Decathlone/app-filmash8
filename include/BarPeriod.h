@@ -32,3 +32,8 @@ constexpr double getBarPeriodLength( const TBarPeriod aID ) {
     assert( aID > TBarPeriod::minValue );
     assert( aID < TBarPeriod::maxValue );
     return gOutBarPeriod[ static_cast<size_t>( aID ) ];    
+}
+
+std::string getBarPeriodName( const TBarPeriod aID );
+
+#endif /* BARPERIO
