@@ -30,4 +30,5 @@ constexpr double gOutBarPeriod[ static_cast<size_t>( TBarPeriod::maxValue ) ] = 
 
 constexpr double getBarPeriodLength( const TBarPeriod aID ) {
     assert( aID > TBarPeriod::minValue );
-    assert( aID < TBarPeriod::maxValu
+    assert( aID < TBarPeriod::maxValue );
+    return gOutBarPeriod[ static_cast<size_t>( aID ) ];    
