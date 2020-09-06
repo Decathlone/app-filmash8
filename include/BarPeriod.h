@@ -36,4 +36,4 @@ constexpr double getBarPeriodLength( const TBarPeriod aID ) {
 
 std::string getBarPeriodName( const TBarPeriod aID );
 
-#endif /* BARPERIO
+#endif /* BARPERIOD_H */
