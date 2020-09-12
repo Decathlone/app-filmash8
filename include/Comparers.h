@@ -9,4 +9,4 @@
 #ifndef COMPARERS_H
 #define	COMPARERS_H
 
-constexpr do
+constexpr double gAbsoluteZero = 0.000000001;/*!< 0.000001 Числовное представление "ма
