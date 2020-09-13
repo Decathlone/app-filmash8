@@ -9,4 +9,7 @@
 #ifndef COMPARERS_H
 #define	COMPARERS_H
 
-constexpr double gAbsoluteZero = 0.000000001;/*!< 0.000001 Числовное представление "ма
+constexpr double gAbsoluteZero = 0.000000001;/*!< 0.000001 Числовное представление "маленького" значения */
+
+/**
+ *  \brief Проверяемое число, чуток, но
