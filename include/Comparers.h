@@ -12,4 +12,6 @@
 constexpr double gAbsoluteZero = 0.000000001;/*!< 0.000001 Числовное представление "маленького" значения */
 
 /**
- *  \brief Проверяемое число, чуток, но
+ *  \brief Проверяемое число, чуток, но больше чем 0
+ */
+template< typename TData > constexpr bool isPosit
