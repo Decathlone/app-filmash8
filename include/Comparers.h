@@ -15,4 +15,10 @@ constexpr double gAbsoluteZero = 0.000000001;/*!< 0.000001 Числовное п
  *  \brief Проверяемое число, чуток, но больше чем 0
  */
 template< typename TData > constexpr bool isPositiveValue( const TData A, const double aAbsoluteZero = gAbsoluteZero ) {
-  
+    return ( A > aAbsoluteZero );
+}
+
+/**
+ *  \brief A > B
+ */
+template< typename TD
