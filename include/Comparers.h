@@ -21,4 +21,4 @@ template< typename TData > constexpr bool isPositiveValue( const TData A, const 
 /**
  *  \brief A > B
  */
-template< typename TD
+template< typename TData > constexpr bool IsGreat( const TData A, const TData B, c
