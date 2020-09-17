@@ -22,4 +22,10 @@ template< typename TData > constexpr bool isPositiveValue( const TData A, const 
  *  \brief A > B
  */
 template< typename TData > constexpr bool IsGreat( const TData A, const TData B, const double aAbsoluteZero = gAbsoluteZero  ) {
-    re
+    return ( A - B > aAbsoluteZero );
+}
+
+/**
+ *  \brief A < B
+ */
+template< type
