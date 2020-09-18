@@ -28,4 +28,4 @@ template< typename TData > constexpr bool IsGreat( const TData A, const TData B,
 /**
  *  \brief A < B
  */
-template< typename TData > constexpr bool IsLess( const TD
+template< typename TData > constexpr bool IsLess( const TData A, const TData B, const double aAbsoluteZero = gAbsoluteZero  ) {
