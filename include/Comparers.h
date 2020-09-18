@@ -28,4 +28,4 @@ template< typename TData > constexpr bool IsGreat( const TData A, const TData B,
 /**
  *  \brief A < B
  */
-template< type
+template< typename TData > constexpr bool IsLess( const TD
