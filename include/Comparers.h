@@ -35,4 +35,4 @@ template< typename TData > constexpr bool IsLess( const TData A, const TData B, 
 /**
  *  \brief Проверяемое число 0 или типа того
  */
-template< typename TData > constexpr bool 
+template< typename TData > constexpr bool isZero( const TData A, const double aAbsoluteZero = gAbsoluteZero  
