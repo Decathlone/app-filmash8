@@ -40,4 +40,6 @@ template< typename TData > constexpr bool isZero( const TData A, const double aA
 }
 
 /**
- *
+ *  \brief A != B
+ */
+template< typename TData > constexpr bool IsN
