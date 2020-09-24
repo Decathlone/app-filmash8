@@ -43,4 +43,10 @@ template< typename TData > constexpr bool isZero( const TData A, const double aA
  *  \brief A != B
  */
 template< typename TData > constexpr bool IsNotEqual( const TData A, const TData B, const double aAbsoluteZero = gAbsoluteZero  ) {
-    return ( not isZero( A - B, a
+    return ( not isZero( A - B, aAbsoluteZero ) );
+}
+
+/**
+ *  \brief A == B
+ */
+template< typename TData > c
