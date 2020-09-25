@@ -49,4 +49,4 @@ template< typename TData > constexpr bool IsNotEqual( const TData A, const TData
 /**
  *  \brief A == B
  */
-template< typename TData > c
+template< typename TData > constexpr bool IsEqual( const TData A, const TData B, const double aAbs
