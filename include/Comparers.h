@@ -50,4 +50,11 @@ template< typename TData > constexpr bool IsNotEqual( const TData A, const TData
  *  \brief A == B
  */
 template< typename TData > constexpr bool IsEqual( const TData A, const TData B, const double aAbsoluteZero = gAbsoluteZero ) {
-    return ( isZero( A - B, aAbsoluteZero ) )
+    return ( isZero( A - B, aAbsoluteZero ) );
+}
+
+
+/**
+ *  \brief получить знак числа
+ */
+template< typename TD
