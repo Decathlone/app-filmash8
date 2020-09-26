@@ -57,4 +57,4 @@ template< typename TData > constexpr bool IsEqual( const TData A, const TData B,
 /**
  *  \brief получить знак числа
  */
-template< typename TD
+template< typename TData > constexpr int Sign( TData x, const double aAbsoluteZero = g
