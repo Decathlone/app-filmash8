@@ -59,4 +59,8 @@ template< typename TData > constexpr bool IsEqual( const TData A, const TData B,
  */
 template< typename TData > constexpr int Sign( TData x, const double aAbsoluteZero = gAbsoluteZero ){
   if( x > aAbsoluteZero ) return 1;
-  if( x < -aAbsolu
+  if( x < -aAbsoluteZero ) return -1;
+  return 0;
+}
+
+#endif	/* COMPARERS_H */
