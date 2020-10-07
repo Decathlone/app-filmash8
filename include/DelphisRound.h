@@ -79,3 +79,60 @@ template< typename T > constexpr size_t ToSize_t( const T aValue ) {
  *  \fn RoundToSize_t
  *  \brief Округление double в size_t , отрицательные значения заменяются на 0
  */
+template< typename T > constexpr size_t RoundToSize_t( const T aValue ) {
+    assert( ToDouble( aValue ) < gMaxSizet );
+    
+    return isPositiveValue( aValue ) ? static_cast< size_t >( std::round( aValue ) ) : 0UL ;
+}
+
+/**
+ *  \fn Ceil
+ *  \brief Округление вверх как в Delphi из double в int
+ */
+#ifdef NDEBUG
+    #define Ceil( aValue ) static_cast< int >( std::ceil( aValue ) )
+#else
+    template< typename T > int Ceil( const T aValue ) {
+        assert( gMinInteger <= ToDouble( aValue ) );
+        assert( ToDouble( aValue ) <= gMaxInteger );
+
+        return static_cast< int >( std::ceil( aValue ) );
+    }
+#endif
+
+/**
+ *  \fn CeilToSize_t
+ *  \brief Округление вверх из double в size_t , отрицательные значения заменяются на 0
+ */
+template< typename T > constexpr size_t CeilToSize_t( const T aValue ) {
+    assert( ToDouble( aValue ) <  gMaxSizet );
+    
+    return isPositiveValue( aValue ) ? static_cast< size_t >( std::ceil( aValue ) ) : 0UL ;
+}
+
+/**
+ *  \fn Trunc
+ *  \brief Округление вниз как в Delphi из double в int
+ */
+#ifdef NDEBUG
+    #define Trunc( aValue ) static_cast< int >( std::floor( aValue ) )
+#else
+    template< typename T > int Trunc( const T aValue ) {
+        assert( gMinInteger <= ToDouble( aValue ) );
+        assert( ToDouble( aValue ) <= gMaxInteger );
+
+        return static_cast< int >( std::floor( aValue ) );
+    }
+#endif    
+
+/**
+ *  \fn TruncToSize_t
+ *  \brief Округление вниз из double в size_t
+ */
+template< typename T > constexpr size_t TruncToSize_t( const T aValue ) {
+    assert( ToDouble( aValue ) < gMaxSizet );
+    
+    return isPositiveValue( aValue ) ? static_cast< size_t >( std::floor( aValue ) ) : 0UL ;
+}
+
+#endif	/* DELPHISROUND_H */
