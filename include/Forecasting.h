@@ -1,3 +1,5 @@
 /* 
  * File:   Forecasting.h
- * Author: k
+ * Author: kan <kansoftware.ru>
+ *
+ * Created on January 23, 2017, 
