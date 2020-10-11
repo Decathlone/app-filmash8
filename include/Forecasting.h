@@ -8,4 +8,8 @@
 #ifndef FORECASTING_H
 #define FORECASTING_H
 
-#include "CIn
+#include "CIndicatorES.h"
+
+struct TForecastResult{
+    double lower;
+    double
