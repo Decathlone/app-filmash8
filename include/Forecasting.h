@@ -12,4 +12,8 @@
 
 struct TForecastResult{
     double lower;
-    double
+    double forecast;
+    double upper;
+} ;
+
+// To calc confidence intervals 
