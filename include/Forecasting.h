@@ -17,4 +17,6 @@ struct TForecastResult{
 } ;
 
 // To calc confidence intervals in R (err=5%,n=100) do :  qt( 1.0 - 0.05 / 2.0, 100 )
-// Confidence 
+// Confidence intervals( 90% ) = 1.65
+// Confidence intervals( 80% ) = 1.290075
+// TForecas
