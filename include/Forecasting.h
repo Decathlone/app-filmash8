@@ -21,4 +21,6 @@ struct TForecastResult{
 // Confidence intervals( 80% ) = 1.290075
 // TForecastModelParams aioParams;
 // aioParams.SetDefault( aData[ 0 ] );
-TForecastResult Forecast( const TDoubles &aData, TForecastModelParams & aioPa
+TForecastResult Forecast( const TDoubles &aData, TForecastModelParams & aioParams, const double aConfidenceIntervals = 1.290075 );
+
+#endif
