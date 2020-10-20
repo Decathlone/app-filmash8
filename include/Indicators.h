@@ -1,3 +1,4 @@
 /**
  * \file Indicators.h
- * \brief 
+ * \brief Модуль реализующий индикаторы для одноногих стратегий
+ * \author kan <kanso
