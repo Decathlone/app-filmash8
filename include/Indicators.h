@@ -10,4 +10,7 @@
 #ifndef BACKTESTER_INDICATORS_H
 #define BACKTESTER_INDICATORS_H
 
-#in
+#include "BasisOfStrategy.h"
+#include "BarPeriod.h"
+
+co
