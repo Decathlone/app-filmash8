@@ -7,4 +7,7 @@
  * Модуль используется неизменно в проектах TradeBot и [R] BackTester
  */
 
-#ifndef
+#ifndef BACKTESTER_INDICATORS_H
+#define BACKTESTER_INDICATORS_H
+
+#in
