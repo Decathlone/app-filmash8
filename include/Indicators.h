@@ -13,4 +13,6 @@
 #include "BasisOfStrategy.h"
 #include "BarPeriod.h"
 
-co
+const size_t gUsingCPU = 4;
+
+TPriceSeries _TrueRange( const TBarS
