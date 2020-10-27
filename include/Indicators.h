@@ -15,4 +15,5 @@
 
 const size_t gUsingCPU = 4;
 
-TPriceSeries _TrueRange( const TBarS
+TPriceSeries _TrueRange( const TBarSeries & aBars );
+TPriceSeries _AverageTrueRange( const TBarSeries &
