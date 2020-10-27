@@ -16,4 +16,7 @@
 const size_t gUsingCPU = 4;
 
 TPriceSeries _TrueRange( const TBarSeries & aBars );
-TPriceSeries _AverageTrueRange( const TBarSeries &
+TPriceSeries _AverageTrueRange( const TBarSeries & aBars, const int aPeriod );
+
+bool _DM( const TBarSeries & aBars, 
+          
