@@ -21,4 +21,4 @@ TPriceSeries _AverageTrueRange( const TBarSeries & aBars, const int aPeriod );
 bool _DM( const TBarSeries & aBars, 
             TPriceSeries & aoDMp, 
             TPriceSeries & aoDMn );
-boo
+bool _DI( const TBarSeries & aBars, const int aPeriod,
