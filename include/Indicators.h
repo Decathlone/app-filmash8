@@ -25,4 +25,6 @@ bool _DI( const TBarSeries & aBars, const int aPeriod,
             TPriceSeries & aoDMIp, 
             TPriceSeries & aoDMIn );
 
-TPriceSeries _ADX( const TBarSeries & aBars, const int aPerio
+TPriceSeries _ADX( const TBarSeries & aBars, const int aPeriod );
+
+TPriceSeries _SimpleMA( const TPriceSeries & aPrices, const int
