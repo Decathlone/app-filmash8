@@ -28,4 +28,4 @@ bool _DI( const TBarSeries & aBars, const int aPeriod,
 TPriceSeries _ADX( const TBarSeries & aBars, const int aPeriod );
 
 TPriceSeries _SimpleMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag = 0 );
-TPriceSeries _ExponentMA( con
+TPriceSeries _ExponentMA( const TPriceSeries & aPrices, const int aPeriod, const size_t a
