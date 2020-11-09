@@ -29,4 +29,5 @@ TPriceSeries _ADX( const TBarSeries & aBars, const int aPeriod );
 
 TPriceSeries _SimpleMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag = 0 );
 TPriceSeries _ExponentMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag = 0 );
-TPriceSeries _SmoothedMA( const TPriceSeries & aPrices,
+TPriceSeries _SmoothedMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag = 0 );
+TPriceSeries _KAMA( co
