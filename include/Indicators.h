@@ -32,4 +32,5 @@ TPriceSeries _ExponentMA( const TPriceSeries & aPrices, const int aPeriod, const
 TPriceSeries _SmoothedMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag = 0 );
 TPriceSeries _KAMA( const TPriceSeries & aPrices, const int aPeriod, const double aCoeff = 2.0, const double aFastPeriod = 2.0, const double aSlowPeriod = 30.0, const size_t aLag = 0 );
 
-const size_t gSARStabilizationDelay
+const size_t gSARStabilizationDelay = 200 ;
+TPriceSeries _ParabolicSar( const TBarSer
