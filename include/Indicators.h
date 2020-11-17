@@ -34,4 +34,4 @@ TPriceSeries _KAMA( const TPriceSeries & aPrices, const int aPeriod, const doubl
 
 const size_t gSARStabilizationDelay = 200 ;
 TPriceSeries _ParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf );
-TPriceSeries _Int
+TPriceSeries _IntradayParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf
