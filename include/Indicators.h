@@ -36,4 +36,4 @@ const size_t gSARStabilizationDelay = 200 ;
 TPriceSeries _ParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf );
 TPriceSeries _IntradayParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf );
 TPriceSeries _AbsoluteZigZag( const TBarSeries & aBars, const double aGap );
-TPriceSeries _MACD( const TPriceSeries & 
+TPriceSeries _MACD( const TPriceSeries & aPrices, const int aFastPeriod, const int aSlowPeriod, const int aSmoothPe
