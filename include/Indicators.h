@@ -37,4 +37,6 @@ TPriceSeries _ParabolicSar( const TBarSeries & aBars, const double aAf, const do
 TPriceSeries _IntradayParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf );
 TPriceSeries _AbsoluteZigZag( const TBarSeries & aBars, const double aGap );
 TPriceSeries _MACD( const TPriceSeries & aPrices, const int aFastPeriod, const int aSlowPeriod, const int aSmoothPeriod );
-TPriceSeries _ZigZag( const TBarSeries & aBars, const doubl
+TPriceSeries _ZigZag( const TBarSeries & aBars, const double aGap );
+
+bool _Forecasting( const TPriceSeries & aPrices, const s
