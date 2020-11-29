@@ -40,4 +40,5 @@ TPriceSeries _MACD( const TPriceSeries & aPrices, const int aFastPeriod, const i
 TPriceSeries _ZigZag( const TBarSeries & aBars, const double aGap );
 
 bool _Forecasting( const TPriceSeries & aPrices, const size_t aForecastPeriod, const double aConfidenceIntervals, 
-            
+                    TPriceSeries & aoUpperBorder, 
+                    TPri
