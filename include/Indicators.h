@@ -42,4 +42,6 @@ TPriceSeries _ZigZag( const TBarSeries & aBars, const double aGap );
 bool _Forecasting( const TPriceSeries & aPrices, const size_t aForecastPeriod, const double aConfidenceIntervals, 
                     TPriceSeries & aoUpperBorder, 
                     TPriceSeries & aoForecast, 
-                    TPriceSeries & ao
+                    TPriceSeries & aoLowerBorder );
+
+bool _RollMinMax( const TBarSeries & aBars, const i
