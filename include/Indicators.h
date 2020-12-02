@@ -44,4 +44,6 @@ bool _Forecasting( const TPriceSeries & aPrices, const size_t aForecastPeriod, c
                     TPriceSeries & aoForecast, 
                     TPriceSeries & aoLowerBorder );
 
-bool _RollMinMax( const TBarSeries & aBars, const i
+bool _RollMinMax( const TBarSeries & aBars, const int aPeriod, 
+            TPriceSeries & aoMin, 
+            TPriceSeri
