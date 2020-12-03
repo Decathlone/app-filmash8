@@ -50,4 +50,6 @@ bool _RollMinMax( const TBarSeries & aBars, const int aPeriod,
             const bool aTouch = false );
 
 bool _RollMinMax_old( const TBarSeries & aBars, const int aPeriod, 
-            TPriceS
+            TPriceSeries & aoMin, 
+            TPriceSeries & aoMax,
+            co
