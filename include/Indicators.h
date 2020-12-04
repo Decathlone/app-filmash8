@@ -55,4 +55,6 @@ bool _RollMinMax_old( const TBarSeries & aBars, const int aPeriod,
             const bool aTouch = false );
 
 bool _SupportRessistance( 
-    const 
+    const TBarSeries & aBars, 
+    const int aPeriod,
+    const size_t aMi
