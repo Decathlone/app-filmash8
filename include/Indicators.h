@@ -60,4 +60,6 @@ bool _SupportRessistance(
     const size_t aMinTouch, 
     const double aTollerance,
     TPriceSeries & aoMin, 
-    TPriceSe
+    TPriceSeries & aoMax );
+
+bool _ForwardMinMax( const TBarSeries & aBars, const size_t a
