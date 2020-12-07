@@ -62,4 +62,6 @@ bool _SupportRessistance(
     TPriceSeries & aoMin, 
     TPriceSeries & aoMax );
 
-bool _ForwardMinMax( const TBarSeries & aBars, const size_t a
+bool _ForwardMinMax( const TBarSeries & aBars, const size_t aTimeDelta,
+            TPriceSeries & aoMin, 
+            TP
