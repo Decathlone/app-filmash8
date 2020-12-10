@@ -64,4 +64,6 @@ bool _SupportRessistance(
 
 bool _ForwardMinMax( const TBarSeries & aBars, const size_t aTimeDelta,
             TPriceSeries & aoMin, 
-            TP
+            TPriceSeries & aoMax );
+
+bool _BollingerBands( const TPriceSeries & aPrices, const int aPerio
