@@ -66,4 +66,6 @@ bool _ForwardMinMax( const TBarSeries & aBars, const size_t aTimeDelta,
             TPriceSeries & aoMin, 
             TPriceSeries & aoMax );
 
-bool _BollingerBands( const TPriceSeries & aPrices, const int aPerio
+bool _BollingerBands( const TPriceSeries & aPrices, const int aPeriod, const double aSigma,
+    TPriceSeries & aoMin,
+    TPriceSe
