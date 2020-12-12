@@ -71,4 +71,6 @@ bool _BollingerBands( const TPriceSeries & aPrices, const int aPeriod, const dou
     TPriceSeries & aoMean,
     TPriceSeries & aoMax );
 
-TPriceSeries _Chann
+TPriceSeries _ChannelSize( const TBarSeries & aBars, const int aPeriod );
+
+TPriceSeries _Stochas
