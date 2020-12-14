@@ -75,4 +75,4 @@ TPriceSeries _ChannelSize( const TBarSeries & aBars, const int aPeriod );
 
 TPriceSeries _Stochastic( const TBarSeries & aBars, const int aPeriod );
 
-#endif //
+#endif //BACKTESTER_INDICATORS_H
