@@ -61,3 +61,48 @@ class TLiveSAR {
                     lCurrentSide = TDealSide::Sell;
                     lSar = lFuturesSar;
                     lFuturesSar = lLow;
+                }
+                    
+                lPrevBar = aBar;
+                return lSar;
+            }
+
+            if( lCurrentSide == TDealSide::Sell ) {
+                    
+                if( IsLess(lLow, lFuturesSar) ) {
+                    lFuturesSar = lLow;
+                    if( IsLess( lAf, aMaxAf) ) {
+                        lAf += aAf;
+                    }
+                }
+
+                const TPrice lPriorHigh = lPrevBar.High;
+                const TPrice lLocalHigh= std::max( lHigh, lPriorHigh );
+                const double lCondidateSAR = std::max( lLocalHigh, lSar );
+                lSar = std::min( lPriorSar, lCondidateSAR );
+                
+                if( IsGreat(lHigh, lSar) ) {
+                    lAf = lInitaAfValue;
+                    lCurrentSide = TDealSide::Buy;
+                    lSar = lFuturesSar;
+                    lFuturesSar = lHigh;
+                }
+            }
+
+            lPrevBar = aBar;
+
+            return lSar;
+        }
+
+    private:
+        TPrice lSar = NAN;
+        TPrice lFuturesSar = NAN;
+        const double aAf;
+        const double aMaxAf;
+        const double lInitaAfValue;
+        double lAf;
+        TDealSide lCurrentSide = TDealSide::Buy;
+        TSimpleBar lPrevBar;
+};
+
+#endif //LIVESAR_H
