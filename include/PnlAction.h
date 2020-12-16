@@ -68,3 +68,56 @@ struct TDeal {
         ResetPrice( ClosePrice );
         CloseTime = 0.0;
         DealSide = TDealSide::None;
+        ResetPrice( StopLoss );
+        ResetPrice( TakeProfit );
+        Volume = 0;
+        Additive.clear();
+    }
+
+    bool InAction() const { return DealSide == TDealSide::Buy or DealSide == TDealSide::Sell; }
+};
+
+typedef std::list< TDeal > TDeals;
+typedef std::vector< double > TDoubles;
+typedef std::vector< int > TIntegers;
+typedef std::vector< bool > TBools;
+
+TDoubles ToDoublesArray( const TPriceSeries & aPriceSeries );
+
+bool CalcDrawDown(
+    const TPriceSeries & aPnL,
+    TPrice & aoMaxDD,
+    TInnerDate & aoBegin,
+    TInnerDate & aoReturn );
+
+TPrice PnLsToMoneyResult( const TPriceSeries & aPnl, const bool aUseVolume = false );
+TPrice PnLsToMoneyStatValue( const TPriceSeries & aPnl, const bool aUseVolume = false, const size_t N=gMinDealsStatictics, const double aQuantile=0.2 );
+TPrice PnLsToMoneyStatValueGost( const TPriceSeries & aPnl, const bool aUseVolume = false, const size_t N=gMinDealsStatictics  );
+TPrice PnLsToMoneyMonteCarlo( const TPriceSeries & aPnl, const bool aUseVolume = false, const size_t N=gMinDealsStatictics, const size_t aSamples=gWellDealsStatictics );
+TPrice PnLsToMoneyMonteCarloQuantile( const TPriceSeries & aPnl, const bool aUseVolume = false, const size_t N=gMinDealsStatictics, const size_t aSamples=gWellDealsStatictics, const double aQuantile=0.05 );
+
+TPriceSeries PnLsAmplifier( const TPriceSeries &aPnl, const std::vector<double> &aAmplifiers, const TInnerDate aBegin=-1.0, const TInnerDate aEnd=-1.0 );
+
+TPriceSeries ReductionOfTheIncome(
+    const TPriceSeries & aPnL,
+    const size_t aProfitNum,
+    const double aProfitCoef,
+    const size_t aLossNum,
+    const double aLossCoef );
+
+TPriceSeries DealsToPnLs( const TDeals & aDeals );
+TPrice DealsToPNLCoefficientQuick( const TDeals & aDeals, const TPrice aFirstPrice, const size_t aMinDeals = gMinDealsForAllTime );
+TPrice DealsToCoeff( const TBarSeries & aBars, const TDeals & aDeals, const size_t aMinDeals, TPrice & aoPnl, TPrice & aoMaxDD, size_t & aoMaxPos, size_t & aoMeadPos );
+
+TPrice DealsToPNLCoefficient(
+    const TDeals & aDeals,
+    const TInnerDate aFirstPoint,
+    const TInnerDate aLastPoint,
+    const TPrice aMinPnl = 0.0,
+    const size_t aMinDeals = gMinDealsForAllTime,
+    const size_t aQuantTime = 86400 * 7 );
+
+TPriceSeries PnlsToDaily( const TPriceSeries & aPnls, const bool aCumSum = true );
+bool IsGrows( const TPriceSeries & aDailyPnls, const size_t aPeriod, const size_t aTollerance = 1 );
+
+#endif //BACKTESTER_PNLACTION_H
