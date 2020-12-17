@@ -49,3 +49,85 @@ class RollRange {
             backSearch(aP >= 0.5),
             pN( (backSearch ? Trunc((aP - 1.0) * ToDouble(n) ) : Trunc(aP * ToDouble(n) ) ) ),
             fBadValue( aBadValue ),
+            fArrayReserve( std::max(aN, 1000UL) ) {
+            if (n < 1) throw std::invalid_argument("n must be greater than 0");
+            if (aP < 0.0 or aP > 1.0) throw std::invalid_argument("p must be in [0,1]");
+            
+
+            minHistory.reserve( fArrayReserve );
+            maxHistory.reserve( fArrayReserve );
+            quantileHistory.reserve( fArrayReserve );
+        }
+
+        void Add( const double value ) {
+
+            window.push(value);
+            windowSorted.insert(value);
+
+            if (window.size() > n) {
+                windowSorted.erase(windowSorted.find(window.front()));
+                window.pop();
+            }
+            range.min = *windowSorted.begin();
+            range.max = *std::prev(windowSorted.end());
+
+            if( IsFormed() ){
+                auto it = backSearch ? windowSorted.cend() : windowSorted.cbegin();
+                std::advance(it, pN);
+                range.quantile = *it;
+
+                minHistory.push_back( range.min );
+                maxHistory.push_back( range.max );
+                quantileHistory.push_back( range.quantile );
+            } else {
+                minHistory.push_back( fBadValue );
+                maxHistory.push_back( fBadValue );
+                quantileHistory.push_back( fBadValue );
+            }
+        }
+
+        bool IsFormed() const {
+            return window.size() == n;
+        }
+
+        Range GetValue() const {
+            return range;
+        }
+
+        std::vector< double > GetMinHistory() const {
+            return minHistory;
+        }
+
+        std::vector< double > GetMaxHistory() const {
+            return maxHistory;
+        }
+
+        std::vector< double > GetQuantileHistory() const {
+            return quantileHistory;
+        }
+
+        void Reset() {
+            window={};
+            windowSorted.clear();
+
+            minHistory.clear();
+            maxHistory.clear();
+            quantileHistory.clear();
+
+            minHistory.reserve( fArrayReserve );
+            maxHistory.reserve( fArrayReserve );
+            quantileHistory.reserve( fArrayReserve );
+        }
+
+        double GetDelta(){
+            assert( IsFormed() );
+            const double lFirstValue = window.front();
+            return (lFirstValue!=0.0) ? (window.back() / lFirstValue - 1.0) : NAN;
+        }
+};
+
+
+class RollRange_with_tollerance {
+    private:
+        Range range;
+        const size_t n;
