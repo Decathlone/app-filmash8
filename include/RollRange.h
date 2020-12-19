@@ -197,3 +197,70 @@ class RollSeesaw {
                 window.pop();
             }
         }
+
+        bool IsFormed() const {
+            return window.size() == n;
+        }
+
+        void Reset() {
+            window={};
+        }
+
+        double GetDelta(){
+            assert( IsFormed() );
+            const double lFirstValue = window.front();
+            return (lFirstValue!=0.0) ? (window.back() / lFirstValue - 1.0) : NAN;
+        }
+};
+
+
+class RollRangeLazy {
+    
+    private:
+        Range range;
+        const size_t n;
+        const bool backSearch;
+        const int pN;
+        std::queue< double > window;
+        std::multiset< double > windowSorted;
+
+        std::vector< double > minHistory;
+        std::vector< double > maxHistory;
+                
+        const double fBadValue;
+        const size_t fArrayReserve = 1000; 
+
+    public:
+        RollRangeLazy( const size_t aN, const double aP = 1.0, const double aBadValue = -333333.33 ) :
+            n( aN ),
+            backSearch(aP >= 0.5),
+            pN( (backSearch ? Trunc((aP - 1.0) * ToDouble(n) ) : Trunc(aP * ToDouble(n) ) ) ),
+            fBadValue( aBadValue ),
+            fArrayReserve( std::max(aN, 1000UL) ) {
+            if (n < 1) throw std::invalid_argument("n must be greater than 0");
+            if (aP < 0.0 or aP > 1.0) throw std::invalid_argument("p must be in [0,1]");
+            
+            minHistory.reserve( fArrayReserve );
+            maxHistory.reserve( fArrayReserve );
+        }
+
+        void Add( const double value ) {
+
+            window.push(value);
+            windowSorted.insert(value);
+
+            if (window.size() > n) {
+                windowSorted.erase(windowSorted.find(window.front()));
+                window.pop();
+            }
+            range.min = *windowSorted.begin();
+            range.max = *std::prev(windowSorted.end());
+
+            if( IsFormed() ){
+                minHistory.push_back( range.min );
+                maxHistory.push_back( range.max );
+            } else {
+                minHistory.push_back( fBadValue );
+                maxHistory.push_back( fBadValue );
+            }
+        }
