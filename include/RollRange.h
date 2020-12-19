@@ -131,3 +131,69 @@ class RollRange_with_tollerance {
     private:
         Range range;
         const size_t n;
+        const size_t fMinTouch;
+        const double fTollerance;
+        std::queue< double > window;
+        std::multiset< double > windowSorted;
+        const double fBadValue;
+
+    public:
+
+        RollRange_with_tollerance( const size_t aN, const size_t aMinTouch=1, const double aTollerance = -1.0, const double aBadValue = -333333.33 ) :
+            n( aN ),
+            fMinTouch(aMinTouch),
+            fTollerance( aTollerance ),
+            fBadValue( aBadValue ) {
+            if (n < 1) throw std::invalid_argument("n must be greater than 0");
+            if (fTollerance < 0.0 ) throw std::invalid_argument("fTollerance must be >= 0.0");
+        }
+
+        void Add( const double value ) {
+
+            window.push(value);
+            windowSorted.insert(value);
+
+            if (window.size() > n) {
+                windowSorted.erase(windowSorted.find(window.front()));
+                window.pop();
+            }
+            
+            auto it = std::lower_bound(windowSorted.begin(), windowSorted.end(), *windowSorted.begin()+fTollerance );
+            range.min = ( static_cast<size_t>(std::distance( windowSorted.begin(),it)) >= fMinTouch ) ? *it : fBadValue;
+            
+            auto itr = std::upper_bound(windowSorted.begin(), windowSorted.end(), *windowSorted.rbegin()-fTollerance );
+            range.max = ( static_cast<size_t>(std::distance(itr, windowSorted.end())) >= fMinTouch ) ? *itr : fBadValue;
+        }
+
+        bool IsFormed() const {
+            return window.size() == n;
+        }
+
+        Range GetValue() const {
+            return range;
+        }
+
+        void Reset() {
+            window={};
+            windowSorted.clear();
+        }
+};
+
+
+class RollSeesaw {
+    private:
+        const size_t n;
+        std::queue< double > window;
+
+    public:
+        RollSeesaw( const size_t aN ) :
+            n( aN ) {
+            if (n < 1) throw std::invalid_argument("n must be greater than 0");
+        }
+
+        void Add( const double value ) {
+            window.push(value);
+            if (window.size() > n) {
+                window.pop();
+            }
+        }
