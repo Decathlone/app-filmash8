@@ -264,3 +264,43 @@ class RollRangeLazy {
                 maxHistory.push_back( fBadValue );
             }
         }
+
+        bool IsFormed() const {
+            return window.size() == n;
+        }
+
+        Range GetValue() {
+            auto it = backSearch ? windowSorted.cend() : windowSorted.cbegin();
+            std::advance(it, pN);
+            range.quantile = *it;
+
+            return range;
+        }
+
+        std::vector< double > GetMinHistory() const {
+            return minHistory;
+        }
+
+        std::vector< double > GetMaxHistory() const {
+            return maxHistory;
+        }
+
+        void Reset() {
+            window={};
+            windowSorted.clear();
+
+            minHistory.clear();
+            maxHistory.clear();
+
+            minHistory.reserve( fArrayReserve );
+            maxHistory.reserve( fArrayReserve );
+        }
+
+        double GetDelta(){
+            assert( IsFormed() );
+            const double lFirstValue = window.front();
+            return (lFirstValue!=0.0) ? (window.back() / lFirstValue - 1.0) : NAN;
+        } 
+};
+
+#endif //ROLLRANGE_H
