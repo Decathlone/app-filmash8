@@ -91,3 +91,63 @@ class TRollRangeBar {
             if(fCached_m){
                 return fMean;
             }
+
+            double lmv = 0.0;
+            size_t ln = 0;
+            for( const auto& lv : History ){
+                if( lv == fBadValue) continue;
+                lmv += (lv.second - lv.first);
+                ln++;
+            }
+
+            fMean = lmv / static_cast<double>(ln);
+            fCached_m = true;
+            return fMean;
+        }
+
+        double getErr() const {
+            const double lMean = getMean();
+            if( std::isnan(lMean) ){
+                return NAN;
+            }
+
+            if(fCached_e){
+                return fErr;
+            }
+
+            double lsd = 0.0;
+            size_t ln = 0;
+            for( const auto& lv : History ) {
+                if( lv == fBadValue) continue;
+                const double ld = (lv.second - lv.first);
+                lsd += pow( lMean - ld, 2 );
+                ln++;
+            }
+            const double lc = static_cast<double>(ln);
+            lsd /= (lc-1.5);
+            
+            fErr = sqrt(lsd) / sqrt(lc);
+            fCached_e = true;
+            return fErr;
+        }
+
+    private:
+        const size_t n;
+
+        std::queue< TRange > window;
+        std::multiset< double > windowSortedMin;
+        std::multiset< double > windowSortedMax;
+
+        std::vector< TRange > History;
+        
+        const TRange fBadValue;
+        TRange range;
+        const size_t fArrayReserve = 1000;
+        
+        mutable bool fCached_m = false;
+        mutable bool fCached_e = false;
+        mutable double fMean = NAN;
+        mutable double fErr = NAN;
+};
+
+#endif //ROLLRANGEBAR_H
