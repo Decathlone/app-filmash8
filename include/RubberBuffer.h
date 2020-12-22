@@ -78,3 +78,5 @@ template <class T, class Tin=T> class TRubberBuffer {
         TBufferType fBuffer;
         T fMax=NAN, fMin=NAN, fMean=NAN, fErr=NAN, fSD=NAN;
 };
+
+#endif //RUBBERBUFFER_H
