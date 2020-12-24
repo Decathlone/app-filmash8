@@ -7,4 +7,10 @@
  */
 
 #ifndef STRINGHASHER_H
-#define	STRINGHASH
+#define	STRINGHASHER_H
+
+#include <string>
+
+/**
+ *  \fn IntToCode
+ *  \brief преоб
