@@ -13,4 +13,6 @@
 
 /**
  *  \fn IntToCode
- *  \brief преоб
+ *  \brief преобразование числа в сжатую gSymbols строку
+ */
+std::string IntToCode( const
