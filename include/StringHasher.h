@@ -15,4 +15,8 @@
  *  \fn IntToCode
  *  \brief преобразование числа в сжатую gSymbols строку
  */
-std::string IntToCode( const
+std::string IntToCode( const long aValue );
+
+/**
+ *  \fn GetSymbolByIdx
+ *  \brief Получить с
