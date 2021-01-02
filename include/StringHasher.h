@@ -22,3 +22,7 @@ std::string IntToCode( const long aValue );
  *  \brief Получить символ по его коду
  */
 char GetSymbolByIdx( const size_t aIdx );
+
+/**
+ *  \fn GetSymbolsCount
+ *  \brief Получить чис
