@@ -19,4 +19,6 @@ std::string IntToCode( const long aValue );
 
 /**
  *  \fn GetSymbolByIdx
- *  \brief Получить с
+ *  \brief Получить символ по его коду
+ */
+char GetSymbolByIdx( const size_t aIdx );
