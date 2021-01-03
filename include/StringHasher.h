@@ -29,4 +29,4 @@ char GetSymbolByIdx( const size_t aIdx );
  */
 size_t GetSymbolsCount();
 
-#endif	/* STRINGHA
+#endif	/* STRINGHASHER_H */
