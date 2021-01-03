@@ -25,4 +25,8 @@ char GetSymbolByIdx( const size_t aIdx );
 
 /**
  *  \fn GetSymbolsCount
- *  \brief Получить чис
+ *  \brief Получить число символов в наборе
+ */
+size_t GetSymbolsCount();
+
+#endif	/* STRINGHA
