@@ -62,3 +62,74 @@ class TVolatilityBarBuffer {
                 }
 
                 return lisfill;
+            }
+
+            return false;
+        }
+
+        double getMax()const{return fMax;}
+        double getMin()const{return fMin;}
+        double getMean()const{return fMean/static_cast<double>(fCount);}
+        double getErr()const{return fErr;}
+
+    private:
+        const size_t fCount;
+        TBufferType fBuffer;
+        double fMax=NAN, fMin=NAN, fMean=NAN, fErr=NAN;
+};
+
+class TVolatilityBarRollBuffer {
+    public:
+        using TBufferType = std::deque<double>;
+        explicit TVolatilityBarRollBuffer( const size_t aCount ):
+            fCount(aCount){
+            ;
+        }
+        bool isFill() const {return fBuffer.size() == fCount;}
+        void reset(){
+            fBuffer.clear();
+            fMMBuffer.clear();
+
+            fMean = 0;
+            fErr = NAN;
+        }
+        double getMax()const{return *fMMBuffer.rbegin();}
+        double getMin()const{return *fMMBuffer.begin();}
+        double getMean()const{return fMean/static_cast<double>(fCount);}
+        double getErr()const{return fErr;}
+
+        bool add(const TSimpleBar& aValue) {
+            const double lValue = aValue.High - aValue.Low;
+
+            bool lisfill = isFill();
+            if( lisfill ){
+                const double lOldValue = fBuffer.front();
+                fBuffer.pop_front();
+                fBuffer.push_back(lValue);
+                fMean += (lValue-lOldValue);
+                fMMBuffer.erase( fMMBuffer.find( lOldValue ) );
+
+            }else{
+                fBuffer.push_back(lValue);
+                if(not fBuffer.empty()){
+                    fMean += lValue;
+                }else{
+                    fMean = lValue;
+                }
+                lisfill = isFill();
+            }
+            fMMBuffer.emplace(lValue);
+            
+            if(lisfill){
+                const double lc = static_cast<double>(fCount);
+                const double lMean = fMean / lc;
+                double lsd = 0.0;
+                for (auto& lv : fBuffer) {
+                    lsd += pow( lMean - lv, 2 );
+                }
+                
+                lsd /= (lc-1.5);
+                fErr = sqrt(lsd) / sqrt(lc);
+            }
+
+            return lisfill;
