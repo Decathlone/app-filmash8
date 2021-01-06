@@ -133,3 +133,13 @@ class TVolatilityBarRollBuffer {
             }
 
             return lisfill;
+        }
+
+    private:
+        TBufferType fBuffer;
+        std::multiset<double> fMMBuffer;
+        const size_t fCount;
+        double fMean=0, fErr=NAN;
+};
+
+#endif // VOLATILITYBARBUFFER_H
