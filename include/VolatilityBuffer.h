@@ -47,3 +47,32 @@ template <class T, class Tin=T> class TVolatilityBuffer {
 
                 const bool lisfill = isFill();
                 if(lisfill){
+                    const T lc = static_cast<T>(fCount);
+                    const T lMean = fMean / lc;
+                    double lsd = 0.0;
+                    for (auto& lv : fBuffer) {
+                        lsd += pow( lMean - lv, 2 );
+                    }
+                    
+                    lsd /= (lc-1.5);
+                    fErr = sqrt(lsd) / sqrt(lc);
+                }
+
+                return lisfill;
+            }
+
+            return false;
+        }
+
+        T getMax()const{return fMax;}
+        T getMin()const{return fMin;}
+        T getMean()const{return fMean/static_cast<T>(fCount);}
+        T getErr()const{return fErr;}
+
+    private:
+        const size_t fCount;
+        TBufferType fBuffer;
+        T fMax=NAN, fMin=NAN, fMean=NAN, fErr=NAN;
+};
+
+#endif //VOLATILITYBUFFER_H
