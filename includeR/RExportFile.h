@@ -102,3 +102,63 @@ Rcpp::NumericVector Stochastic( const Rcpp::NumericMatrix & aOHLCV, const int aP
 
 // [[Rcpp::export]]
 Rcpp::NumericVector ADX( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod );
+//------------------------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, const double aSigma=2.0, const int aType=6 );
+//------------------------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName );
+//------------------------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+double DealsToPnLValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams );
+//------------------------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+double DealsToStatValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams );
+//------------------------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams );
+//------------------------------------------------------------------------------------------
+
+// [[Rcpp::export]]
+Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp::DataFrame & aDeals, const SEXP & aParams );
+//------------------------------------------------------------------------------------------
+
+inline std::string getTimeZone(const Rcpp::NumericMatrix & aData){
+    std::string lTZone;
+    try{
+        lTZone = Rcpp::as< std::string >( aData.attr("tzone") );
+    }catch(...){
+        //std::cout << "tzone import error"  << std::endl;
+    };
+    
+    return lTZone;
+}
+//------------------------------------------------------------------------------------------
+
+inline TPriceSeries XtsToPriceSeries( const Rcpp::NumericMatrix & aData, const TMAPoint aType, std::string & aoTZone ) {
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wconversion"
+    const Rcpp::NumericVector lIndex( aData.attr("index") );
+    #pragma GCC diagnostic pop
+
+    aoTZone = getTimeZone( aData );
+
+    if( aData.ncol() < 5 ) {
+        throw std::logic_error( "Need Xts with OHLCV bars" );
+    }
+
+    TPriceSeries lResult;
+    lResult.reserve( aData.nrow() );
+
+    if( aType == TMAPoint::MAP_Mid ) {
+        for( int lRowNum = 0; lRowNum < aData.nrow(); ++lRowNum ) {
+            const TPrice lPrice = (
+                aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_High ) ) +
+                aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Low ) )
+            ) / 2.0 ;
+            lResult.emplace_back( lIndex[ lRowNum ], lPrice, aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Volume ) ) );
