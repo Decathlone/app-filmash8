@@ -162,3 +162,63 @@ inline TPriceSeries XtsToPriceSeries( const Rcpp::NumericMatrix & aData, const T
                 aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Low ) )
             ) / 2.0 ;
             lResult.emplace_back( lIndex[ lRowNum ], lPrice, aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Volume ) ) );
+        }
+
+    } else if( aType == TMAPoint::MAP_Triple ) {
+        for( int lRowNum = 0; lRowNum < aData.nrow(); ++lRowNum ) {
+            const TPrice lPrice =(
+                aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_High ) ) +
+                aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Low ) ) +
+                aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Close ) )
+            ) / 3.0 ;
+            lResult.emplace_back( lIndex[ lRowNum ], lPrice, aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Volume ) ) );
+        }
+
+    } else {
+        for( int lRowNum = 0; lRowNum < aData.nrow(); ++lRowNum ) {
+            const TPrice lPrice = aData.at( lRowNum, static_cast<int>( aType ) );
+            lResult.emplace_back( lIndex[ lRowNum ], lPrice, aData.at( lRowNum, static_cast<int>( TMAPoint::MAP_Volume ) ) );
+        }
+    }
+
+    return lResult;
+}
+//------------------------------------------------------------------------------------------
+
+inline Rcpp::NumericVector PriceSeriesToXts( const TPriceSeries & aPrices, const std::string & aTZone ) {
+
+    if(aPrices.empty()){
+        return Rcpp::NumericVector();
+    }
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wzero-as-null-pointer-constant"
+    Rcpp::NumericVector lResult( aPrices.size() );
+    Rcpp::NumericVector lIndex( aPrices.size() );
+#pragma GCC diagnostic pop
+
+    for( size_t i=0; i < aPrices.size(); ++i ) {
+        lResult[ i ] = IsEqual( aPrices[i].Price, GetBadPrice() ) ? NA_REAL : aPrices[i].Price ;
+        lIndex[ i ] = aPrices[i].DateTime;
+    }
+    
+    lIndex.attr("tzone")    = aTZone.c_str();// "Europe/Moscow"; // the index has attributes
+    lIndex.attr("tclass")   = "POSIXct";
+
+    lResult.attr("dim")         = Rcpp::IntegerVector::create( aPrices.size(), 1 );
+    lResult.attr("index")       = lIndex;
+    Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
+    lResult.attr("class")       = klass;
+    lResult.attr(".indexCLASS") = "POSIXct";
+    lResult.attr("tclass")      = "POSIXct";
+    lResult.attr(".indexTZ")    = aTZone.c_str(); //"Europe/Moscow";
+    lResult.attr("tzone")       = aTZone.c_str(); //"Europe/Moscow";
+
+    colnames( lResult ) = Rcpp::CharacterVector::create( "value" );
+    
+    return lResult;
+}
+//------------------------------------------------------------------------------------------
+
+inline Rcpp::NumericVector PriceSeriesVolumeToXts( const TPriceSeries & aPrices, const std::string & aTZone ) {
+#pragma GCC diagnostic push
