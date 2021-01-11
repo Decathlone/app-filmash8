@@ -222,3 +222,72 @@ inline Rcpp::NumericVector PriceSeriesToXts( const TPriceSeries & aPrices, const
 
 inline Rcpp::NumericVector PriceSeriesVolumeToXts( const TPriceSeries & aPrices, const std::string & aTZone ) {
 #pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wzero-as-null-pointer-constant"
+    Rcpp::NumericVector lResult( aPrices.size() );
+    Rcpp::NumericVector lIndex( aPrices.size() );
+#pragma GCC diagnostic pop
+
+    for( size_t i=0; i < aPrices.size(); ++i ) {
+        lResult[ i ] = aPrices[i].Volume;
+        lIndex[ i ] = aPrices[i].DateTime;
+    }
+    
+    lIndex.attr("tzone")    = aTZone.c_str();// "Europe/Moscow"; // the index has attributes
+    lIndex.attr("tclass")   = "POSIXct";
+
+    lResult.attr("dim")         = Rcpp::IntegerVector::create( aPrices.size(), 1 );
+    lResult.attr("index")       = lIndex;
+    Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
+    lResult.attr("class")       = klass;
+    lResult.attr(".indexCLASS") = "POSIXct";
+    lResult.attr("tclass")      = "POSIXct";
+    lResult.attr(".indexTZ")    = aTZone.c_str(); //"Europe/Moscow";
+    lResult.attr("tzone")       = aTZone.c_str(); //"Europe/Moscow";
+
+    colnames( lResult ) = Rcpp::CharacterVector::create( "value" );
+    
+    return lResult;
+}
+//------------------------------------------------------------------------------------------
+
+inline TBarSeries XtsToBarSeries( const Rcpp::NumericMatrix & aBar ) {
+    const int lDataSize = aBar.nrow();
+    TBarSeries lResult;
+    lResult.reserve( lDataSize );
+    
+    if( lDataSize > 0 ) {
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wconversion"
+        const Rcpp::NumericVector lIndex( aBar.attr("index") );
+        #pragma GCC diagnostic pop
+
+        for( int lRowNum = 0; lRowNum < lDataSize; ++lRowNum ) {
+            lResult.push_back({
+                lIndex[ lRowNum ],
+                aBar.at( lRowNum, static_cast<int>( TMAPoint::MAP_Open ) ),
+                aBar.at( lRowNum, static_cast<int>( TMAPoint::MAP_High ) ),
+                aBar.at( lRowNum, static_cast<int>( TMAPoint::MAP_Low ) ),
+                aBar.at( lRowNum, static_cast<int>( TMAPoint::MAP_Close ) ),
+                aBar.at( lRowNum, static_cast<int>( TMAPoint::MAP_Volume ) )
+            });
+        }
+    }
+
+    return lResult;
+}
+//------------------------------------------------------------------------------------------
+
+inline TPriceSeries IndicatorToPriceSeries( const Rcpp::NumericMatrix & aData  ){
+    const int lDataSize = aData.nrow();
+    TPriceSeries lResult;
+    lResult.reserve( lDataSize );
+    
+    if( lDataSize > 0 ) {
+        #pragma GCC diagnostic push
+        #pragma GCC diagnostic ignored "-Wconversion"
+        const Rcpp::NumericVector lIndex( aData.attr("index") );
+        #pragma GCC diagnostic pop
+
+        for( int lRowNum = 0; lRowNum < lDataSize; ++lRowNum ) {
+            lResult.emplace_back(
+                lIndex[ lRowNum ],
