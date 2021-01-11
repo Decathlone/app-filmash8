@@ -1,0 +1,3 @@
+/** 
+ * File:   BarPeriod.cpp
+ * A

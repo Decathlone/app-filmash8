@@ -291,3 +291,48 @@ inline TPriceSeries IndicatorToPriceSeries( const Rcpp::NumericMatrix & aData  )
         for( int lRowNum = 0; lRowNum < lDataSize; ++lRowNum ) {
             lResult.emplace_back(
                 lIndex[ lRowNum ],
+                aData.at( lRowNum, 0 ),
+                1
+            );
+        }
+    }
+
+    return lResult;
+}
+//------------------------------------------------------------------------------------------
+
+inline TDeals DataFrameToDeals( const Rcpp::DataFrame & aDeals, TPrice aFirstPrice = 0 ) {
+    TDeals lResult;
+
+    Rcpp::NumericVector lBP = Rcpp::as< Rcpp::NumericVector >( aDeals["open_time"] ) ;
+    Rcpp::NumericVector lEP = Rcpp::as< Rcpp::NumericVector >( aDeals["close_time"] ) ;
+    Rcpp::NumericVector lOpens = Rcpp::as< Rcpp::NumericVector >( aDeals["open_price"] ) ;
+    Rcpp::NumericVector lCloses = Rcpp::as< Rcpp::NumericVector >( aDeals["close_price"] ) ;
+    Rcpp::NumericVector lSide = Rcpp::as< Rcpp::NumericVector >( aDeals["side"] ) ;
+
+    for( int i = 0; i < aDeals.nrows(); ++i ) {
+        const Rcpp::Datetime lBeginPoint( lBP[i] );
+        const Rcpp::Datetime lEndPoint( lEP[i] );
+        
+        const TInnerDate lOpenTime = lBeginPoint.getFractionalTimestamp();
+        const TPrice lOpenPrice = lOpens[ i ];
+        const TPrice lStopLoss = GetBadPrice();
+        const TPrice lTakeProfit = GetBadPrice();
+        const TPrice lClosePrice =  lCloses[ i ];
+        const TInnerDate lCloseTime = lEndPoint.getFractionalTimestamp();
+        const TDealSide lDealSide = ( lSide[ i ] > 0 ) ? TDealSide::Buy : TDealSide::Sell;
+        
+        lResult.push_back( { lOpenTime, lOpenPrice, lStopLoss, lTakeProfit, lClosePrice, lCloseTime, lDealSide  } );
+    }
+
+    return lResult;
+}
+//------------------------------------------------------------------------------------------
+
+std::any getValueFromR( Rcpp::List::NameProxy aValue, const std::type_index aType );
+//------------------------------------------------------------------------------------------
+
+std::string R2String( Rcpp::List::NameProxy aValue, const std::type_index aType );
+//------------------------------------------------------------------------------------------
+
+#endif //BACKTESTER_REXPORTFILE_H
