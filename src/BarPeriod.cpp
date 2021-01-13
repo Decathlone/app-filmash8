@@ -5,4 +5,6 @@
  * Created on December 19, 2016, 5:37 PM
  */
 
-#incl
+#include "BarPeriod.h"
+
+const char *gBarPeriodNames[ static_cast<size
