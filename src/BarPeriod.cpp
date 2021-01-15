@@ -7,4 +7,6 @@
 
 #include "BarPeriod.h"
 
-const char *gBarPeriodNames[ static_cast<size_t>( TBarPeriod::maxValue ) ] = { "0MIN", "1MIN", "5MIN", "10MIN", "15
+const char *gBarPeriodNames[ static_cast<size_t>( TBarPeriod::maxValue ) ] = { "0MIN", "1MIN", "5MIN", "10MIN", "15MIN", "1HOUR", "4HOURS", "1DAY", "1WEEK", "1SEC" };
+
+//----------
