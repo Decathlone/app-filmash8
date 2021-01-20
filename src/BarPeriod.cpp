@@ -13,4 +13,7 @@ const char *gBarPeriodNames[ static_cast<size_t>( TBarPeriod::maxValue ) ] = { "
 std::string getBarPeriodName( const TBarPeriod aID ) {
     assert( aID > TBarPeriod::minValue );
     assert( aID < TBarPeriod::maxValue );
-    
+    return std::string( gBarPeriodNames[ static_cast<size_t>( aID ) ] );
+}
+
+//------
