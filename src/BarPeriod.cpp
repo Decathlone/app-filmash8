@@ -16,4 +16,4 @@ std::string getBarPeriodName( const TBarPeriod aID ) {
     return std::string( gBarPeriodNames[ static_cast<size_t>( aID ) ] );
 }
 
-//------
+//---------------------------------------------------------------------------
