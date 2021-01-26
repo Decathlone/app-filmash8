@@ -104,3 +104,76 @@ TPriceSeries BarsToPriceSeries( const TBarSeries &aBar, const TMAPoint aType ) {
             FAST_DECODER( Low );
         } break ;
         /////////
+        case TMAPoint::MAP_Volume : {
+            FAST_DECODER( Volume );
+        } break ;
+    }
+
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+void Reset( TSimpleBar &aBar ) {
+    aBar.DateTime = gStartingTime;
+    aBar.Open = 0.0;
+    aBar.High = 0.0;
+    aBar.Low = 0.0;
+    aBar.Close = 0.0;
+    aBar.Volume = -1.0;
+}
+
+//------------------------------------------------------------------------------------------
+TBarSeries _CreateBars( const TBarSeries & aBars, const TBarPeriod aBarPeriod ) {
+   
+    const double lOutBarPeriod = getBarPeriodLength( aBarPeriod );//0.0;
+    
+    TBarSeries oResuiltBarSeries;
+    TSimpleBar lOutBar;
+    Reset( lOutBar );
+    
+    int GlobalBarIndex = 0;
+    
+    for( size_t i = 0; i < aBars.size( ); i++ ) {
+        
+        const TSimpleBar lCurrentBar = aBars[ i ];
+        const TInnerDate lBarTime = lCurrentBar.DateTime;
+        const int lCurrentBarIndex = Trunc( ( lBarTime - gStartingTime ) / lOutBarPeriod );
+        
+        if( lCurrentBarIndex != GlobalBarIndex ) {
+            
+            if( GlobalBarIndex != 0 ) {
+                lOutBar.DateTime = GlobalBarIndex * lOutBarPeriod + gStartingTime;
+                oResuiltBarSeries.push_back( lOutBar );
+                Reset( lOutBar );
+            }
+            
+            GlobalBarIndex = lCurrentBarIndex;
+        }
+        
+        lOutBar = lOutBar + lCurrentBar;
+        
+        if( ( aBars.size( ) - i ) == 1 ) {
+            lOutBar.DateTime = lCurrentBarIndex * lOutBarPeriod + gStartingTime;
+            oResuiltBarSeries.push_back( lOutBar );
+            Reset( lOutBar );
+        }
+    }
+
+    return oResuiltBarSeries;
+}
+
+//------------------------------------------------------------------------------------------
+TSimpleBar operator+( const TSimpleBar &aStarBar, const TSimpleBar &aEndBar ) {
+    
+    if( not IsValidBar( aEndBar ) ) {
+        return aStarBar;
+    }
+    
+    if( not IsValidBar( aStarBar ) ) {
+        return aEndBar;
+    }
+    
+    const double lOpen =  aStarBar.Open;
+    const double lHigh = IsGreat( aStarBar.High, aEndBar.High ) ? aStarBar.High : aEndBar.High ;
+    const double lLow = IsLess( aStarBar.Low, aEndBar.Low ) ? aStarBar.Low : aEndBar.Low;
+    const double lClose = aEndBar.Close;
