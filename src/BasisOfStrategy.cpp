@@ -177,3 +177,66 @@ TSimpleBar operator+( const TSimpleBar &aStarBar, const TSimpleBar &aEndBar ) {
     const double lHigh = IsGreat( aStarBar.High, aEndBar.High ) ? aStarBar.High : aEndBar.High ;
     const double lLow = IsLess( aStarBar.Low, aEndBar.Low ) ? aStarBar.Low : aEndBar.Low;
     const double lClose = aEndBar.Close;
+    const double lVolume = aStarBar.Volume + aEndBar.Volume;
+
+    const TSimpleBar lOutBar{ aStarBar.DateTime, lOpen, lHigh, lLow, lClose, lVolume };
+
+    return lOutBar;
+}
+
+//------------------------------------------------------------------------------------------
+std::string DateToStr( const TInnerDate aDate ) {
+    const time_t lTime = Round( aDate );
+    const std::string lStrTime( ctime( &lTime ) );
+    
+    return trim( lStrTime );
+}
+
+//------------------------------------------------------------------------------------------
+TInnerTime ITime( const TInnerDate aDate ) {
+    // const time_t lTime = Round( aDate );
+    // struct tm * ltimeinfo = localtime (&lTime);
+    
+    // return ltimeinfo->tm_hour * 3600 + ltimeinfo->tm_min * 60 + ltimeinfo->tm_sec;
+    return  ToDouble(ToInt(aDate) % ToInt(gOneDay));
+}
+
+//------------------------------------------------------------------------------------------
+TInnerTime ITime( const std::string& aTime ) {
+    std::string s{aTime};
+    const std::string delimiter{":"};
+    int lHours;
+    size_t pos = 0;
+
+    if ((pos = s.find(delimiter)) != std::string::npos) {
+        lHours = std::stoi(s.substr(0, pos));
+        s.erase(0, pos + delimiter.length());
+    } else {
+        return 0.0;
+    }
+
+    if ((pos = s.find(delimiter)) != std::string::npos) {
+        int lMinutes = std::stoi(s.substr(0, pos));
+        s.erase(0, pos + delimiter.length());
+        int lSeconds = std::stoi(s.substr(0, pos));
+
+        return ToDouble(lHours * 3600 + lMinutes * 60 + lSeconds);
+    } else {
+        int lMinutes = std::stoi(s);
+        return ToDouble(lHours * 3600 + lMinutes * 60);
+    }
+}
+
+//------------------------------------------------------------------------------------------
+std::ostream& operator<<( std::ostream &out, const TSimpleBar &aBar ) {
+    std::stringstream strm;
+    
+    strm    << DateToStr( aBar.DateTime ) << "\t"
+            << aBar.Open << "\t"
+            << aBar.High << "\t"
+            << aBar.Low << "\t"
+            << aBar.Close << "\t"
+            << aBar.Volume ;
+
+    return out << strm.str();
+}
