@@ -240,3 +240,36 @@ std::ostream& operator<<( std::ostream &out, const TSimpleBar &aBar ) {
 
     return out << strm.str();
 }
+
+//------------------------------------------------------------------------------------------
+std::ostream& operator<<( std::ostream &out, const TSimpleTick &aTick ) {
+    std::stringstream strm;
+    
+    strm    << DateToStr( aTick.DateTime ) << "\t"
+            << aTick.Price << "\t"
+            << aTick.Volume ;
+    return out << strm.str();     
+}
+
+//------------------------------------------------------------------------------------------
+TPrice RoundTo( const TPrice aPrice, const TPrice aPriceStep ) {
+    assert( isPositiveValue( aPriceStep ) );
+    
+    return std::round( aPrice / aPriceStep ) * aPriceStep ;
+}
+
+//------------------------------------------------------------------------------------------
+TPrice TruncTo( const TPrice aPrice, const TPrice aPriceStep ) {
+    assert( isPositiveValue( aPriceStep ) );
+    
+    return std::trunc( aPrice / aPriceStep ) * aPriceStep ;
+}
+
+//------------------------------------------------------------------------------------------
+TPrice CeilTo( const TPrice aPrice, const TPrice aPriceStep ) {
+    assert( isPositiveValue( aPriceStep ) );
+    
+    return std::ceil( aPrice / aPriceStep ) * aPriceStep ;
+}
+
+//------------------------------------------------------------------------------------------
