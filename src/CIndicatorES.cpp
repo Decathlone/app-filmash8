@@ -3,3 +3,6 @@
 
 /* 
  * File:   CIndicatorES.cpp
+ * Author: victorg(mq5), kan(c++)
+ * 
+ * Created on January 20, 2
