@@ -10,4 +10,6 @@
 #include <cmath>
 #include "DelphisRound.h"
 
-#inclu
+#include "CIndicatorES.h"
+
+//------------------------------------------------
