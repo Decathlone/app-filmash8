@@ -5,4 +5,9 @@
  * File:   CIndicatorES.cpp
  * Author: victorg(mq5), kan(c++)
  * 
- * Created on January 20, 2
+ * Created on January 20, 2017, 4:14 PM
+ */
+#include <cmath>
+#include "DelphisRound.h"
+
+#inclu
