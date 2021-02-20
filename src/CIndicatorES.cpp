@@ -19,4 +19,8 @@ double CIndicatorES::GetPar(const int n) {
     if (n >= 0 and n < 5) {
         return ( Par[ ToSize_t(n) ]);
     } else {
-        return ( 0.0)
+        return ( 0.0);
+    }
+}
+
+//-------------------------------------------------------------
