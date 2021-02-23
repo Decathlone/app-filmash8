@@ -26,4 +26,7 @@ double CIndicatorES::GetPar(const int n) {
 //-----------------------------------------------------------------------------------
 bool CIndicatorES::CalcPar(const TDoubles &dat, const TForecastModelParams &aParams) {
     Dlen = dat.size();
-   
+    Dat = dat;
+
+    Par[0] = aParams.S; // Dat[0]; // initial S
+    Par[1] 
