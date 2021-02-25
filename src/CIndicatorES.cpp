@@ -32,4 +32,6 @@ bool CIndicatorES::CalcPar(const TDoubles &dat, const TForecastModelParams &aPar
     Par[1] = aParams.t; // 0; // initial T
     Par[2] = aParams.Alpha; // 0.5; // initial Alpha
     Par[3] = aParams.Gamma; // 0.5; // initial Gamma
- 
+    Par[4] = aParams.Phi; // 0.5; // initial Phi
+
+    return Optimiz
