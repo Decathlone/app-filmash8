@@ -29,4 +29,5 @@ bool CIndicatorES::CalcPar(const TDoubles &dat, const TForecastModelParams &aPar
     Dat = dat;
 
     Par[0] = aParams.S; // Dat[0]; // initial S
-    Par[1] 
+    Par[1] = aParams.t; // 0; // initial T
+    Par[2] = aParams.Alpha; // 0.5; // 
