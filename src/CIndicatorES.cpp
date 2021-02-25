@@ -34,4 +34,7 @@ bool CIndicatorES::CalcPar(const TDoubles &dat, const TForecastModelParams &aPar
     Par[3] = aParams.Gamma; // 0.5; // initial Gamma
     Par[4] = aParams.Phi; // 0.5; // initial Phi
 
-    return Optimiz
+    return Optimize(Par) > 0.0; // Powell's optimization
+}
+
+//----------------------------
