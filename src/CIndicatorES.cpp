@@ -37,4 +37,6 @@ bool CIndicatorES::CalcPar(const TDoubles &dat, const TForecastModelParams &aPar
     return Optimize(Par) > 0.0; // Powell's optimization
 }
 
-//----------------------------
+//------------------------------------------------------------------------------------
+// func
+//---
