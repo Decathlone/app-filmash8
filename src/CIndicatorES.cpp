@@ -41,3 +41,6 @@ bool CIndicatorES::CalcPar(const TDoubles &dat, const TForecastModelParams &aPar
 // func
 //------------------------------------------------------------------------------------
 double CIndicatorES::func(const TDoubles &p) {
+    double s, t, alp, gam, phi, k1, k2, k3, e, sse, ae, pt;
+
+ 
