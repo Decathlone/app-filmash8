@@ -54,4 +54,6 @@ double CIndicatorES::func(const TDoubles &p) {
     if (alp > 0.95) {
         k1 += (alp - 0.95)*200.0;
         alp = 0.95;
-    }// Alpha  
+    }// Alpha   > 0.95
+    else if (alp < 0.05) {
+        k1 += (0.05 - alp)*200.0;
