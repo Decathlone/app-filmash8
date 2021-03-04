@@ -71,4 +71,7 @@ double CIndicatorES::func(const TDoubles &p) {
 
     if (phi > 1.0) {
         k3 += (phi - 1.0)*200.0;
-        phi = 1.0
+        phi = 1.0;
+    }// Phi     > 1.0
+    else if (phi < 0.05) {
+        
