@@ -68,3 +68,7 @@ double CIndicatorES::func(const TDoubles &p) {
         k2 += (0.05 - gam)*200.0;
         gam = 0.05;
     } // Gamma   < 0.05
+
+    if (phi > 1.0) {
+        k3 += (phi - 1.0)*200.0;
+        phi = 1.0
