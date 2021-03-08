@@ -77,3 +77,6 @@ double CIndicatorES::func(const TDoubles &p) {
         k3 += (0.05 - phi)*200;
         phi = 0.05;
     } // Phi     < 0.05
+
+    sse = 0;
+    for (size_t i = 0; i < Dlen; 
