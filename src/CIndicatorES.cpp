@@ -85,4 +85,7 @@ double CIndicatorES::func(const TDoubles &p) {
         ae = alp*e;
         pt = phi*t;
         s = s + pt + ae;
-       
+        t = pt + gam*ae;
+    }
+
+    return ( ToDouble(Dlen) * log(k1
