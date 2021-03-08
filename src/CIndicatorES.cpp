@@ -79,4 +79,7 @@ double CIndicatorES::func(const TDoubles &p) {
     } // Phi     < 0.05
 
     sse = 0;
-    for (size_t i = 0; i < Dlen; 
+    for (size_t i = 0; i < Dlen; i++) {
+        e = Dat[ i ]-(s + phi * t);
+        sse += e*e;
+        ae = 
