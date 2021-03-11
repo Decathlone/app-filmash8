@@ -1,1 +1,1 @@
-// This is an independent pro
+// This is an independent project of an individual developer. Dear PVS-Studio, please check i
