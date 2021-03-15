@@ -8,4 +8,8 @@
  * Created on January 23, 2017, 1:58 PM
  */
 
-#incl
+#include <cmath>
+#include <cstddef>
+
+#include "Prices.h"
+#include "Delphi
