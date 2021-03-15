@@ -3,4 +3,9 @@
 
 /* 
  * File:   Forecasting.cpp
- * Author: victorg(mq5)
+ * Author: victorg(mq5), kan(c++)
+ * 
+ * Created on January 23, 2017, 1:58 PM
+ */
+
+#incl
