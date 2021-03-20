@@ -17,3 +17,6 @@
 #include "Forecasting.h"
 
 //-----------------------------------------------------------------------------------
+TForecastResult Forecast(
+    const TDoubles &aData, 
+    TForec
