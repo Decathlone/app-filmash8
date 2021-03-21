@@ -26,4 +26,7 @@ TForecastResult Forecast(
 
     CIndicatorES Es;
     if (not Es.CalcPar(aData, aioParams)) {
-        return TForecastResult{ GetBa
+        return TForecastResult{ GetBadPrice(), GetBadPrice(), GetBadPrice()};
+    }
+
+    double s = Es.GetPar
