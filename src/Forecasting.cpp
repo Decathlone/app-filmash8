@@ -19,4 +19,7 @@
 //-----------------------------------------------------------------------------------
 TForecastResult Forecast(
     const TDoubles &aData, 
-    TForec
+    TForecastModelParams & aioParams, 
+    const double aConfidenceIntervals ) {
+    
+  
