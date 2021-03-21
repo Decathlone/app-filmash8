@@ -33,4 +33,6 @@ TForecastResult Forecast(
     double t = Es.GetPar(1);
     const double alp = Es.GetPar(2);
     const double gam = Es.GetPar(3);
-    c
+    const double phi = Es.GetPar(4);
+    double f = (s + phi * t);
+    double var = 0.0
