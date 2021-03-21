@@ -35,4 +35,7 @@ TForecastResult Forecast(
     const double gam = Es.GetPar(3);
     const double phi = Es.GetPar(4);
     double f = (s + phi * t);
-    double var = 0.0
+    double var = 0.0;
+
+    for (size_t i = 0; i < NDat; i++) { // History
+        const d
