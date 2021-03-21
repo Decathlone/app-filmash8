@@ -22,4 +22,7 @@ TForecastResult Forecast(
     TForecastModelParams & aioParams, 
     const double aConfidenceIntervals ) {
     
-  
+    const size_t NDat = aData.size();
+
+    CIndicatorES Es;
+    if (
