@@ -29,4 +29,6 @@ TForecastResult Forecast(
         return TForecastResult{ GetBadPrice(), GetBadPrice(), GetBadPrice()};
     }
 
-    double s = Es.GetPar
+    double s = Es.GetPar(0);
+    double t = Es.GetPar(1);
+    const double alp = Es.GetP
