@@ -25,4 +25,5 @@ TForecastResult Forecast(
     const size_t NDat = aData.size();
 
     CIndicatorES Es;
-    if (
+    if (not Es.CalcPar(aData, aioParams)) {
+        return TForecastResult{ GetBa
