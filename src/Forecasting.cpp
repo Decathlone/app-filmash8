@@ -42,4 +42,7 @@ TForecastResult Forecast(
         var += e*e;
         const double a1 = alp*e;
         const double a2 = phi*t;
-        s = s + a2 + 
+        s = s + a2 + a1;
+        t = a2 + gam*a1;
+        f = (s + phi * t);
+        //
