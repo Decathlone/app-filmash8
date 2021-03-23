@@ -40,4 +40,6 @@ TForecastResult Forecast(
     for (size_t i = 0; i < NDat; i++) { // History
         const double e = aData[i] - f;
         var += e*e;
-        const double a1 
+        const double a1 = alp*e;
+        const double a2 = phi*t;
+        s = s + a2 + 
