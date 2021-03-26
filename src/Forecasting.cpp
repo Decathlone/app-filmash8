@@ -45,4 +45,8 @@ TForecastResult Forecast(
         s = s + a2 + a1;
         t = a2 + gam*a1;
         f = (s + phi * t);
-        //
+        //        Hist[start + i] = f;
+    }
+    var /= ToDouble(NDat - 1);
+    double a1 = 1.0;
+  
