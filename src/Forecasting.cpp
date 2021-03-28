@@ -53,4 +53,8 @@ TForecastResult Forecast(
     double a3 = 1.0;
 
     a1 = a1*phi;
-    
+    a2 += a1;
+
+    const double Fore = s + a2*t; // Forecast
+
+    const double 
