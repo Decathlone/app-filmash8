@@ -49,4 +49,8 @@ TForecastResult Forecast(
     }
     var /= ToDouble(NDat - 1);
     double a1 = 1.0;
-  
+    double a2 = 0.0;
+    double a3 = 1.0;
+
+    a1 = a1*phi;
+    
