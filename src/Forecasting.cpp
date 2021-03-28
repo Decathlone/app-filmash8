@@ -57,4 +57,5 @@ TForecastResult Forecast(
 
     const double Fore = s + a2*t; // Forecast
 
-    const double 
+    const double ci = aConfidenceIntervals * sqrt(var * a3);
+    const double Conf1 = Fore + c
