@@ -61,4 +61,7 @@ TForecastResult Forecast(
     const double Conf1 = Fore + ci;
     const double Conf2 = Fore - ci;
 
-    //    a = alp * (1 + 
+    //    a = alp * (1 + a2 * gam);
+    //    a3 += a*a;
+    TForecastResult lResult;
+    lRes
