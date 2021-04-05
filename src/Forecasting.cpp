@@ -66,4 +66,8 @@ TForecastResult Forecast(
     TForecastResult lResult;
     lResult.upper = Conf1;
     lResult.forecast = Fore;
-    lResult.lower =
+    lResult.lower = Conf2;
+
+    aioParams.S = s;
+    aioParams.t = t;
+    aioPa
