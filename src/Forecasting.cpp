@@ -64,4 +64,6 @@ TForecastResult Forecast(
     //    a = alp * (1 + a2 * gam);
     //    a3 += a*a;
     TForecastResult lResult;
-    lRes
+    lResult.upper = Conf1;
+    lResult.forecast = Fore;
+    lResult.lower =
