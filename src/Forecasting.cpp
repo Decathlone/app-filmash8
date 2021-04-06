@@ -72,4 +72,9 @@ TForecastResult Forecast(
     aioParams.t = t;
     aioParams.Alpha = alp;
     aioParams.Gamma = gam;
-    aioPar
+    aioParams.Phi = phi;
+
+    return lResult;
+}
+
+//-----------
