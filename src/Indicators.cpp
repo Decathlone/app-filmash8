@@ -62,3 +62,66 @@ TPriceSeries _AverageTrueRange( const TBarSeries & aBars, const int aPeriod ) {
 
 //------------------------------------------------------------------------------------------
 TPriceSeries _SimpleMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag ) {
+
+    if( aPeriod <= 0 ) {
+        throw std::logic_error( "Period can be only positive!" );
+    }
+    
+    const size_t lPeriod = ToSize_t( aPeriod );
+    const size_t lResultSize = aPrices.size() ;
+    
+    TPriceSeries lResult;
+    lResult.reserve( lResultSize );
+    
+    if( lResultSize > lPeriod ) {
+        
+        for( size_t j = 0; j < aLag ; ++j ) {
+            lResult.emplace_back( aPrices[ j ].DateTime, GetBadPrice(), 0.0 );
+        }
+        
+        TPrice lSum = 0.0;
+        for( size_t j = aLag; j < lPeriod - 1 ; ++j ) {
+            lResult.emplace_back( aPrices[ j ].DateTime, GetBadPrice(), 0.0 );
+            lSum += aPrices[ j ].Price;
+        }
+
+        for( size_t i = lPeriod - 1; i < lResultSize; ++i ) {
+            lSum += aPrices[ i ].Price;
+            lResult.emplace_back( aPrices[ i ].DateTime, lSum / ToDouble( lPeriod ), 1.0 );
+            lSum -= aPrices[ i - lPeriod + 1 ].Price;
+        }
+
+    } else {
+        for( size_t i = 0; i < lResultSize; ++i ) {
+            lResult.emplace_back( aPrices[ i ].DateTime, GetBadPrice(), 0.0 );
+        }
+    }
+
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _ExponentMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag ) {
+
+    if( aPeriod <= 0 ) {
+        throw std::logic_error( "Period can be only positive!" );
+    }
+    const size_t lPeriod = static_cast< size_t >( aPeriod );
+    const size_t lResultSize = aPrices.size() ;
+    TPriceSeries lResult( lResultSize );
+
+    if( lResultSize > lPeriod ) {
+      
+        for( size_t i = 0 ; i < aLag; ++i ) {
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+        }
+
+        const double lExpWeigth = 2.0 / ( ToDouble( lPeriod + 1 ) );
+        double lExpPrice = 0.0 ;
+        
+        for( size_t i = aLag ; i < lPeriod + aLag; ++i ) {
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+            lExpPrice += aPrices[ i ].Price;
+        }
+        lExpPrice /= ToDouble( lPeriod );
+        lResult[ lPeriod + aLag - 1 ] = TSimpleTick{ aPrices[ lPeriod + aLag - 1 ].DateTime, lExpPrice, 1.0 } ;
