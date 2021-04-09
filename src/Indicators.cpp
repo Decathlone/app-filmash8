@@ -262,3 +262,65 @@ bool _DI( const TBarSeries &aBars, const int aPeriod, TPriceSeries &aoDMIp, TPri
     }
 
     for( size_t i = lPeriod; i < aBars.size(); ++i ) {
+        lDMSump = ( lDMSump * ToDouble( lPeriod - 1 ) / ToDouble( lPeriod ) + lDMp[i].Price );
+        lTRSum = ( lTRSum * ToDouble( lPeriod - 1 ) / ToDouble( lPeriod ) + lTR[i].Price );
+        const double lDMIp = 
+            ( isPositiveValue( lTRSum ) ?
+                (100.0 * lDMSump / lTRSum) :
+                0.0 );
+        TSimpleTick lTick{ aBars[i].DateTime, lDMIp, aBars[i].Volume };
+        aoDMIp[i] = lTick;
+
+        lDMSumn = ( lDMSumn * ToDouble( lPeriod - 1 ) / ToDouble( lPeriod ) + lDMn[i].Price );
+        const double lDMIn = 
+            ( isPositiveValue( lTRSum ) ?
+                (100.0 * lDMSumn / lTRSum) :
+                0.0 );
+        lTick.Price = lDMIn;
+        aoDMIn[i] = lTick;
+    }
+
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _ADX( const TBarSeries & aBars, const int aPeriod ) {
+    TPriceSeries lDMIp;
+    TPriceSeries lDMIn;
+    if( not _DI( aBars, aPeriod, lDMIp, lDMIn )) {
+        return TPriceSeries();
+    }
+    
+    TPriceSeries lDX( aBars.size() );
+    for( size_t i = 0; i < ToSize_t(aPeriod); ++i ){
+        lDX[i].DateTime = aBars[i].DateTime;
+        lDX[i].Price = GetBadPrice();
+        lDX[i].Volume = 0.0;
+    }
+    
+    // DX = [ 100 * ABS( (+DI) - (-DI) ) ] / ( (+DI) + (-DI) )
+    for( size_t i = ToSize_t(aPeriod); i < aBars.size(); ++i ){
+        lDX[i].DateTime = aBars[i].DateTime;
+        lDX[i].Volume = 1.0;
+        
+        lDX[i].Price = std::fabs( 100.0 * ( lDMIp[i].Price - lDMIn[i].Price ) ) / ( lDMIp[i].Price + lDMIn[i].Price );
+    }
+    
+     //ADXi = [(ADX(i-1) * (n - 1)) + DXi] / n where n = Smoothing Period
+    const TPriceSeries lADX( _SmoothedMA( lDX, aPeriod, aPeriod ));
+    
+    return lADX;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _ParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf ) {
+
+    TPriceSeries lResult( aBars.size() );
+
+    if( aBars.empty() ) {
+        return lResult;
+    }
+
+    TDealSide lCurrentSide = TDealSide::Buy;
+    const double lInitaAfValue = aAf;
+    double lAf = lInitaAfValue;
