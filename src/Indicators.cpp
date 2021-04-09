@@ -192,3 +192,73 @@ bool _DM( const TBarSeries & aBars, TPriceSeries & aoDMp, TPriceSeries & aoDMn )
         0.0,
         aBars.begin()->Volume 
     };
+    lDMp[ 0 ] = lTick;
+    lDMn[ 0 ] = lTick;
+
+    for( size_t i = 1; i < lBarsCounter; ++i ) {
+        TSimpleBar lCurrentBar = aBars[ i ];
+        
+        const TPrice lHigh = lCurrentBar.High - aBars[ i-1 ].High;
+        const TPrice lLow = aBars[ i-1 ].Low - lCurrentBar.Low;
+
+        lTick.DateTime = lCurrentBar.DateTime ;
+        lTick.Volume = lCurrentBar.Volume ;
+
+        TPrice dm_p = 0.0;
+        TPrice dm_m = 0.0;
+
+        if( IsGreat( lHigh, lLow ) and isPositiveValue( lHigh ) ) {
+            dm_p = lHigh;
+        }
+
+        else if( IsGreat( lLow, lHigh ) and isPositiveValue( lLow ) ) {
+            dm_m = lLow;
+        }
+
+        lTick.Price = dm_p ;
+        lDMp[ i ] = lTick;
+
+        lTick.Price = dm_m ;
+        lDMn[ i ] = lTick;
+    }
+
+    aoDMp.swap( lDMp );
+    aoDMn.swap( lDMn );
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
+bool _DI( const TBarSeries &aBars, const int aPeriod, TPriceSeries &aoDMIp, TPriceSeries &aoDMIn ) {
+    if( aPeriod < 2 ) { return false; }
+    
+    const size_t lPeriod = ToSize_t( aPeriod );
+    
+    if( aBars.size() < lPeriod ) { return false; }
+
+    TPriceSeries lDMp;
+    TPriceSeries lDMn;
+
+    if( not _DM( aBars, lDMp, lDMn ) ) { return false; }
+
+    const TPriceSeries lTR( _TrueRange( aBars ) );
+
+    if( aBars.size() != lDMp.size() or lDMp.size() != lDMn.size() or lDMn.size() != lTR.size() ) { return false; }
+
+    aoDMIp.resize( aBars.size() );
+    aoDMIn.resize( aBars.size() );
+
+    double lDMSump = 0.0;
+    double lDMSumn = 0.0;
+    double lTRSum = 0.0;
+    for( size_t i = 0; i < lPeriod; ++i ) {
+        const TSimpleTick lTick{ aBars[i].DateTime, GetBadPrice(), 0.0 };
+
+        aoDMIp[i] = lTick;
+        aoDMIn[i] = lTick;
+
+        lDMSump += lDMp[i].Price;
+        lDMSumn += lDMn[i].Price;
+        lTRSum += lTR[i].Price;
+    }
+
+    for( size_t i = lPeriod; i < aBars.size(); ++i ) {
