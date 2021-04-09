@@ -125,3 +125,70 @@ TPriceSeries _ExponentMA( const TPriceSeries & aPrices, const int aPeriod, const
         }
         lExpPrice /= ToDouble( lPeriod );
         lResult[ lPeriod + aLag - 1 ] = TSimpleTick{ aPrices[ lPeriod + aLag - 1 ].DateTime, lExpPrice, 1.0 } ;
+
+        for( size_t i =  lPeriod+aLag ; i < lResultSize; ++i ) {
+            lExpPrice = aPrices[ i ].Price * lExpWeigth + lExpPrice * ( 1 - lExpWeigth );
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, lExpPrice, 1.0 };
+        }
+
+    } else {
+        for( size_t i = 0 ; i < lResultSize; ++i ) {
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+        }
+    }
+
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _SmoothedMA( const TPriceSeries & aPrices, const int aPeriod, const size_t aLag ) {
+
+    if( aPeriod <= 0 ) {
+        throw std::logic_error( "Period can be only positive!" );
+    }
+    const size_t lPeriod = static_cast< size_t >( aPeriod );
+    const size_t lResultSize = aPrices.size() ;
+    TPriceSeries lResult( lResultSize );
+
+    if( lResultSize > lPeriod + aLag ) {
+
+        double lExpPrice = 0.0 ;
+
+        for( size_t i = 0 ; i < aLag; ++i ) {
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+        }
+
+        for( size_t i = aLag ; i < lPeriod + aLag ; ++i ) {
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+            lExpPrice += aPrices[ i ].Price;
+        }
+        lExpPrice /= ToDouble( lPeriod );
+        lResult[ lPeriod + aLag - 1 ] = TSimpleTick{ aPrices[ lPeriod + aLag - 1 ].DateTime, lExpPrice, 1.0 } ;
+
+        for( size_t i =  lPeriod + aLag ; i < lResultSize; ++i ) {
+            lExpPrice = ( aPrices[ i ].Price + lExpPrice * ToDouble( lPeriod - 1 ) ) / ToDouble( lPeriod );
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, lExpPrice, 1.0 };
+        }
+
+    } else {
+        for( size_t i = 0 ; i < lResultSize; ++i ) {
+            lResult[ i ] = TSimpleTick { aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+        }
+    }
+
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+bool _DM( const TBarSeries & aBars, TPriceSeries & aoDMp, TPriceSeries & aoDMn ) {
+    size_t lBarsCounter = aBars.size() ;
+    if( lBarsCounter <= 1 ) { return false; }
+
+    TPriceSeries lDMp( lBarsCounter );
+    TPriceSeries lDMn( lBarsCounter );
+
+    TSimpleTick lTick {
+        aBars.begin()->DateTime,
+        0.0,
+        aBars.begin()->Volume 
+    };
