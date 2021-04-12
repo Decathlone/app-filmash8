@@ -376,3 +376,78 @@ TPriceSeries _ParabolicSar( const TBarSeries & aBars, const double aAf, const do
         }
 
         if( lCurrentSide == TDealSide::Sell ) {
+                
+            if( IsLess(lLow, lFuturesSar) ) {
+                lFuturesSar = lLow;
+                if( IsLess( lAf, aMaxAf) ) {
+                    lAf += aAf;
+                }
+            }
+
+            const TPrice lPriorHigh = aBars[ i - 1 ].High;
+            const TPrice lLocalHigh= std::max( lHigh, lPriorHigh );
+            const double lCondidateSAR = std::max( lLocalHigh, lSar );
+            lSar = std::min( lPriorSar, lCondidateSAR );
+            
+            if( IsGreat(lHigh, lSar) ) {
+                lAf = lInitaAfValue;
+                lCurrentSide = TDealSide::Buy;
+                lSar = lFuturesSar;
+                lFuturesSar = lHigh;
+            }
+
+            const TSimpleTick lTick{
+                lCurrentBar.DateTime,
+                lSar,
+                1.0
+            };
+            lResult[ i ] = lTick;
+//            continue;
+        }
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _MACD( 
+    const TPriceSeries & aPrices, 
+    const int aFastPeriod, 
+    const int aSlowPeriod, 
+    const int aSmoothPeriod ) {
+    
+    if( aFastPeriod <= 0 or aSlowPeriod <= 0 or aSmoothPeriod<=0 ) {
+        throw std::logic_error( "Period can be only positive!" );
+    }
+    
+    const TPriceSeries lFastExponentMA( _ExponentMA( aPrices, aFastPeriod ) );
+    const TPriceSeries lSlowExponentMA( _ExponentMA( aPrices, aSlowPeriod ) );
+    
+    const size_t lResultSize = aPrices.size() ;
+    TPriceSeries lDifference( lResultSize );
+    
+    const size_t lMaxPeriod = ToSize_t( ( aSlowPeriod > aFastPeriod ) ? aSlowPeriod : aFastPeriod );
+    
+    for( size_t j = 0; j < lMaxPeriod-1 ; ++j ) {
+        lDifference[ j ] = TSimpleTick { aPrices[ j ].DateTime, GetBadPrice(), 0.0 };
+    }
+    
+    for( size_t i = lMaxPeriod-1 ; i < lResultSize; ++i ) {
+        lDifference[ i ] = TSimpleTick { aPrices[ i ].DateTime, ( lFastExponentMA[ i ].Price - lSlowExponentMA[ i ].Price ), 1.0 };
+    }
+    
+    const TPriceSeries lResult( _ExponentMA( lDifference, aSmoothPeriod, lMaxPeriod-1 ) );
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _ZigZag( const TBarSeries & aBars, const double aGap ) {
+    
+    if( not isPositiveValue( aGap )  ) {
+        throw std::logic_error( "aGap can be only positive!" );
+    }
+    
+    TPriceSeries lResult( aBars.size() );
+    
+    /////////////////////////////
