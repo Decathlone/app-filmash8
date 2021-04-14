@@ -661,3 +661,77 @@ bool _RollMinMax_old(
         lRollerLow.Add( aBars[ i ].Low );
         
         aoMax[ i ] = lEmptyTick;
+        lRollerHigh.Add( aBars[ i ].High );
+    }
+    
+    for( size_t i=lPeriod; i<lDataSize; ++i ){
+        
+        lRollerLow.Add( aBars[ i ].Low );
+        assert( lRollerLow.IsFormed() );
+        
+        TSimpleTick lTick {
+            aBars[ i ].DateTime,
+            lRollerLow.GetValue().min,
+            (IsEqual(lRollerLow.GetValue().min, aBars[ i ].Low)? 1.0 : (aTouch?0.0:1.0))
+        };
+        
+        aoMin[ i ] = lTick;
+        
+        lRollerHigh.Add( aBars[ i ].High );
+        assert( lRollerHigh.IsFormed() );
+        lTick.Price = lRollerHigh.GetValue().max;
+        lTick.Volume = (IsEqual(lRollerHigh.GetValue().max, aBars[ i ].High)? 1.0 : (aTouch?0.0:1.0));
+        aoMax[ i ] = lTick;
+    }
+    
+    if( aTouch ){
+        for( size_t i=lPeriod; i<lDataSize; ++i ){
+            aoMax[ i ].Volume = ( isPositiveValue(aoMax[ i ].Volume) and IsEqual(aoMax[ i ].Price, aoMax[ i-1 ].Price) ) ? (aoMax[ i ].Volume + aoMax[ i-1 ].Volume) : 0.0;
+            aoMin[ i ].Volume = ( isPositiveValue(aoMin[ i ].Volume) and IsEqual(aoMin[ i ].Price, aoMin[ i-1 ].Price) ) ? (aoMin[ i ].Volume + aoMin[ i-1 ].Volume) : 0.0;            
+        }
+    }
+    
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
+bool _SupportRessistance( 
+    const TBarSeries & aBars, 
+    const int aPeriod,
+    const size_t aMinTouch, 
+    const double aTollerance,
+    TPriceSeries & aoMin, 
+    TPriceSeries & aoMax ) {
+
+    const size_t lDataSize = aBars.size();
+    const size_t lPeriod = ToSize_t( aPeriod );
+    if( ( aPeriod <= 0 ) or lDataSize < lPeriod ) {
+        return false;
+    }
+    
+    aoMin.resize( lDataSize );
+    aoMax.resize( lDataSize );
+
+    RollRange_with_tollerance lRollerLow( lPeriod, aMinTouch, aTollerance );
+    RollRange_with_tollerance lRollerHigh( lPeriod, aMinTouch, aTollerance  );
+    
+    for( size_t i=0; i<lPeriod; ++i ){
+        
+        const TSimpleTick lEmptyTick {
+            aBars[ i ].DateTime,
+            GetBadPrice(),
+            0.0
+        };
+        
+        aoMin[ i ] = lEmptyTick;
+        lRollerLow.Add( aBars[ i ].Low );
+        
+        aoMax[ i ] = lEmptyTick;
+        lRollerHigh.Add( aBars[ i ].High );
+    }
+    
+    for( size_t i=lPeriod; i<lDataSize; ++i ){
+        
+        lRollerLow.Add( aBars[ i ].Low );
+        assert( lRollerLow.IsFormed() );
+        
