@@ -799,3 +799,50 @@ bool _ForwardMinMax(
         lTick.Price = lHigh;
         aoMax[ i ] = lTick;
     }
+    
+    
+    size_t i = lDataSize-1;
+    TSimpleTick lTick {
+        aBars[ i ].DateTime,
+        GetBadPrice(),
+        0.0
+    };
+    aoMin[ i ] = lTick;
+    aoMax[ i ] = lTick;
+    
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _KAMA( 
+    const TPriceSeries & aPrices, 
+    const int aPeriod, 
+    const double aCoeff, 
+    const double aFastPeriod, 
+    const double aSlowPeriod, 
+    const size_t aLag ) {
+  
+    if( aPeriod <= 0 or aFastPeriod <= 0 or aSlowPeriod <= 0 ) {
+        throw std::logic_error( "Period can be only positive!" );
+    }
+    
+    const size_t lPeriod = static_cast< size_t >( aPeriod );
+    const size_t lResultSize = aPrices.size() ;
+    
+    TPriceSeries lResult( lResultSize );
+    
+    const double lFastest = 2.0 / ( aFastPeriod + 1.0 );
+    const double lSlowest = 2.0 / ( aSlowPeriod + 1.0 );
+
+    if( lResultSize > lPeriod ) {
+        
+        ///\todo можно оптимизировать избавившись от if в циклах
+        
+        for( size_t i = 0; i < aLag ; ++i ) {
+            lResult[ i ] = TSimpleTick{ aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+        }
+        
+        TPrice lVolatility = 0.0;
+        TPrice lSum = 0.0;
+        for( size_t i = aLag; i < lPeriod; ++i ) {
+            lResult[ i ] = TSimpleTick{ aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
