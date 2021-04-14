@@ -509,3 +509,81 @@ TPriceSeries _ZigZag( const TBarSeries & aBars, const double aGap ) {
     }
     
     return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+bool _Forecasting( 
+    const TPriceSeries & aPrices, 
+    const size_t aForecastPeriod, 
+    const double aConfidenceIntervals, 
+    TPriceSeries & aoUpperBorder, 
+    TPriceSeries & aoForecast, 
+    TPriceSeries & aoLowerBorder ) {
+    
+    const size_t lDataSize = aPrices.size();
+    
+    if( lDataSize < aForecastPeriod ) {
+        return false;
+    }
+    
+    aoUpperBorder.resize( lDataSize );
+    aoForecast.resize( lDataSize );
+    aoLowerBorder.resize( lDataSize );
+    
+    for( size_t i = 0; i < aForecastPeriod; ++i ) {
+        const TSimpleTick lEmptyTick {
+            aPrices[i].DateTime,
+            GetBadPrice(),
+            0.0
+        };
+        
+        aoUpperBorder[ i ] = lEmptyTick;
+        aoForecast[ i ] = lEmptyTick;
+        aoLowerBorder[ i ] = lEmptyTick;
+    }
+
+    TForecastModelParams lParams;
+    lParams.SetDefault( aPrices[ 0 ].Price );
+    
+    const TDoubles lData( ToDoublesArray( aPrices ) );
+    
+    for( size_t i = aForecastPeriod; i < lDataSize; ++i ) {
+        const TDoubles lDataF( 
+            std::next( lData.begin(), ToInt( i - aForecastPeriod ) ),
+            std::next( lData.begin(), ToInt( i ) ) 
+        );
+        const TForecastResult lResult( Forecast( lDataF, lParams, aConfidenceIntervals ) );
+        
+        if( IsValidPrice(lResult.forecast) ) {
+            TSimpleTick lTick {
+                aPrices[i].DateTime,
+                lResult.forecast,
+                1.0
+            };
+            aoForecast[ i ] = lTick;
+
+            lTick.Price = lResult.upper;
+            aoUpperBorder[ i ] = lTick;
+
+            lTick.Price = lResult.lower;
+            aoLowerBorder[ i ] = lTick;
+        } else {
+            const TSimpleTick lEmptyTick {
+                aPrices[i].DateTime,
+                GetBadPrice(),
+                0.0
+            };
+
+            aoUpperBorder[ i ] = lEmptyTick;
+            aoForecast[ i ] = lEmptyTick;
+            aoLowerBorder[ i ] = lEmptyTick;    
+        }
+    }
+    
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
+bool _RollMinMax( 
+    const TBarSeries & aBars, 
+    const int aPeriod, 
