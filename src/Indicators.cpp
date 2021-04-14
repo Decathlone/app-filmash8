@@ -928,3 +928,66 @@ TPriceSeries _IntradayParabolicSar( const TBarSeries & aBars, const double aAf, 
             if( IsGreat( lHigh, lFuturesSar ) ) {
                 lFuturesSar = lHigh;
                 if( IsLess(lAf, aMaxAf) ) {
+                    lAf += aAf;
+                }
+            }
+                
+            const TPrice lPriorLow = aBars[ i - 1 ].Low;
+            const TPrice lLocalLow = std::min( lLow, lPriorLow );
+            const double lCondidateSAR = std::min( lLocalLow, lSar );
+            lSar = std::max( lPriorSar, lCondidateSAR );
+            
+            if( IsLess( lLow , lSar ) ) {
+                lAf = lInitaAfValue;
+                lCurrentSide = TDealSide::Sell;
+                lSar = lFuturesSar;
+                lFuturesSar = lLow;
+            }
+                
+            TSimpleTick lTick{
+                lCurrentBar.DateTime,
+                lSar,
+                1.0
+            };
+            lResult[ i ] = lTick;
+            continue;
+        }
+
+        if( lCurrentSide == TDealSide::Sell ) {
+                
+            if( IsLess(lLow, lFuturesSar) ) {
+                lFuturesSar = lLow;
+                if( IsLess( lAf, aMaxAf) ) {
+                    lAf += aAf;
+                }
+            }
+
+            const TPrice lPriorHigh = aBars[ i - 1 ].High;
+            const TPrice lLocalHigh= std::max( lHigh, lPriorHigh );
+            const double lCondidateSAR = std::max( lLocalHigh, lSar );
+            lSar = std::min( lPriorSar, lCondidateSAR );
+            
+            if( IsGreat(lHigh, lSar) ) {
+                lAf = lInitaAfValue;
+                lCurrentSide = TDealSide::Buy;
+                lSar = lFuturesSar;
+                lFuturesSar = lHigh;
+            }
+
+            TSimpleTick lTick{
+                lCurrentBar.DateTime,
+                lSar,
+                1.0
+            };
+            lResult[ i ] = lTick;
+        }
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _AbsoluteZigZag( const TBarSeries & aBars, const double aGap ) {
+    
+    if( not isPositiveValue( aGap )  ) {
+        throw std::logic_error( "aGap can be only positive!" );
