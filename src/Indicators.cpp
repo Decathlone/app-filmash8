@@ -735,3 +735,67 @@ bool _SupportRessistance(
         lRollerLow.Add( aBars[ i ].Low );
         assert( lRollerLow.IsFormed() );
         
+        TSimpleTick lTick {
+            aBars[ i ].DateTime,
+            lRollerLow.GetValue().min,
+            1.0
+        };
+        
+        aoMin[ i ] = lTick;
+        
+        lRollerHigh.Add( aBars[ i ].High );
+        assert( lRollerHigh.IsFormed() );
+        lTick.Price = lRollerHigh.GetValue().max;
+        aoMax[ i ] = lTick;
+    }
+    
+    return true;
+}
+
+
+//------------------------------------------------------------------------------------------
+bool _ForwardMinMax( 
+    const TBarSeries & aBars, 
+    const size_t aTimeDelta,
+    TPriceSeries & aoMin, 
+    TPriceSeries & aoMax ) {
+    
+    const size_t lDataSize = aBars.size();
+    if( lDataSize < 5 ) {
+        return false;
+    }
+    
+    aoMin.resize( lDataSize );
+    aoMax.resize( lDataSize );
+    
+    for( size_t i=0; i<lDataSize-1; ++i ){
+        
+        size_t j = i+1;
+        TPrice lHigh = GetBadPrice();
+        TPrice lLow = GetBadPrice();
+        
+        while( j<lDataSize ){
+            if( aBars[j].DateTime > (aBars[i].DateTime + ToDouble( aTimeDelta )) ) break;
+            
+            if( not IsValidPrice(lHigh) ){
+                lHigh = aBars[j].High;
+                lLow = aBars[j].Low;
+            } else {
+                lHigh = std::max(aBars[j].High, lHigh);
+                lLow = std::min(aBars[j].Low, lLow);
+            }
+            
+            ++j;
+        }
+        
+        TSimpleTick lTick {
+            aBars[ i ].DateTime,
+            lLow,
+            1.0
+        };
+        
+        aoMin[ i ] = lTick;
+        
+        lTick.Price = lHigh;
+        aoMax[ i ] = lTick;
+    }
