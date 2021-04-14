@@ -846,3 +846,85 @@ TPriceSeries _KAMA(
         TPrice lSum = 0.0;
         for( size_t i = aLag; i < lPeriod; ++i ) {
             lResult[ i ] = TSimpleTick{ aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+            lSum += aPrices[ i ].Price;
+            if( i >= 1 ) {
+                lVolatility += std::abs( aPrices[ i ].Price - aPrices[ i - 1 ].Price );
+            }
+        }
+
+        for( size_t i = lPeriod; i < lResultSize; ++i ) {
+            const double lDirection = std::abs( aPrices[ i ].Price - aPrices[ i - lPeriod ].Price );
+            
+            lVolatility += std::abs( aPrices[ i ].Price - aPrices[ i - 1 ].Price );
+            if( i > lPeriod ) {
+                lVolatility -= std::abs( aPrices[ i - lPeriod ].Price - aPrices[ i - lPeriod - 1 ].Price );
+            }
+            
+            const double lEfficiencyRatio = isZero( lVolatility ) ? 1.0 : ( lDirection / lVolatility ) ;
+            const double smooth = ( lEfficiencyRatio * ( lFastest - lSlowest ) + lSlowest );
+            const double c = std::pow( smooth, aCoeff );
+            const TPrice lCurrentValue = c * aPrices[ i ].Price + ( 1.0 - c ) *  ( ( i > lPeriod ) ? lResult[ i - 1 ].Price : aPrices[ i - 1 ].Price ) ;
+            lResult[ i ] =  TSimpleTick{ aPrices[ i ].DateTime, lCurrentValue, 1.0 };
+        }
+
+    } else {
+        for( size_t i = 0; i < lResultSize; ++i ) {
+            lResult[ i ] = TSimpleTick{ aPrices[ i ].DateTime, GetBadPrice(), 0.0 };
+        }
+    }
+
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _IntradayParabolicSar( const TBarSeries & aBars, const double aAf, const double aMaxAf ) {
+
+    TPriceSeries lResult( aBars.size() );
+
+    if( aBars.empty() ) {
+        return lResult;
+    }
+
+    TDealSide lCurrentSide = TDealSide::Buy;
+    const double lInitaAfValue = aAf;
+    double lAf = lInitaAfValue;
+
+    const TSimpleBar lFirstBar( *aBars.begin() );
+
+    TSimpleTick lTick{
+        lFirstBar.DateTime,
+        lFirstBar.Low,
+        1.0 
+    };
+    lResult[ 0 ] = lTick;
+
+    double lSar = lFirstBar.Low;
+    double lFuturesSar = lFirstBar.High;
+    
+    for( size_t i = 1; i < aBars.size(); ++i ) {
+        const TSimpleBar lCurrentBar( aBars[ i ] );
+        const TPrice lHigh = lCurrentBar.High;
+        const TPrice lLow = lCurrentBar.Low;
+        const double lPriorSar = lSar;
+        
+        lSar = (lFuturesSar - lPriorSar) * lAf + lPriorSar;
+        
+        if( not IsOneDay( aBars[ i - 1 ].DateTime, aBars[ i ].DateTime ) ){
+            lCurrentSide = TDealSide::Buy;
+            lSar = aBars[ i ].Low;
+            lFuturesSar = aBars[ i ].High;
+            lAf = lInitaAfValue;
+            TSimpleTick lTick{
+                aBars[ i ].DateTime,
+                aBars[ i ].Low,
+                1.0 
+            };
+            lResult[ i ] = lTick;
+            continue;
+        }
+        
+        if( lCurrentSide == TDealSide::Buy ) {
+
+            if( IsGreat( lHigh, lFuturesSar ) ) {
+                lFuturesSar = lHigh;
+                if( IsLess(lAf, aMaxAf) ) {
