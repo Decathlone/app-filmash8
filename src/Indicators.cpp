@@ -1058,3 +1058,74 @@ TPriceSeries _AbsoluteZigZag( const TBarSeries & aBars, const double aGap ) {
 
 //------------------------------------------------------------------------------------------
 TPriceSeries _Stochastic( const TBarSeries & aBars, const int aPeriod ){
+    TPriceSeries lMin;
+    TPriceSeries lMax;
+    
+    const size_t lDataSize = aBars.size();
+    const size_t lPeriod = ToSize_t( aPeriod );
+    TPriceSeries lResult( lDataSize );
+    
+    if( _RollMinMax( aBars, aPeriod, lMin, lMax ) ) {
+        
+        for( size_t i=0; i<lPeriod; ++i ) {
+            lResult[i].Price = GetBadPrice();
+            lResult[i].DateTime = aBars[i].DateTime;
+            lResult[i].Volume = 0.0;
+        }
+        
+        for( size_t i = lPeriod; i < lDataSize; ++i ) {
+            const TPrice lRange = (lMax[i].Price - lMin[i].Price);
+            lResult[i].Price =  isZero(lRange)? 50.0 : (100.0 * ( aBars[i].Close - lMin[i].Price ) / lRange);
+            lResult[i].DateTime = aBars[i].DateTime;
+            lResult[i].Volume = 1.0;
+        }
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries _ChannelSize( const TBarSeries & aBars, const int aPeriod ) {
+    TPriceSeries lMin;
+    TPriceSeries lMax;
+    
+    if( not _RollMinMax( aBars, aPeriod, lMin, lMax )) {
+        return TPriceSeries();
+    }
+    
+    TPriceSeries lResult( aBars.size() );
+    for( size_t i = 0; i < ToSize_t(aPeriod); ++i ){
+        lResult[i].DateTime = aBars[i].DateTime;
+        lResult[i].Price = GetBadPrice();
+        lResult[i].Volume = 0.0;
+    }
+    
+    for( size_t i = ToSize_t(aPeriod); i < aBars.size(); ++i ){
+        lResult[i].DateTime = aBars[i].DateTime;
+        lResult[i].Volume = 1.0;
+        lResult[i].Price = lMax[i].Price - lMin[i].Price;
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+bool _BollingerBands( 
+    const TPriceSeries & aPrices, 
+    const int aPeriod, 
+    const double aSigma,
+    TPriceSeries & aoMin,
+    TPriceSeries & aoMean,
+    TPriceSeries & aoMax ) {
+    
+    if( aPrices.size() <= ToSize_t(aPeriod) ){
+        return false;
+    }
+    
+    TPriceSeries lSMA( _SimpleMA( aPrices, aPeriod, 0 ) );
+    aoMean.swap( lSMA );
+    
+    aoMin=aoMean;
+    aoMax=aoMean;
+    
+    for( size_t i = aPeriod; i <= aPrices.size(); ++i ){
