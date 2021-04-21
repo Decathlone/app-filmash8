@@ -67,3 +67,58 @@ TPriceSeries DealsToPnLs( const TDeals & aDeals ) {
 }
 
 //------------------------------------------------------------------------------------------
+bool CalcDrawDown(
+    const TPriceSeries & aPnL,
+    TPrice & aoMaxDD,
+    TInnerDate & aoBegin,
+    TInnerDate & aoReturn ) {
+
+    aoBegin = -1;
+    aoReturn = -1;
+
+    if( aPnL.empty() ) {
+        aoMaxDD = -1;
+        return false;
+    }
+
+    TPrice lMax = 0.0;
+    TPrice lMin = 0.0;
+    TPrice lPnl = 0.0;
+    TPrice lDelta = 0.0;
+    size_t lBegin = 0;
+    bool lHaveMin = false;
+    bool lResult = false;
+
+    for( size_t i = 0; i < aPnL.size() ; ++i ) {
+        lPnl += aPnL[i].Price;
+
+        if( IsGreat( lPnl, lMax ) ) { //очередной максимум
+            lMax = lPnl;
+            lMin = lPnl;
+
+            if( lHaveMin ) {
+                    aoBegin = aPnL[ lBegin ].DateTime;
+                    aoReturn = aPnL[ i ].DateTime;
+                    lHaveMin = false;
+                    lResult = true;
+            }
+
+            lBegin = i;
+
+        } else if( IsGreat( lMin, lPnl ) ) { //новый минимум
+            lMin = lPnl;
+
+            if( IsGreat( lMax - lMin, lDelta ) ) {
+                lDelta = lMax - lMin;
+                lHaveMin = true;
+            }
+        }
+    }
+
+    aoMaxDD = lDelta;
+
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries ReductionOfTheIncome(
