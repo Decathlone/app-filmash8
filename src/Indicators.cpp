@@ -1129,3 +1129,19 @@ bool _BollingerBands(
     aoMax=aoMean;
     
     for( size_t i = aPeriod; i <= aPrices.size(); ++i ){
+        TPrice lstdev = 0.0;
+        for( size_t j = (i-aPeriod); j < i; ++j ){
+            lstdev += pow(aPrices[j].Price - aoMean[i-1].Price, 2);
+        }
+        
+        lstdev /= ToDouble(aPeriod);
+        const TPrice lSigma = sqrt(lstdev);
+      
+        aoMin[i-1].Price -=  lSigma * aSigma;
+        aoMax[i-1].Price +=  lSigma * aSigma;
+    }
+    
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
