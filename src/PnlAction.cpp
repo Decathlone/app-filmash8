@@ -122,3 +122,77 @@ bool CalcDrawDown(
 
 //------------------------------------------------------------------------------------------
 TPriceSeries ReductionOfTheIncome(
+    const TPriceSeries & aPnL,
+    const size_t aProfitNum,
+    const double aProfitCoef,
+    const size_t aLossNum,
+    const double aLossCoef ) {
+
+    std::multimap< TPrice, size_t > lProfits;
+    for( size_t i = 0; i < aPnL.size(); ++i ) {
+
+        TPrice lValue = aPnL[ i ].Price ;
+        //lProfits.insert( std::pair< TPrice, size_t >( lValue, i ) ) ;
+        lProfits.emplace( lValue, i ) ;
+    }
+
+    TPriceSeries lPnLVector( aPnL );
+    size_t i = aProfitNum;
+    for( auto it = lProfits.rbegin(); it != lProfits.rend(); ++it ) {
+        if( it->first > 0 ) {
+            const size_t lRealID = it->second ;
+            TSimpleTick lTick = aPnL[ lRealID ] ;
+            lTick.Price  /= aProfitCoef ;
+            lPnLVector[ lRealID ] = lTick;
+        }
+        if( --i == 0 ) break;
+    }
+
+    i = aLossNum;
+    for( auto it = lProfits.begin(); it != lProfits.end() ;++it ) {
+        if( it->first < 0 ) {
+            const size_t lRealID = it->second ;
+            TSimpleTick lTick = aPnL[ lRealID ] ;
+            lTick.Price  *= aLossCoef ;
+            lPnLVector[ lRealID ] = lTick;
+        }
+        if( --i == 0 ) break;
+    }
+
+    return lPnLVector;
+}
+
+//------------------------------------------------------------------------------------------
+TPrice PnLsToMoneyResult( const TPriceSeries & aPnls, const bool aUseVolume ) {
+    TPrice lResult = 0.0;
+    for( const TSimpleTick& lPnl : aPnls ) {
+        lResult += lPnl.Price * ( aUseVolume ? lPnl.Volume : 1.0 );
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+double Student_t_value( const size_t Sn, const double tail=0.2 ){//80%
+    using boost::math::students_t;
+    students_t dist( ToDouble(Sn) - 1 );
+    const double T = quantile(complement(dist, tail / 2.0));
+    
+    return T;
+}
+
+//------------------------------------------------------------------------------------------
+TPrice PnLsToMoneyStatValue( const TPriceSeries & aPnl, const bool aUseVolume, const size_t N, const double aQuantile ) {
+    const size_t lSize = aPnl.size();
+    if( lSize < 2 or N < 2 ) {
+        return 0.0;
+    }
+    
+    std::vector< TPrice > lPnl( lSize );
+    TPrice sum = 0.0;
+    for( size_t i=0; i<lSize; ++i ){
+        const TPrice lValue = aPnl[i].Price * ( aUseVolume ? aPnl[i].Volume : 1.0 );
+        sum += lValue;
+        lPnl[i] = lValue;
+    }
+    
