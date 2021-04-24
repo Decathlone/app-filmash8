@@ -264,3 +264,76 @@ TPrice PnLsToMoneyMonteCarlo( const TPriceSeries & aPnl, const bool aUseVolume, 
 }
 
 //------------------------------------------------------------------------------------------
+TPrice PnLsToMoneyMonteCarloQuantile( const TPriceSeries & aPnl, const bool aUseVolume, const size_t N, const size_t aSamples, const double aQuantile ) {
+    const size_t lSize = aPnl.size();
+    if( lSize < 2 or N < 2 or IsGreat( aQuantile, 1.0 ) ) {
+        return 0.0;
+    }
+    
+    std::multiset<TPrice> lData;
+    
+    for( size_t i=0; i<aSamples; ++i ){
+        TPrice lPnlTest = 0.0;
+        for( size_t j=0; j<N; ++j ){
+            const size_t lID = rand() % lSize;
+            const TPrice lPnlSample = aPnl[lID].Price * (aUseVolume ? aPnl[lID].Volume : 1.0);
+            lPnlTest += lPnlSample;
+        }
+        lPnlTest /= ToDouble(N);
+        
+        lData.insert( lPnlTest );
+    }
+    
+    const size_t lID = RoundToSize_t( aQuantile * ToDouble( aSamples ) );
+    
+    auto iter = lData.cbegin();
+    std::advance(iter, lID);
+    
+    const TPrice lResult = *iter;
+    
+    return lResult * ToDouble(N);    
+}
+
+//------------------------------------------------------------------------------------------
+TPrice DealsToPNLCoefficientQuick(
+    const TDeals & aDeals,
+    const TPrice aFirstPrice,
+    const size_t aMinDeals ) {
+    
+    TPriceSeries lPnL( DealsToPnLs( aDeals ) );
+    if( lPnL.size() <= aMinDeals ) {
+        return gMaxBedAttraction;
+    }
+
+    TPrice lMaxDD = -1;
+    TInnerDate lBegin;
+    TInnerDate lReturn;
+
+    bool lDDOk = CalcDrawDown( lPnL, lMaxDD, lBegin, lReturn );
+    bool lGoodResult = lDDOk or ( isZero( lMaxDD ) );
+
+    if( not lGoodResult ) { return gMaxBedAttraction; }
+
+    const size_t lDealsToReduction = std::max( std::min( aMinDeals / 2, 3UL ), 1UL );
+    const double lReductionCoeff = 2.0;
+    const TPriceSeries lPnLPes( ReductionOfTheIncome( lPnL, lDealsToReduction, lReductionCoeff, lDealsToReduction, lReductionCoeff ) );
+    const TPrice lPnlMoneyReduction = PnLsToMoneyResult( lPnLPes );
+    
+    const TPrice lPnlMoney = PnLsToMoneyResult( lPnL );
+    const TPrice lResult =  lPnlMoneyReduction / ( lMaxDD + std::abs( lPnlMoney ) );
+//    TPrice lResult =  lPnlMoney / ( lMaxDD + std::abs( lPnlMoney ) );
+//    TPrice lResult =  lPnlMoney / ( lMaxDD + 1 );
+    
+    return lResult ;
+}
+
+//------------------------------------------------------------------------------------------
+TPrice DealsToPNLCoefficient(
+    const TDeals & aDeals,
+    const TInnerDate aFirstPoint,
+    const TInnerDate aLastPoint,
+    const TPrice aMinPnl,
+    const size_t aMinDeals,
+    const size_t aQuantTime ) {
+
+    if( aDeals.size() < aMinDeals ) {
