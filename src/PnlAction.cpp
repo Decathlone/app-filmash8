@@ -337,3 +337,78 @@ TPrice DealsToPNLCoefficient(
     const size_t aQuantTime ) {
 
     if( aDeals.size() < aMinDeals ) {
+        return gMaxBedAttraction;
+    }
+
+    //region перевести список сделок в список d_pnl
+    TPrice lResult = gMaxBedAttraction ;
+    TPrice lPnLValue = 0.0;
+    //TInnerDate lPnLTime = 0.0;
+    std::list< TSimpleTick > lPnLs;
+    lPnLs.push_back( {aFirstPoint, 0.0, 0} );
+
+    for( const auto &lDeal : aDeals ) {
+        TInnerDate lEmptyDate = lDeal.OpenTime;
+        TSimpleTick lEmptyTick = { lEmptyDate, 0.0, 0 };
+        lPnLs.push_back( lEmptyTick );
+
+        TInnerDate lBeginDate = lDeal.CloseTime;
+
+        const TPrice lDealPnl =
+            (lDeal.DealSide == TDealSide::Buy) ?
+                (lDeal.ClosePrice - lDeal.OpenPrice) :
+                (lDeal.OpenPrice - lDeal.ClosePrice);
+        
+        TSimpleTick lRealTick = { lBeginDate, lDealPnl, 1 };
+        lPnLs.push_back( lRealTick );
+
+        lPnLValue += lDealPnl;
+        //lPnLTime += ( lDeal.CloseTime - lDeal.OpenTime );
+    }
+
+    lPnLs.push_back( {aLastPoint, 0.0, 0} );
+    //endregion
+
+    // рассчитать общий pnl, учесть aMinPnl
+    if( lPnLValue <= aMinPnl ) {
+        return gMaxBedAttraction;
+    }
+
+    //region  рассчитать ср. и макс. d_pnl, число сделок
+    const size_t lWeekCouner = CeilToSize_t( ( aLastPoint - aFirstPoint ) / static_cast< double >( aQuantTime ) );
+    std::vector< TPrice > lQuantPnL( lWeekCouner );
+    size_t lIdx=0;
+    TInnerDate lNextDate = aFirstPoint + static_cast<TInnerDate>( aQuantTime );
+
+    std::list< TSimpleTick > lPnLsToQuanting( lPnLs );
+    while( not lPnLsToQuanting.empty() ) {
+        auto lTick = lPnLsToQuanting.front();
+        lPnLsToQuanting.pop_front();
+
+        if( lTick.DateTime > lNextDate ) {
+            lNextDate += static_cast<TInnerDate>( aQuantTime );
+            lIdx++;
+        }
+        lQuantPnL[ lIdx ] += lTick.Price;
+    }
+
+    TPrice lMaxPnl = 0.0; //если lPnLValue>0 значит точно есть положительный pnl за интервал
+    TPrice lMidPnl = 0.0;
+    size_t lDealCounter = 0 ;
+    for( const auto ldPnl : lQuantPnL ) {
+        if( ldPnl > lMaxPnl ){ lMaxPnl = ldPnl; }
+
+        lMidPnl += ldPnl ;
+        lDealCounter++ ;
+    }
+    //endregion
+
+    // ... рассчитать разброс pnl,
+    TPrice lPnLValatility = ( lMidPnl / ToDouble( lDealCounter ) ) / lMaxPnl;
+
+    //region расчитать d_DD, учесть DD==0
+    TInnerDate lDD_begin ;
+    TPrice lCurrDD = 0.0;
+    TPrice lSumCurrDD = 0.0;
+    TInnerDate lPrioreDate = aFirstPoint ;
+    for( const auto& lTick : lPnLs ) {
