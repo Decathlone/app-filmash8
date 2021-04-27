@@ -412,3 +412,70 @@ TPrice DealsToPNLCoefficient(
     TPrice lSumCurrDD = 0.0;
     TInnerDate lPrioreDate = aFirstPoint ;
     for( const auto& lTick : lPnLs ) {
+
+        if( isZero( lCurrDD ) and lTick.Price < 0.0 ) {
+
+            lCurrDD = lTick.Price;
+            lDD_begin = lPrioreDate ;
+
+            lSumCurrDD += lCurrDD * ( lTick.DateTime - lDD_begin ) ;// 86400.0;
+
+        } else if( lCurrDD < 0.0 ) {
+            TPrice lPriorDD = lCurrDD;
+            lCurrDD += lTick.Price;
+
+            if( lCurrDD > 0.0 ) {
+                lCurrDD = 0.0;
+
+            } else {
+                lPriorDD = lCurrDD;
+            }
+
+            lSumCurrDD += lPriorDD * ( lTick.DateTime - lPrioreDate ) ;// 86400.0;
+        }
+
+        lPrioreDate = lTick.DateTime ;
+    }
+    //endregion
+
+    if( isPositiveValue( lSumCurrDD ) ) {
+        return gMaxBedAttraction;
+    }
+
+    // ... рассчитать ср.DD
+    const TPrice lTW_DD = -lSumCurrDD / ( aLastPoint - aFirstPoint );
+
+    // Расчитать коэффициент            Это среднеинтервальный заработок
+    lResult = lPnLValatility / ( lTW_DD + 1.0 ) * lMidPnl /  ToDouble( lDealCounter ) ; //lPnLValue / lPnLTime ;
+
+    return lResult ;
+}
+
+//------------------------------------------------------------------------------------------
+TPrice DealsToCoeff(
+    const TBarSeries & aBars,
+    const TDeals & aDeals,
+    const size_t aMinDeals,
+    TPrice & aoPnl,
+    TPrice & aoMaxDD,
+    size_t & aoMaxPos,
+    size_t & aoMeadPos ) {
+    #ifdef FULLDATA
+        std::cout << "aDeals.size() = " << aDeals.size() << std::endl;
+    #endif
+    
+    if( aDeals.size() <= aMinDeals ) {
+        aoPnl = GetBadPrice(); 
+        aoMaxDD = GetBadPrice();
+        aoMaxPos = 0; 
+        aoMeadPos = 0;
+        return gMaxBedAttraction;
+    }
+    
+    TPriceSeries lBalance( aBars.size() );
+    
+    for( size_t i=0; i<aBars.size(); ++i ){
+        lBalance[i]={aBars[i].DateTime,0.0,0.0};
+    }
+    
+    auto lTickCompare = []( const TSimpleTick& aLeft, const TSimpleTick& aRigth )->bool {
