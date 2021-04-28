@@ -544,3 +544,69 @@ TPrice DealsToCoeff(
     
     #ifdef FULLDATA
     std::cout << "\nDD" << std::endl;
+    #endif
+    
+    std::vector< size_t > lPosition( aBars.size(), 0 );
+    
+    for( size_t i=0; i<aBars.size(); ++i ) {
+        lPosition[ i ] = ToSize_t( std::fabs( lBalance[i].Volume ) );
+        aoPnl = lBalance[i].Price + aBars[i].Close * lBalance[i].Volume;
+        
+        if( IsGreat( aoPnl, lMax ) ) { //очередной максимум
+            lMax = aoPnl;
+            lMin = aoPnl;
+
+        } else if( IsGreat( lMin, aoPnl ) ) { //новый минимум
+            lMin = aoPnl;
+            const TPrice lCurrentDD = lMax - lMin;
+            if( IsGreat( lCurrentDD, aoMaxDD ) ) {
+                aoMaxDD = lCurrentDD;
+            }
+        }
+        #ifdef FULLDATA
+        std::cout << RoundToSize_t( aBars[i].DateTime ) << " " << aBars[i].Close << " " << lBalance[i].Volume << " " << aoPnl << " " << lMax << " " << lMin << " " << aoMaxDD << std::endl;
+        #endif
+    }
+    
+    std::sort( lPosition.begin(), lPosition.end() );
+    aoMaxPos = *lPosition.rbegin();
+    aoMeadPos = lPosition[ lPosition.size() / 2 ];
+
+    const TPrice lResult = isZero( std::abs( aoPnl ) + aoMaxDD ) ? gMaxBedAttraction : (aoPnl / ( std::abs( aoPnl ) + aoMaxDD )) ;
+    #ifdef FULLDATA
+    std::cout << "lResult = " << lResult << std::endl;
+    #endif
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TDoubles ToDoublesArray( const TPriceSeries & aPriceSeries ) {
+    const size_t lArraySize = aPriceSeries.size();
+    TDoubles lResult( lArraySize );
+    
+    for( size_t i=0; i<lArraySize; ++i ) {
+        lResult[i]=aPriceSeries[i].Price;
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries PnlsToDaily( const TPriceSeries & aPnls, const bool aCumSum ) {
+    
+    if( aPnls.empty() ) {
+        return TPriceSeries();
+    }
+    TInnerDate lMinDate = gMaxInteger;
+    TInnerDate lMaxDate = 0;
+    
+    for( const auto &lDeal : aPnls ) {
+        const TInnerDate lDealDate = Trunc( lDeal.DateTime / gOneDay );
+        lMinDate = IsLess( lMinDate, lDealDate ) ? lMinDate : lDealDate;
+        lMaxDate = IsGreat( lMaxDate, lDealDate ) ? lMaxDate : lDealDate;
+    }
+    
+    TPriceSeries lResult( ToSize_t( lMaxDate-lMinDate+1 ) );
+    for( const auto &lDeal : aPnls ) {
+        const size_t lDealDate = ToSize_t( Trunc( lDeal.DateTime / gOneDay ) - lMinDate );
