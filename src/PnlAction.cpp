@@ -479,3 +479,68 @@ TPrice DealsToCoeff(
     }
     
     auto lTickCompare = []( const TSimpleTick& aLeft, const TSimpleTick& aRigth )->bool {
+        return aLeft.DateTime < aRigth.DateTime;
+    };
+    
+    #ifdef FULLDATA
+        std::cout << "\nDeals" << std::endl;
+    #endif
+    
+    for( auto it=aDeals.begin(); it!=aDeals.end(); ++it ) {
+        
+        const TInnerDate lOpenTime = it->OpenTime;
+        const TInnerDate lCloseTime = it->CloseTime;
+        const TPrice lOpenPrice = it->OpenPrice;
+        const TPrice lClosePrice = it->ClosePrice;
+        
+        auto itBegin = std::lower_bound ( 
+            lBalance.begin(), 
+            lBalance.end(),
+            TSimpleTick{ lOpenTime,0.0,0.0 },
+            lTickCompare 
+        );
+        assert( itBegin != lBalance.end() );
+        
+        auto itEnd = std::upper_bound( 
+            itBegin, 
+            lBalance.end(),
+            TSimpleTick{ lCloseTime,0.0,0.0 },
+            lTickCompare 
+        );
+        
+        TPrice lBalanceVolume = 0.0;
+            
+        if( it->DealSide == TDealSide::Buy ) {
+            for( auto itBalance=itBegin; itBalance != std::prev( itEnd ) ; ++itBalance ){
+                itBalance->Volume += 1.0;
+                itBalance->Price -= lOpenPrice;
+            }
+            lBalanceVolume = lClosePrice - lOpenPrice ;
+        
+        } else {
+            for( auto itBalance=itBegin; itBalance != std::prev( itEnd ) ; ++itBalance ) {
+                itBalance->Volume -= 1.0;
+                itBalance->Price += lOpenPrice;
+            }
+            lBalanceVolume = lOpenPrice - lClosePrice;
+        }
+        
+        for( auto itBalance=std::prev( itEnd ); itBalance != lBalance.end(); ++itBalance ) {
+            itBalance->Price += lBalanceVolume;
+        }
+    }
+    
+    if( not isZero( lBalance.rbegin()->Volume ) ) { ///\todo вообще-то нужно учесть сторону для каждой конкретной сделки
+        const TPrice lClosePrice = aBars.rbegin()->Close;
+        const TPrice lBalancedSide = ( aDeals.rbegin()->DealSide == TDealSide::Buy ) ? 1.0 : -1.0;
+        lBalance.rbegin()->Price += lBalancedSide * lBalance.rbegin()->Volume * lClosePrice;
+        lBalance.rbegin()->Volume = 0;
+    }
+    
+    TPrice lMax = 0.0;
+    TPrice lMin = 0.0;
+    aoPnl = 0.0;
+    aoMaxDD = 0.0;
+    
+    #ifdef FULLDATA
+    std::cout << "\nDD" << std::endl;
