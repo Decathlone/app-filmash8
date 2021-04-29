@@ -610,3 +610,65 @@ TPriceSeries PnlsToDaily( const TPriceSeries & aPnls, const bool aCumSum ) {
     TPriceSeries lResult( ToSize_t( lMaxDate-lMinDate+1 ) );
     for( const auto &lDeal : aPnls ) {
         const size_t lDealDate = ToSize_t( Trunc( lDeal.DateTime / gOneDay ) - lMinDate );
+        const TPrice lDealPnl = lDeal.Price * ((lDeal.Volume == 0) ? 1.0 : lDeal.Volume );
+        
+        TSimpleTick lDayDeal = lResult[ lDealDate ];
+        lDayDeal.DateTime = ToDouble( Trunc( lDeal.DateTime / gOneDay ) * gOneDay );
+        lDayDeal.Price += lDealPnl;
+        lDayDeal.Volume += 1.0;
+        
+        lResult[ lDealDate ] = lDayDeal;
+    }
+    
+    if(aCumSum){
+        for( size_t i = 1; i < lResult.size(); ++i ){
+            lResult[i].Price += lResult[i-1].Price;
+        }
+    }
+    
+    return lResult;
+}
+
+//------------------------------------------------------------------------------------------
+bool IsGrows( const TPriceSeries & aDailyPnls, const size_t aPeriod, const size_t aTollerance ) {
+    if( aPeriod == 0 ){
+        throw std::logic_error( "aPeriod can be positive" );
+    }
+    
+    if( aDailyPnls.size() <= aPeriod ) {
+        return false;
+    }
+    
+    size_t lTollerance = ( aTollerance == 0 ) ? 1 : aTollerance;
+    
+    for( size_t i=0; i < aDailyPnls.size() - aPeriod; ++i ) {
+        if( IsGreat( aDailyPnls[i].Price, aDailyPnls[ i+aPeriod ].Price ) ) {
+            if( --lTollerance == 0 ) {
+                return false;
+            }
+        }
+    }
+    
+    return true;
+}
+
+//------------------------------------------------------------------------------------------
+TPriceSeries PnLsAmplifier( const TPriceSeries &aPnl, const std::vector<double> &aAmplifiers, const TInnerDate aBegin, const TInnerDate aEnd ) {
+    
+    if( aAmplifiers.size() < 2UL ){
+        return aPnl;
+    }
+    
+    //sort deals
+    TPriceSeries lPnls( aPnl );
+    std::sort( lPnls.begin(), lPnls.end(),
+        []( const TSimpleTick& lh, const TSimpleTick& rh ){
+            return IsLess( lh.DateTime, rh.DateTime );
+        }
+    );
+    
+    //days range detect
+    const TInnerDate lMinDate =  trunc( (isPositiveValue( aBegin ) ? aBegin : lPnls.begin()->DateTime) / gOneDay );
+    const TInnerDate lMaxDate =  trunc( (isPositiveValue( aEnd ) ? aEnd : lPnls.rbegin()->DateTime) / gOneDay );
+    
+    if( CeilToSize_t(lMaxDate-lMinDate) < aAmplifiers.size() ){
