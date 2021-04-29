@@ -672,3 +672,36 @@ TPriceSeries PnLsAmplifier( const TPriceSeries &aPnl, const std::vector<double> 
     const TInnerDate lMaxDate =  trunc( (isPositiveValue( aEnd ) ? aEnd : lPnls.rbegin()->DateTime) / gOneDay );
     
     if( CeilToSize_t(lMaxDate-lMinDate) < aAmplifiers.size() ){
+        return aPnl;
+    }
+    
+    const double lMinDelta = trunc( (lMaxDate-lMinDate) / ToDouble( aAmplifiers.size() ) );
+    if( IsLess( lMinDelta, 1.0 ) ){
+        return aPnl;
+    }
+    
+    std::vector<TInnerDate> ldates( aAmplifiers.size() );
+    for( size_t i=0; i<aAmplifiers.size(); ++i ) {
+        ldates[i] = lMinDate + lMinDelta * ToDouble(i+1) ;
+    }
+    
+    TPriceSeries lPnls_result;
+    lPnls_result.reserve( ToSize_t(*aAmplifiers.rbegin()) * aPnl.size() );
+    for( auto it = lPnls.begin(); it != lPnls.end(); ++it ){
+        const TSimpleTick lTick( *it );
+        
+        for( size_t i=0; i < ldates.size(); ++i ){
+            if( not IsGreat( trunc(lTick.DateTime / gOneDay), ldates[i] ) ){
+                for( size_t j=0; j < ToSize_t(aAmplifiers[i]); ++j ){
+                    lPnls_result.push_back( lTick );
+                }
+                break;
+            }
+        }
+    }
+    
+    lPnls_result.shrink_to_fit();
+    return lPnls_result;
+}
+
+//------------------------------------------------------------------------------------------
