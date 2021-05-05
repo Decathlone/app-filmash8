@@ -3,4 +3,10 @@
 
 /** 
  * File:   PowellsMethod.cpp
- * Author: victorg(mq5), kan
+ * Author: victorg(mq5), kan(c++)
+ * 
+ * Created on January 20, 2017, 3:58 PM
+ */
+
+#include <stdio.h> 
+#inc
