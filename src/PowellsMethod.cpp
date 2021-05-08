@@ -9,4 +9,8 @@
  */
 
 #include <stdio.h> 
-#inc
+#include <math.h>
+
+#include "PowellsMethod.h"
+
+#define GOLD   1.6180
