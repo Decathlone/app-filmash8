@@ -17,4 +17,7 @@
 #define CGOLD  0.3819660
 #define GLIMIT 100.0
 #define SHFT(a,b,c,d) (a)=(b);(b)=(c);(c)=(d);
-#define SIGN(a,b)
+#define SIGN(a,b) (((b) >= 0.0) ? fabs(a) : -fabs(a))
+#define FMAX(a,b) ((a>b)?a:b)
+
+//---
