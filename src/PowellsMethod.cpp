@@ -16,4 +16,5 @@
 #define GOLD   1.618034
 #define CGOLD  0.3819660
 #define GLIMIT 100.0
-#defin
+#define SHFT(a,b,c,d) (a)=(b);(b)=(c);(c)=(d);
+#define SIGN(a,b)
