@@ -24,3 +24,6 @@
 // Constructor
 //-----------------------------------------------------------------------------------
 PowellsMethod::PowellsMethod() {
+    ItMaxPowell = 200;
+    FtolPowell = 1e-6;
+    It
