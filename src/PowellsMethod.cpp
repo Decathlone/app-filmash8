@@ -26,4 +26,8 @@
 PowellsMethod::PowellsMethod() {
     ItMaxPowell = 200;
     FtolPowell = 1e-6;
-    It
+    ItMaxBrent = 200;
+    FtolBrent = 1e-4;
+}
+
+//-----------
