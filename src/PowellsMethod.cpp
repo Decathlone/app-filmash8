@@ -32,4 +32,9 @@ PowellsMethod::PowellsMethod() {
 
 //-----------------------------------------------------------------------------------
 void PowellsMethod::powell() {
-    size_t m, n, ibig
+    size_t m, n, ibig;
+    double del, fp, fptt, t;
+
+    n = N;
+    Fret = func(P);
+    f
