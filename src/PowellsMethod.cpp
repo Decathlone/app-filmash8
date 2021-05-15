@@ -38,4 +38,8 @@ void PowellsMethod::powell() {
     n = N;
     Fret = func(P);
     for (size_t j = 0; j < n; j++)Pt[j] = P[j];
-    for (Iter = 1;; Iter
+    for (Iter = 1;; Iter++) {
+        fp = Fret;
+        ibig = 0;
+        del = 0.0;
+        for
