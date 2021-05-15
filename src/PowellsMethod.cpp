@@ -42,4 +42,5 @@ void PowellsMethod::powell() {
         fp = Fret;
         ibig = 0;
         del = 0.0;
-        for
+        for (size_t i = 0; i < n; i++) {
+            for (size_t j 
