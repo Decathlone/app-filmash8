@@ -45,4 +45,5 @@ void PowellsMethod::powell() {
         for (size_t i = 0; i < n; i++) {
             for (size_t j = 0; j < n; j++)Xit[j] = Xi[j + n * i];
             fptt = Fret;
-     
+            linmin();
+            if (fabs(fptt - Fret) > del) {
