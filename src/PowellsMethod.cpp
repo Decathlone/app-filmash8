@@ -47,3 +47,5 @@ void PowellsMethod::powell() {
             fptt = Fret;
             linmin();
             if (fabs(fptt - Fret) > del) {
+                del = fabs(fptt - Fret);
+                ibig = 
