@@ -60,4 +60,6 @@ void PowellsMethod::powell() {
             return;
         }
 
-        for (size_
+        for (size_t j = 0; j < n; j++) {
+            Ptt[j] = 2.0 * P[j] - Pt[j];
+            
