@@ -62,4 +62,8 @@ void PowellsMethod::powell() {
 
         for (size_t j = 0; j < n; j++) {
             Ptt[j] = 2.0 * P[j] - Pt[j];
-            
+            Xit[j] = P[j] - Pt[j];
+            Pt[j] = P[j];
+        }
+
+        fptt =
