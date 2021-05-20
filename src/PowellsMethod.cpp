@@ -56,4 +56,8 @@ void PowellsMethod::powell() {
 
         if (Iter >= ItMaxPowell) {
             printf("powell exceeding maximum iterations!");
-            MaxIterFlag 
+            MaxIterFlag = 1;
+            return;
+        }
+
+        for (size_
