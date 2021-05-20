@@ -55,4 +55,5 @@ void PowellsMethod::powell() {
         if (2.0 * fabs(fp - Fret) <= FtolPowell * (fabs(fp) + fabs(Fret) + 1e-25))return;
 
         if (Iter >= ItMaxPowell) {
-   
+            printf("powell exceeding maximum iterations!");
+            MaxIterFlag 
