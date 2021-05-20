@@ -68,4 +68,6 @@ void PowellsMethod::powell() {
 
         fptt = func(Ptt);
         if (fptt < fp) {
-            t = 2.0 * (fp - 2.0 * (Fret) + fptt)*(fp - Fret - del)*(fp - Fret - del) - del * (fp -
+            t = 2.0 * (fp - 2.0 * (Fret) + fptt)*(fp - Fret - del)*(fp - Fret - del) - del * (fp - fptt)*(fp - fptt);
+            if (t < 0.0) {
+                linmin
