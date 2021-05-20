@@ -66,4 +66,6 @@ void PowellsMethod::powell() {
             Pt[j] = P[j];
         }
 
-        fptt =
+        fptt = func(Ptt);
+        if (fptt < fp) {
+            t = 2.0 * (fp - 2.0 * (Fret) 
