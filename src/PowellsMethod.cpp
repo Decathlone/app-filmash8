@@ -76,3 +76,9 @@ void PowellsMethod::powell() {
                     Xi[j + n * ibig] = Xi[m];
                     Xi[m] = Xit[j];
                 }
+            }
+        }
+    }
+}
+
+//----------------
