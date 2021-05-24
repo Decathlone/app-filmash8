@@ -70,4 +70,6 @@ void PowellsMethod::powell() {
         if (fptt < fp) {
             t = 2.0 * (fp - 2.0 * (Fret) + fptt)*(fp - Fret - del)*(fp - Fret - del) - del * (fp - fptt)*(fp - fptt);
             if (t < 0.0) {
-                linmin
+                linmin();
+                for (size_t j = 0; j < n; j++) {
+         
