@@ -83,4 +83,8 @@ void PowellsMethod::powell() {
 
 //-----------------------------------------------------------------------------------
 void PowellsMethod::linmin() {
-    double xx, xmin, fx, fb, fa, bx
+    double xx, xmin, fx, fb, fa, bx, ax;
+
+    size_t n = N;
+    for (size_t j = 0; j < n; j++) {
+        Pcom[j]
