@@ -72,4 +72,5 @@ void PowellsMethod::powell() {
             if (t < 0.0) {
                 linmin();
                 for (size_t j = 0; j < n; j++) {
-         
+                    m = j + n * (n - 1);
+                    Xi[j + n 
