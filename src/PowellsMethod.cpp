@@ -108,4 +108,8 @@ void PowellsMethod::mnbrak(
     double &fa,
     double &fb,
     double &fc) {
+    
+    double ulim, u, r, q, fu, dum;
+
+    fa = f1dim(ax);
    
