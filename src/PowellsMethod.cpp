@@ -87,4 +87,8 @@ void PowellsMethod::linmin() {
 
     size_t n = N;
     for (size_t j = 0; j < n; j++) {
-        Pcom[j]
+        Pcom[j] = P[j];
+        Xicom[j] = Xit[j];
+    }
+    ax = 0.0;
+    xx = 1.0;
