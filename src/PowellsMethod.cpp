@@ -103,4 +103,9 @@ void PowellsMethod::linmin() {
 //-----------------------------------------------------------------------------------
 void PowellsMethod::mnbrak(
     double &ax,
-    double &
+    double &bx,
+    double &cx,
+    double &fa,
+    double &fb,
+    double &fc) {
+   
