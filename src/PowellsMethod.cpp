@@ -92,3 +92,6 @@ void PowellsMethod::linmin() {
     }
     ax = 0.0;
     xx = 1.0;
+    mnbrak(ax, xx, bx, fa, fx, fb);
+    Fret = brent(ax, xx, bx, xmin);
+    
