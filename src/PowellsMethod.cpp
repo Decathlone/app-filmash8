@@ -114,4 +114,8 @@ void PowellsMethod::mnbrak(
     fa = f1dim(ax);
     fb = f1dim(bx);
     if (fb > fa) {
-        SHFT(dum, ax, bx,
+        SHFT(dum, ax, bx, dum)
+        SHFT(dum, fb, fa, dum)
+    }
+    cx = bx + GOLD * (bx - ax);
+    
