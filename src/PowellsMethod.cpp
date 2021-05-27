@@ -112,4 +112,6 @@ void PowellsMethod::mnbrak(
     double ulim, u, r, q, fu, dum;
 
     fa = f1dim(ax);
-   
+    fb = f1dim(bx);
+    if (fb > fa) {
+        SHFT(dum, ax, bx,
