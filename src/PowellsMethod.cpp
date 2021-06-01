@@ -118,4 +118,6 @@ void PowellsMethod::mnbrak(
         SHFT(dum, fb, fa, dum)
     }
     cx = bx + GOLD * (bx - ax);
-    
+    fc = f1dim(cx);
+    while (fb > fc) {
+        r = (bx 
