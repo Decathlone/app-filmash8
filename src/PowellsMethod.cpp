@@ -120,4 +120,6 @@ void PowellsMethod::mnbrak(
     cx = bx + GOLD * (bx - ax);
     fc = f1dim(cx);
     while (fb > fc) {
-        r = (bx 
+        r = (bx - ax)*(fb - fc);
+        q = (bx - cx)*(fb - fa);
+        u = 
