@@ -122,4 +122,4 @@ void PowellsMethod::mnbrak(
     while (fb > fc) {
         r = (bx - ax)*(fb - fc);
         q = (bx - cx)*(fb - fa);
-        u = 
+        u = bx - ((bx - cx) * q - (bx - ax) * r) / (2.0 * SIGN(FMAX(fabs(q - r), 1e-20)
