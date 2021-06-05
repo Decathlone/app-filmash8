@@ -124,4 +124,6 @@ void PowellsMethod::mnbrak(
         q = (bx - cx)*(fb - fa);
         u = bx - ((bx - cx) * q - (bx - ax) * r) / (2.0 * SIGN(FMAX(fabs(q - r), 1e-20), q - r));
         ulim = bx + GLIMIT * (cx - bx);
-        if ((bx 
+        if ((bx - u)*(u - cx) > 0.0) {
+            fu = f1dim(u);
+            if (fu < 
