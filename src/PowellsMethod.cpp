@@ -126,4 +126,7 @@ void PowellsMethod::mnbrak(
         ulim = bx + GLIMIT * (cx - bx);
         if ((bx - u)*(u - cx) > 0.0) {
             fu = f1dim(u);
-            if (fu < 
+            if (fu < fc) {
+                ax = bx;
+                bx = u;
+            
