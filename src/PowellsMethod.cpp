@@ -129,4 +129,6 @@ void PowellsMethod::mnbrak(
             if (fu < fc) {
                 ax = bx;
                 bx = u;
-            
+                fa = fb;
+                fb = fu;
+                return;
