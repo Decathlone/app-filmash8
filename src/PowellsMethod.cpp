@@ -134,4 +134,7 @@ void PowellsMethod::mnbrak(
                 return;
             } else if (fu > fb) {
                 cx = u;
-       
+                fc = fu;
+                return;
+            }
+           
