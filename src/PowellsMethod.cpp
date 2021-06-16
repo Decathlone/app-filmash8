@@ -144,4 +144,6 @@ void PowellsMethod::mnbrak(
             if (fu < fc) {
                 SHFT(bx, cx, u, cx + GOLD * (cx - bx))
                 SHFT(fb, fc, fu, f1dim(u))
-        
+            }
+        } else if ((u - ulim)*(ulim - cx) >= 0.0) {
+            
