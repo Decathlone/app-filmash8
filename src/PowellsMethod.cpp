@@ -149,4 +149,6 @@ void PowellsMethod::mnbrak(
             u = ulim;
             fu = f1dim(u);
         } else {
-       
+            u = cx + GOLD * (cx - bx);
+            fu = f1dim(u);
+      
