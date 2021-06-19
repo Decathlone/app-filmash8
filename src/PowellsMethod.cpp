@@ -146,4 +146,7 @@ void PowellsMethod::mnbrak(
                 SHFT(fb, fc, fu, f1dim(u))
             }
         } else if ((u - ulim)*(ulim - cx) >= 0.0) {
-            
+            u = ulim;
+            fu = f1dim(u);
+        } else {
+       
