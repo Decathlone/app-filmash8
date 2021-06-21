@@ -151,4 +151,9 @@ void PowellsMethod::mnbrak(
         } else {
             u = cx + GOLD * (cx - bx);
             fu = f1dim(u);
-      
+        }
+        SHFT(ax, bx, cx, u)
+        SHFT(fa, fb, fc, fu)
+    }
+}
+
