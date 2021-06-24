@@ -158,4 +158,6 @@ void PowellsMethod::mnbrak(
 }
 
 //-----------------------------------------------------------------------------------
-double PowellsMethod::brent(double ax, double bx, doubl
+double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
+    int iter;
+    double a, b, d, e, etemp, fu
