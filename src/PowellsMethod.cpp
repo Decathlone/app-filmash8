@@ -160,4 +160,6 @@ void PowellsMethod::mnbrak(
 //-----------------------------------------------------------------------------------
 double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
     int iter;
-    double a, b, d, e, etemp, fu
+    double a, b, d, e, etemp, fu, fv, fw, fx, p, q, r, tol1, tol2, u, v, w, x, xm;
+
+    a = ((ax < cx) ? 
