@@ -168,4 +168,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
     e = 0.0;
     x = w = v = bx;
     fw = fv = fx = f1dim(x);
-    for (iter = 1; iter <=
+    for (iter = 1; iter <= ItMaxBrent; iter++) {
+        xm = 0.5 * (a + b);
+        tol2 = 2.0 
