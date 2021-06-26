@@ -166,4 +166,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
     b = ((ax > cx) ? ax : cx);
     d = 0.0;
     e = 0.0;
-    x = w 
+    x = w = v = bx;
+    fw = fv = fx = f1dim(x);
+    for (iter = 1; iter <=
