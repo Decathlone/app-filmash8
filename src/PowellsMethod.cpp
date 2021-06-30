@@ -171,4 +171,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
     for (iter = 1; iter <= ItMaxBrent; iter++) {
         xm = 0.5 * (a + b);
         tol2 = 2.0 * (tol1 = FtolBrent * fabs(x) + 2e-19);
-        if (fabs(x - xm) <= (tol2 
+        if (fabs(x - xm) <= (tol2 - 0.5 * (b - a))) {
+            xmin = x;
+            return (fx);
