@@ -174,3 +174,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
         if (fabs(x - xm) <= (tol2 - 0.5 * (b - a))) {
             xmin = x;
             return (fx);
+        }
+        if (fabs(e) > tol1) {
+            r = (x -
