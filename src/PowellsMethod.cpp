@@ -176,4 +176,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             return (fx);
         }
         if (fabs(e) > tol1) {
-            r = (x -
+            r = (x - w)*(fx - fv);
+            q = (x - v)*(fx - fw);
+            p = (x - 
