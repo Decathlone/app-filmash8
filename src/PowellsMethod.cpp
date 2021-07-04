@@ -180,4 +180,7 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             q = (x - v)*(fx - fw);
             p = (x - v) * q - (x - w) * r;
             q = 2.0 * (q - r);
-            if (q > 0.
+            if (q > 0.0)p = -p;
+            q = fabs(q);
+            etemp = e;
+   
