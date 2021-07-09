@@ -184,4 +184,5 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             q = fabs(q);
             etemp = e;
             e = d;
-            if (fabs(p) >= fabs(0.5 * q 
+            if (fabs(p) >= fabs(0.5 * q * etemp) || p <= q * (a - x) || p >= q * (b - x))
+                d = CGOLD * (e =
