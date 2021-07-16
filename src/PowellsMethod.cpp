@@ -188,4 +188,5 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
                 d = CGOLD * (e = ((x >= xm) ? (a - x) : (b - x)));
             else {
                 d = p / q;
-    
+                u = x + d;
+                if (u - a < tol2 || b - u < tol
