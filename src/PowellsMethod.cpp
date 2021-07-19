@@ -189,4 +189,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             else {
                 d = p / q;
                 u = x + d;
-                if (u - a < tol2 || b - u < tol
+                if (u - a < tol2 || b - u < tol2)d = SIGN(tol1, xm - x);
+            }
+        } else d = CGOLD
