@@ -192,4 +192,5 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
                 if (u - a < tol2 || b - u < tol2)d = SIGN(tol1, xm - x);
             }
         } else d = CGOLD * (e = ((x >= xm) ? (a - x) : (b - x)));
-        u = (fabs
+        u = (fabs(d) >= tol1 ? (x + d) : (x + SIGN(tol1, d)));
+        fu = f1d
