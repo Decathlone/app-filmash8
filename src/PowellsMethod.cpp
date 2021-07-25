@@ -193,4 +193,7 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             }
         } else d = CGOLD * (e = ((x >= xm) ? (a - x) : (b - x)));
         u = (fabs(d) >= tol1 ? (x + d) : (x + SIGN(tol1, d)));
-        fu = f1d
+        fu = f1dim(u);
+        if (fu <= fx) {
+            if (u >= x)a = x;
+          
