@@ -196,4 +196,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
         fu = f1dim(u);
         if (fu <= fx) {
             if (u >= x)a = x;
-          
+            else b = x;
+            SHFT(v, w, x, u)
+            SH
