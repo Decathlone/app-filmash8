@@ -198,4 +198,7 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             if (u >= x)a = x;
             else b = x;
             SHFT(v, w, x, u)
-            SH
+            SHFT(fv, fw, fx, fu)
+        } else {
+            if (u < x)a = u;
+   
