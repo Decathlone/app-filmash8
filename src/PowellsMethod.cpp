@@ -209,4 +209,8 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
                 fw = fu;
             } else if (fu <= fv || v == x || v == w) {
                 v = u;
-              
+                fv = fu;
+            }
+        }
+    }
+    printf("To
