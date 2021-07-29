@@ -219,4 +219,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
     return (fx);
 }
 
-//------------------------------------------------------
+//-----------------------------------------------------------------------------------
+double PowellsMethod::f1dim(double x) {
+  
