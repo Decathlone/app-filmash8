@@ -216,4 +216,7 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
     printf("Too many iterations in brent");
     MaxIterFlag = 1;
     xmin = x;
-    r
+    return (fx);
+}
+
+//------------------------------------------------------
