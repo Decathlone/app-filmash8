@@ -201,4 +201,6 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
             SHFT(fv, fw, fx, fu)
         } else {
             if (u < x)a = u;
-   
+            else b = u;
+            if (fu <= fw || w == x) {
+     
