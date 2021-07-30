@@ -227,3 +227,5 @@ double PowellsMethod::f1dim(double x) {
     f = func(Xt);
     return (f);
 }
+
+//---------------------------------------------------
