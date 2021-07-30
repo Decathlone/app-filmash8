@@ -223,4 +223,7 @@ double PowellsMethod::brent(double ax, double bx, double cx, double &xmin) {
 double PowellsMethod::f1dim(double x) {
     double f;
 
-    for (size_t j = 0; j < N; j++) Xt[j] 
+    for (size_t j = 0; j < N; j++) Xt[j] = Pcom[j] + x * Xicom[j];
+    f = func(Xt);
+    return (f);
+}
