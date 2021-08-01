@@ -229,4 +229,7 @@ double PowellsMethod::f1dim(double x) {
 }
 
 //-----------------------------------------------------------------------------------
-int PowellsMethod::Optimize(TDouble
+int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
+    int ret;
+
+    size_t k = p.size()
