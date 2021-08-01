@@ -232,4 +232,8 @@ double PowellsMethod::f1dim(double x) {
 int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
     int ret;
 
-    size_t k = p.size()
+    size_t k = p.size();
+    if (n == 0)N = k;
+    else N = n;
+    if (N < 1 || N > k)return (0);
+ 
