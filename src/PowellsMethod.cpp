@@ -236,4 +236,7 @@ int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
     if (n == 0)N = k;
     else N = n;
     if (N < 1 || N > k)return (0);
- 
+    P.resize(N);
+    Xi.resize(N * N);
+    Pcom.resize(N);
+    Xi
