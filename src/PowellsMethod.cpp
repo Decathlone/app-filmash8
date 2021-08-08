@@ -245,4 +245,7 @@ int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
     Ptt.resize(N);
     Xit.resize(N);
     for (size_t i = 0; i < N; i++)for (size_t j = 0; j < N; j++)Xi[i + N * j] = ((i == j) ? 1.0 : 0.0);
-    for (size_t i = 0; i < N; 
+    for (size_t i = 0; i < N; i++)P[i] = p[i];
+    MaxIterFlag = 0;
+    powell();
+    for (s
