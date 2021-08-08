@@ -242,4 +242,6 @@ int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
     Xicom.resize(N);
     Xt.resize(N);
     Pt.resize(N);
-    Ptt.
+    Ptt.resize(N);
+    Xit.resize(N);
+    for (size_t i = 0; i < N; i++)for (size_
