@@ -254,4 +254,7 @@ int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
     } else {
         ret = Iter;
     }
-    return
+    return (ret);
+}
+
+//----------------------------------------------------------
