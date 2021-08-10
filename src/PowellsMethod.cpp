@@ -249,4 +249,9 @@ int PowellsMethod::Optimize(TDoubles &p, const size_t n) {
     MaxIterFlag = 0;
     powell();
     for (size_t i = 0; i < N; i++)p[i] = P[i];
-    if (MaxIterFlag == 1) 
+    if (MaxIterFlag == 1) {
+        ret = -1;
+    } else {
+        ret = Iter;
+    }
+    return
