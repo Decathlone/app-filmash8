@@ -39,3 +39,10 @@ size_t GetSymbolsCount() {
  char GetSymbolByIdx( const size_t aIdx ) {
     if( aIdx >= gSymbols_count ) {
         return '_';
+    
+    } else {
+        return gSymbols[ aIdx ] ;
+    }
+}
+
+//------------------------------------------------------------------------------------------
