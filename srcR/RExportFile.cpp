@@ -4,4 +4,7 @@
 #include <vector>
 #include <list>
 #include <map>
-#include <
+#include <cmath>
+#include <algorithm>
+#include <fstream>
+#include <fun
