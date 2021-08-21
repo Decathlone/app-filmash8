@@ -16,4 +16,4 @@
 #include "RExportFile.h"
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector Simple
+Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const int aT
