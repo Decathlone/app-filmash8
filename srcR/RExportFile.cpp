@@ -16,4 +16,5 @@
 #include "RExportFile.h"
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const int aT
+Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const int aType ) {
+    const TMAPoint lMAPoint = static_cast< TMAPoint >(
