@@ -19,4 +19,5 @@
 Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const int aType ) {
     const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
     std::string lTZone;
-    const TPriceSeri
+    const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );
+    
