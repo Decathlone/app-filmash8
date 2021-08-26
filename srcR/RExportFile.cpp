@@ -22,4 +22,7 @@ Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPerio
     const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );
     const TPriceSeries lTMPResult( _SimpleMA( lPrices, aPeriod ) );
 
-   
+    return PriceSeriesToXts( lTMPResult, lTZone );
+}
+
+//-----------------------------
