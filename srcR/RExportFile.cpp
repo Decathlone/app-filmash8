@@ -25,4 +25,5 @@ Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPerio
     return PriceSeriesToXts( lTMPResult, lTZone );
 }
 
-//-----------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::Numer
