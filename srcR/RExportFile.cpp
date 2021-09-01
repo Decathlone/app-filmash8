@@ -26,4 +26,4 @@ Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPerio
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::Numer
+Rcpp::NumericVector ExponentMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, cons
