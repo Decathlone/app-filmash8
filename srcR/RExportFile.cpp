@@ -26,4 +26,5 @@ Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPerio
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector ExponentMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, cons
+Rcpp::NumericVector ExponentMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const int aType ) {
+    const TMAPoint lMAPoint = static_cast< TMA
