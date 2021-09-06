@@ -29,4 +29,5 @@ Rcpp::NumericVector SimpleMA( const Rcpp::NumericMatrix & aXts, const int aPerio
 Rcpp::NumericVector ExponentMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const int aType ) {
     const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
     std::string lTZone;
-    const TPriceSeries 
+    const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );
+    const TPriceSeries lT
