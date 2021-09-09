@@ -35,4 +35,5 @@ Rcpp::NumericVector ExponentMA( const Rcpp::NumericMatrix & aXts, const int aPer
     return PriceSeriesToXts( lTMPResult, lTZone );
 }
 
-//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVector KaufmanMA( const Rcpp::NumericMatrix & aXt
