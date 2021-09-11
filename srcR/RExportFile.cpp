@@ -36,4 +36,5 @@ Rcpp::NumericVector ExponentMA( const Rcpp::NumericMatrix & aXts, const int aPer
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector KaufmanMA( const Rcpp::NumericMatrix & aXt
+Rcpp::NumericVector KaufmanMA( const Rcpp::NumericMatrix & aXts, const int aPeriod, const double aKoeff, const int aType ) {
+    const
