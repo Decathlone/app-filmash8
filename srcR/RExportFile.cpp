@@ -41,4 +41,7 @@ Rcpp::NumericVector KaufmanMA( const Rcpp::NumericMatrix & aXts, const int aPeri
     std::string lTZone;    
     const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );    
     const TPriceSeries lTMPResult( _KAMA( lPrices, aPeriod, aKoeff ) );    
-    return PriceSeriesToXts( lTMP
+    return PriceSeriesToXts( lTMPResult, lTZone );
+}
+
+//------------------------------------------------
