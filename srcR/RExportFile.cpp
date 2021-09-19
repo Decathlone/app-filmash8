@@ -47,4 +47,5 @@ Rcpp::NumericVector KaufmanMA( const Rcpp::NumericMatrix & aXts, const int aPeri
 //------------------------------------------------------------------------------------------
 Rcpp::NumericVector TrueRange( const Rcpp::NumericMatrix & aXts ) {
     const TBarSeries lBars( XtsToBarSeries( aXts ) );
-    const TPriceSe
+    const TPriceSeries lResult( _TrueRange( lBars ) );
+    const std::string lTZone( Rcpp::as< std
