@@ -50,4 +50,7 @@ Rcpp::NumericVector TrueRange( const Rcpp::NumericMatrix & aXts ) {
     const TPriceSeries lResult( _TrueRange( lBars ) );
     const std::string lTZone( Rcpp::as< std::string >( aXts.attr( "tzone" ) ) );
     
-    return PriceSeriesToXts( lRes
+    return PriceSeriesToXts( lResult, lTZone );
+}
+
+//--------------------------------------------------------
