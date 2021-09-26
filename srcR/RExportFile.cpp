@@ -53,4 +53,5 @@ Rcpp::NumericVector TrueRange( const Rcpp::NumericMatrix & aXts ) {
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//--------------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVector AverageTrueRa
