@@ -54,4 +54,5 @@ Rcpp::NumericVector TrueRange( const Rcpp::NumericMatrix & aXts ) {
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector AverageTrueRa
+Rcpp::NumericVector AverageTrueRange( const Rcpp::NumericMatrix & aXts, const int aPeriod ) {
+    const
