@@ -55,4 +55,5 @@ Rcpp::NumericVector TrueRange( const Rcpp::NumericMatrix & aXts ) {
 
 //------------------------------------------------------------------------------------------
 Rcpp::NumericVector AverageTrueRange( const Rcpp::NumericMatrix & aXts, const int aPeriod ) {
-    const
+    const TBarSeries lBars( XtsToBarSeries( aXts ) );
+    co
