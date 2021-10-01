@@ -72,4 +72,6 @@ Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPerio
     const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
 
     std::string lTZone;
-    const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone 
+    const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );
+    
+    const TPriceSeries lMacdResult( _MACD( lPrices, aFastPer
