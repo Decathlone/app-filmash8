@@ -62,4 +62,5 @@ Rcpp::NumericVector AverageTrueRange( const Rcpp::NumericMatrix & aXts, const in
     return PriceSeriesToXts( lTMPResult, lTZone );
 }
 
-//----------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVec
