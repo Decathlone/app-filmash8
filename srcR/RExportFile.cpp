@@ -63,4 +63,6 @@ Rcpp::NumericVector AverageTrueRange( const Rcpp::NumericMatrix & aXts, const in
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPeriod, const int aSlowPeriod, const int aSmoothPeriod, const i
+Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPeriod, const int aSlowPeriod, const int aSmoothPeriod, const int aType ) {
+
+    if( aFastPeriod <= 0 or aSlowPeriod <= 0 o
