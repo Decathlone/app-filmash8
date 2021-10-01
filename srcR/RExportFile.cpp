@@ -59,4 +59,7 @@ Rcpp::NumericVector AverageTrueRange( const Rcpp::NumericMatrix & aXts, const in
     const TPriceSeries lTMPResult( _AverageTrueRange( lBars, aPeriod ) );
     const std::string lTZone( Rcpp::as< std::string >( aXts.attr( "tzone" ) ) );
     
-    return PriceSeriesToXts( lT
+    return PriceSeriesToXts( lTMPResult, lTZone );
+}
+
+//----------------------------------------------------
