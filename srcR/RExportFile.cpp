@@ -69,4 +69,6 @@ Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPerio
         return R_NilValue; 
     }
     
-    const
+    const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
+
+    std::string lTZone
