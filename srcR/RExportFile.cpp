@@ -77,4 +77,7 @@ Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPerio
     const TPriceSeries lMacdResult( _MACD( lPrices, aFastPeriod, aSlowPeriod, aSmoothPeriod ) );
     const Rcpp::NumericVector oResult( PriceSeriesToXts( lMacdResult, lTZone ) );
     colnames( oResult ) = Rcpp::CharacterVector::create( "Indicator" );
-    r
+    return oResult;
+}
+
+//-----------------------------------------------
