@@ -86,4 +86,5 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
         return R_NilValue; 
     }
     
-    const TMAPoint lMAPoint = static_cas
+    const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
+    const size_t lForecastPeriod = aForecastPeriod;
