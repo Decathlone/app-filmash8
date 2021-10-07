@@ -90,4 +90,6 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     const size_t lForecastPeriod = aForecastPeriod;
 
     std::string lTZone;
-    const TPriceSeries lPrices( XtsToPriceSeries(
+    const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );
+    
+    if( lPrices.size(
