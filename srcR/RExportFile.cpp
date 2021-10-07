@@ -88,3 +88,6 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     
     const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
     const size_t lForecastPeriod = aForecastPeriod;
+
+    std::string lTZone;
+    const TPriceSeries lPrices( XtsToPriceSeries(
