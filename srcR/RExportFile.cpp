@@ -81,4 +81,4 @@ Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPerio
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::List Forecasting( const Rcp
+Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPeriod, const double aConfidenceIntervals
