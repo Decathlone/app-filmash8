@@ -80,4 +80,5 @@ Rcpp::NumericVector MACD( const Rcpp::NumericMatrix & aXts, const int aFastPerio
     return oResult;
 }
 
-//-----------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::List Forecasting( const Rcp
