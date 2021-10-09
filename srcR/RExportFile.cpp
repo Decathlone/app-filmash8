@@ -96,4 +96,6 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
         return R_NilValue;
     }
     
-    TPriceSe
+    TPriceSeries lUpperBorder;
+    TPriceSeries lForecast;
+    TPriceSeries lLow
