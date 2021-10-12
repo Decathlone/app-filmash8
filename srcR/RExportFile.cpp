@@ -102,4 +102,6 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     
     if( _Forecasting( lPrices, lForecastPeriod, aConfidenceIntervals, lUpperBorder, lForecast, lLowerBorder ) ) {
     
-        ///\
+        ///\todo заменить плохие значения на NA
+        return Rcpp::List::create(
+      
