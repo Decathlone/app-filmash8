@@ -100,4 +100,6 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     TPriceSeries lForecast;
     TPriceSeries lLowerBorder;
     
-    if( _Forecasting( lPrices, lForecastPeriod, aCon
+    if( _Forecasting( lPrices, lForecastPeriod, aConfidenceIntervals, lUpperBorder, lForecast, lLowerBorder ) ) {
+    
+        ///\
