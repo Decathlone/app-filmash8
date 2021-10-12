@@ -104,4 +104,4 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     
         ///\todo заменить плохие значения на NA
         return Rcpp::List::create(
-      
+            Rcpp::Named("UpperBorder") = PriceSeriesToXts( lUpper
