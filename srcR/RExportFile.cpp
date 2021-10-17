@@ -109,4 +109,9 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
             Rcpp::Named("LowerBorder") = PriceSeriesToXts( lLowerBorder, lTZone )
         );
         
-    } else
+    } else {
+        return R_NilValue;
+    }
+}
+
+//----------------------
