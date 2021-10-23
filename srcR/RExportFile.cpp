@@ -114,4 +114,4 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     }
 }
 
-//----------------------
+//---------------------------------------------------------------------------------
