@@ -114,4 +114,5 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
     }
 }
 
-//---------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+double DealsToPnLValue( const Rcpp::DataFrame 
