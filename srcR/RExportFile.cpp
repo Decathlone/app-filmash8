@@ -120,4 +120,6 @@ double DealsToPnLValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) {
     double lFirstPrice = Rcpp::as<double>( lParam["FirstPrice"] );
     double lMinDeals = Rcpp::as<double>( lParam["MinDeals"] );
 
-    const TDeals lDeals( DataFrameT
+    const TDeals lDeals( DataFrameToDeals( aDeals, lFirstPrice ) );
+
+    return DealsToPNLCoefficientQuick
