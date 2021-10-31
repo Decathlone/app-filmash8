@@ -118,4 +118,6 @@ Rcpp::List Forecasting( const Rcpp::NumericMatrix & aXts, const int aForecastPer
 double DealsToPnLValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) {
     const Rcpp::List lParam( aParams );
     double lFirstPrice = Rcpp::as<double>( lParam["FirstPrice"] );
-    double lMinDeals = Rcpp::as<double
+    double lMinDeals = Rcpp::as<double>( lParam["MinDeals"] );
+
+    const TDeals lDeals( DataFrameT
