@@ -129,4 +129,5 @@ double DealsToPnLValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) {
 double DealsToStatValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) {
     const Rcpp::List lParam( aParams );
     double lFirstPrice = Rcpp::as<double>( lParam["FirstPrice"] );
-    const size_t N = Rcpp::as<size_t>( lP
+    const size_t N = Rcpp::as<size_t>( lParam["N"] ) ;
+    double lQuantile = Rcpp::as<double>( lParam["Qu
