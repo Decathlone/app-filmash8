@@ -135,4 +135,7 @@ double DealsToStatValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) 
     const TDeals lDeals( DataFrameToDeals( aDeals, lFirstPrice ) );
     const TPriceSeries lPns(DealsToPnLs( lDeals ));
     
-    retur
+    return PnLsToMoneyStatValue( lPns, false, N, lQuantile );
+}
+
+//--
