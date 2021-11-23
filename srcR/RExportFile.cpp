@@ -138,4 +138,4 @@ double DealsToStatValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) 
     return PnLsToMoneyStatValue( lPns, false, N, lQuantile );
 }
 
-//--
+//-------------------------------------------------------------------------------------
