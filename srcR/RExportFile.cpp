@@ -139,4 +139,5 @@ double DealsToStatValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) 
 }
 
 //------------------------------------------------------------------------------------------
-double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, 
+double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, const SEXP & aParams ) {
+    const Rcpp::List lParam( aPa
