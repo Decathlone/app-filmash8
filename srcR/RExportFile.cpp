@@ -147,3 +147,6 @@ double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, const SEXP & aPar
     double lQuantile = Rcpp::as<double>( lParam["Quantile"] );
     
     const TDeals lDeals( DataFrameToDeals( aDeals, lFirstPrice ) );
+    const TPriceSeries lPns(DealsToPnLs( lDeals ));
+    
+    retur
