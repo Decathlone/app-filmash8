@@ -146,4 +146,4 @@ double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, const SEXP & aPar
     const size_t aSamples = Rcpp::as<size_t>( lParam["Samples"] ) ;
     double lQuantile = Rcpp::as<double>( lParam["Quantile"] );
     
-    const TDeals 
+    const TDeals lDeals( DataFrameToDeals( aDeals, lFirstPrice ) );
