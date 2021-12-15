@@ -152,4 +152,5 @@ double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, const SEXP & aPar
     return PnLsToMoneyMonteCarloQuantile( lPns, false, N, aSamples, lQuantile );    
 }
 
-//--------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::List DealsToC
