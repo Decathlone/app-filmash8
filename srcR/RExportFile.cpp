@@ -155,4 +155,7 @@ double DealsToMonteCarloValue( const Rcpp::DataFrame & aDeals, const SEXP & aPar
 //------------------------------------------------------------------------------------------
 Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp::DataFrame & aDeals, const SEXP & aParams ) {
     
-    const TBarSeries lBars = XtsT
+    const TBarSeries lBars = XtsToBarSeries( aBars );
+    
+    const Rcpp::List lParam( aParams );
+   
