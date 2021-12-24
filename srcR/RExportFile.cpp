@@ -158,4 +158,4 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     const TBarSeries lBars = XtsToBarSeries( aBars );
     
     const Rcpp::List lParam( aParams );
-   
+    const double lMinDealsPerDay = Rcpp::as<double>( lParam[ "MinDeals" ] 
