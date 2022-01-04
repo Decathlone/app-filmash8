@@ -160,4 +160,6 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     const Rcpp::List lParam( aParams );
     const double lMinDealsPerDay = Rcpp::as<double>( lParam[ "MinDeals" ] );
     double lBeginLabel = ( Rcpp::as<Rcpp::Datetime>( lParam["BeginLabel"] ) ).getFractionalTimestamp() * gOneDay;
-    double lEndLabel = ( Rcpp::as<Rcpp::Datetime>( lParam["EndLabel"] 
+    double lEndLabel = ( Rcpp::as<Rcpp::Datetime>( lParam["EndLabel"] ) ).getFractionalTimestamp() * gOneDay;
+    
+    const size_t lMinDeals 
