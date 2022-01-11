@@ -164,4 +164,6 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     
     const size_t lMinDeals = std::max( gMinDealsForAllTime, RoundToSize_t( lMinDealsPerDay * ( lEndLabel / gOneDay - lBeginLabel / gOneDay ) ) );
 
-    TPric
+    TPrice lMaxDD = 0.0;
+    TPrice lPnl = 0.0;
+    size_t lMaxPos = 0
