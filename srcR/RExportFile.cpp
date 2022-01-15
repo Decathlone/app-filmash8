@@ -166,4 +166,6 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
 
     TPrice lMaxDD = 0.0;
     TPrice lPnl = 0.0;
-    size_t lMaxPos = 0
+    size_t lMaxPos = 0;
+    size_t lMeadPos = 0;
+    const TDeals lDeals( Da
