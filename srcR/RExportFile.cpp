@@ -169,4 +169,4 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     size_t lMaxPos = 0;
     size_t lMeadPos = 0;
     const TDeals lDeals( DataFrameToDeals( aDeals ) );
-    const TPrice lCoeff = DealsToCoeff( lBa
+    const TPrice lCoeff = DealsToCoeff( lBars, lDeals, lMinDeals, lPnl, lMaxDD, lMaxPos, lMeadPos );
