@@ -170,3 +170,6 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     size_t lMeadPos = 0;
     const TDeals lDeals( DataFrameToDeals( aDeals ) );
     const TPrice lCoeff = DealsToCoeff( lBars, lDeals, lMinDeals, lPnl, lMaxDD, lMaxPos, lMeadPos );
+        
+    return Rcpp::List::create(
+        Rcpp::Named( "Attraction" ) = lCoe
