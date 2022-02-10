@@ -172,4 +172,6 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     const TPrice lCoeff = DealsToCoeff( lBars, lDeals, lMinDeals, lPnl, lMaxDD, lMaxPos, lMeadPos );
         
     return Rcpp::List::create(
-        Rcpp::Named( "Attraction" ) = lCoe
+        Rcpp::Named( "Attraction" ) = lCoeff,
+        Rcpp::Named( "MaxDD" ) = lMaxDD,
+        Rcpp::Named( "Pnl"
