@@ -176,4 +176,8 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
         Rcpp::Named( "MaxDD" ) = lMaxDD,
         Rcpp::Named( "Pnl" ) = lPnl,
         Rcpp::Named( "MaxPos" ) = lMaxPos,
-   
+        Rcpp::Named( "MeadPos" ) = lMeadPos
+    );
+}
+
+//-------------
