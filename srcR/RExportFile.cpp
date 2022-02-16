@@ -180,4 +180,4 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
     );
 }
 
-//-------------
+//------------------------------------------------------------------------------------------
