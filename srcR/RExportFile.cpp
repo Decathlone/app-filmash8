@@ -188,4 +188,6 @@ Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
     TPriceSeries lDMIp;
     TPriceSeries lDMIn;
 
-    if( _DI( lBars, a
+    if( _DI( lBars, aPeriod, lDMIp, lDMIn ) ) {
+
+        const std::string lTZone( R
