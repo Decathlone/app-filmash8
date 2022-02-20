@@ -185,4 +185,7 @@ Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
 
     const TBarSeries lBars( XtsToBarSeries( aXts ) );
 
-    T
+    TPriceSeries lDMIp;
+    TPriceSeries lDMIn;
+
+    if( _DI( lBars, a
