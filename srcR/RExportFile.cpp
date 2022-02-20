@@ -182,3 +182,7 @@ Rcpp::List DealsToCoeffUnrealized( const Rcpp::NumericMatrix & aBars, const Rcpp
 
 //------------------------------------------------------------------------------------------
 Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
+
+    const TBarSeries lBars( XtsToBarSeries( aXts ) );
+
+    T
