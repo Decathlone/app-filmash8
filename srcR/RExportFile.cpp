@@ -191,4 +191,5 @@ Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
     if( _DI( lBars, aPeriod, lDMIp, lDMIn ) ) {
 
         const std::string lTZone( Rcpp::as< std::string >( aXts.attr("tzone") ) );
-        ///\tod
+        ///\todo заменить плохие значения на NA
+        return Rcpp::List::create
