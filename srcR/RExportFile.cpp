@@ -194,4 +194,12 @@ Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
         ///\todo заменить плохие значения на NA
         return Rcpp::List::create(
             Rcpp::Named("DMp") = PriceSeriesToXts( lDMIp, lTZone ),
-            Rcpp::Named("DMn") = PriceSeriesToXts( lD
+            Rcpp::Named("DMn") = PriceSeriesToXts( lDMIn, lTZone )
+        );
+
+    } else {
+        return R_NilValue;
+    }
+}
+
+//----
