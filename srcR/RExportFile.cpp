@@ -202,4 +202,4 @@ Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
     }
 }
 
-//----
+//--------------------------------------------------------------------------
