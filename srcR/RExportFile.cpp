@@ -203,4 +203,5 @@ Rcpp::List DI( const Rcpp::NumericMatrix &aXts, const int aPeriod ) {
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLC
+Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, const bool aTouch ) {
+    const TBarSeries lBars(
