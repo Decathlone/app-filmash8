@@ -209,4 +209,5 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
     TPriceSeries lMin;
     TPriceSeries lMax;
 
-    if( _RollMinMax( lBars, aPeriod, lMin, lMax, aTouch )
+    if( _RollMinMax( lBars, aPeriod, lMin, lMax, aTouch ) ) {
+        const std::string lTZone( getTimeZone( aOHLCV ) 
