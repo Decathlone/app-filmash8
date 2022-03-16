@@ -212,4 +212,5 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
     if( _RollMinMax( lBars, aPeriod, lMin, lMax, aTouch ) ) {
         const std::string lTZone( getTimeZone( aOHLCV ) );
         return Rcpp::List::create(
-            Rcpp::Named("Min") = Price
+            Rcpp::Named("Min") = PriceSeriesToXts( lMin, lTZone ),
+            Rcpp::Named("Max") = PriceSeriesToXts( lMax, lTZ
