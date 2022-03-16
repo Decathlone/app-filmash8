@@ -207,4 +207,6 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
 
     TPriceSeries lMin;
-    TPriceSeri
+    TPriceSeries lMax;
+
+    if( _RollMinMax( lBars, aPeriod, lMin, lMax, aTouch )
