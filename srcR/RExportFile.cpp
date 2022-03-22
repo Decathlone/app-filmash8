@@ -214,4 +214,5 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
         return Rcpp::List::create(
             Rcpp::Named("Min") = PriceSeriesToXts( lMin, lTZone ),
             Rcpp::Named("Max") = PriceSeriesToXts( lMax, lTZone ),
-            Rcpp::Named("MinVolume") = PriceSeriesVolumeToXts( 
+            Rcpp::Named("MinVolume") = PriceSeriesVolumeToXts( lMin, lTZone ),
+            Rcpp::Named("MaxVolume") = PriceSeri
