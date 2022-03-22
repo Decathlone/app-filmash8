@@ -213,4 +213,5 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
         const std::string lTZone( getTimeZone( aOHLCV ) );
         return Rcpp::List::create(
             Rcpp::Named("Min") = PriceSeriesToXts( lMin, lTZone ),
-            Rcpp::Named("Max") = PriceSeriesToXts( lMax, lTZ
+            Rcpp::Named("Max") = PriceSeriesToXts( lMax, lTZone ),
+            Rcpp::Named("MinVolume") = PriceSeriesVolumeToXts( 
