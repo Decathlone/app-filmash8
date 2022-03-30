@@ -224,4 +224,4 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::List RollM
+Rcpp::List RollMinMax_old( const Rcpp::NumericMatrix & aOHLCV, const in
