@@ -225,4 +225,9 @@ Rcpp::List RollMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, co
 
 //------------------------------------------------------------------------------------------
 Rcpp::List RollMinMax_old( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod, const bool aTouch ) {
-    const TBarSeries lBars( XtsToBarSer
+    const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
+
+    TPriceSeries lMin;
+    TPriceSeries lMax;
+
+    if( 
