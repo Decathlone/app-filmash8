@@ -248,4 +248,7 @@ Rcpp::List RollMinMax_old( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod
 Rcpp::List SupportRessistance( 
     const Rcpp::NumericMatrix & aOHLCV, 
     const int aPeriod, 
-    const size_t aM
+    const size_t aMinTouch, 
+    const double aTollerance ) {
+    
+    const T
