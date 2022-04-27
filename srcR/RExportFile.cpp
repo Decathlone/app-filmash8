@@ -256,4 +256,5 @@ Rcpp::List SupportRessistance(
     TPriceSeries lMin;
     TPriceSeries lMax;
 
-    if( _SupportRessistance( lBars, aPeriod, aMinTouch, a
+    if( _SupportRessistance( lBars, aPeriod, aMinTouch, aTollerance, lMin, lMax ) ) {
+        const std::string lTZone( getTime
