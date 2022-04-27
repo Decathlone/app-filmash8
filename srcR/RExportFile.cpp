@@ -254,4 +254,6 @@ Rcpp::List SupportRessistance(
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
 
     TPriceSeries lMin;
-    
+    TPriceSeries lMax;
+
+    if( _SupportRessistance( lBars, aPeriod, aMinTouch, a
