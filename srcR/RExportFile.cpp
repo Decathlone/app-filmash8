@@ -251,4 +251,7 @@ Rcpp::List SupportRessistance(
     const size_t aMinTouch, 
     const double aTollerance ) {
     
-    const T
+    const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
+
+    TPriceSeries lMin;
+    
