@@ -257,4 +257,6 @@ Rcpp::List SupportRessistance(
     TPriceSeries lMax;
 
     if( _SupportRessistance( lBars, aPeriod, aMinTouch, aTollerance, lMin, lMax ) ) {
-        const std::string lTZone( getTime
+        const std::string lTZone( getTimeZone(aOHLCV) );
+        return Rcpp::List::create(
+            Rcpp::Name
