@@ -259,4 +259,5 @@ Rcpp::List SupportRessistance(
     if( _SupportRessistance( lBars, aPeriod, aMinTouch, aTollerance, lMin, lMax ) ) {
         const std::string lTZone( getTimeZone(aOHLCV) );
         return Rcpp::List::create(
-            Rcpp::Name
+            Rcpp::Named("Min") = PriceSeriesToXts( lMin, lTZone ),
+            Rcpp::Named("
