@@ -262,4 +262,4 @@ Rcpp::List SupportRessistance(
             Rcpp::Named("Min") = PriceSeriesToXts( lMin, lTZone ),
             Rcpp::Named("Max") = PriceSeriesToXts( lMax, lTZone ),
             Rcpp::Named("MinVolume") = PriceSeriesVolumeToXts( lMin, lTZone ),
-            Rcpp
+            Rcpp::Named("MaxVolume") = PriceSeriesVolumeToXts( lMax
