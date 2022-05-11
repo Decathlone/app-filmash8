@@ -269,3 +269,5 @@ Rcpp::List SupportRessistance(
         return R_NilValue;
     }
 }
+
+//-----------------------------------------------------
