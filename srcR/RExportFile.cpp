@@ -271,4 +271,6 @@ Rcpp::List SupportRessistance(
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::List ForwardMinMax( co
+Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDelta ) {
+
+    if( aTim
