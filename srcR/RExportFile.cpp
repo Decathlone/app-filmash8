@@ -282,4 +282,4 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
     TPriceSeries lMin;
     TPriceSeries lMax;
 
-    if(
+    if( _ForwardMinMax( lBars, static_cast<size_t>(aTimeDelta), lMin
