@@ -277,4 +277,9 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
         return R_NilValue;
     }
     
-    const TBarSeries lBars( XtsToBarSeries( aOHLCV )
+    const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
+
+    TPriceSeries lMin;
+    TPriceSeries lMax;
+
+    if(
