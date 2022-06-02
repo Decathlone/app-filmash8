@@ -282,4 +282,6 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
     TPriceSeries lMin;
     TPriceSeries lMax;
 
-    if( _ForwardMinMax( lBars, static_cast<size_t>(aTimeDelta), lMin
+    if( _ForwardMinMax( lBars, static_cast<size_t>(aTimeDelta), lMin, lMax ) ) {
+
+        const std::string lTZone(getTimeZone(aOHL
