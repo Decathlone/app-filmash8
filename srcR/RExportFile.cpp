@@ -291,4 +291,8 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
         );
 
     } else {
-        retu
+        return R_NilValue;
+    }
+}
+
+//------------------------------------------
