@@ -296,4 +296,4 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVec
+Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int
