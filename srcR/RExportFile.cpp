@@ -287,4 +287,8 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
         const std::string lTZone(getTimeZone(aOHLCV));
         return Rcpp::List::create(
             Rcpp::Named("Min") = PriceSeriesToXts( lMin, lTZone ),
-            Rcpp::Named("Max") = Price
+            Rcpp::Named("Max") = PriceSeriesToXts( lMax, lTZone )
+        );
+
+    } else {
+        retu
