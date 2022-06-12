@@ -296,4 +296,5 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int
+Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod ) {
+    const TBarSeries lBars( XtsToBarSeries( aOHLCV ) )
