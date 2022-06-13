@@ -298,4 +298,7 @@ Rcpp::List ForwardMinMax( const Rcpp::NumericMatrix & aOHLCV, const int aTimeDel
 //------------------------------------------------------------------------------------------
 Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod ) {
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
-    const TPriceSeries lResult( _ChannelSize( lBars, aPeriod )
+    const TPriceSeries lResult( _ChannelSize( lBars, aPeriod ) );
+    
+    const std::string lTZone(getTimeZone(aOHLCV));
+    return Pr
