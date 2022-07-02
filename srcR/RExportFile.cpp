@@ -304,4 +304,5 @@ Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int a
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//----------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::Num
