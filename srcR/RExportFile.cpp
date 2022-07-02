@@ -301,4 +301,7 @@ Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int a
     const TPriceSeries lResult( _ChannelSize( lBars, aPeriod ) );
     
     const std::string lTZone(getTimeZone(aOHLCV));
-    return Pr
+    return PriceSeriesToXts( lResult, lTZone );
+}
+
+//----------------------------
