@@ -305,4 +305,5 @@ Rcpp::NumericVector ChannelSize( const Rcpp::NumericMatrix & aOHLCV, const int a
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const 
+Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFactor, const double aMaxAccFactor, const bool aOvernight ) {
+   
