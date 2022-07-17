@@ -310,4 +310,6 @@ Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFa
     const TPriceSeries lResult(
         aOvernight 
         ? 
-        _P
+        _ParabolicSar( lBars, aAccFactor, aMaxAccFactor )
+        :
+        _Intrad
