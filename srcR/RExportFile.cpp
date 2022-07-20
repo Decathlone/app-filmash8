@@ -312,4 +312,5 @@ Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFa
         ? 
         _ParabolicSar( lBars, aAccFactor, aMaxAccFactor )
         :
-        _Intrad
+        _IntradayParabolicSar( lBars, aAccFactor, aMaxAccFactor ) 
+  
