@@ -313,4 +313,6 @@ Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFa
         _ParabolicSar( lBars, aAccFactor, aMaxAccFactor )
         :
         _IntradayParabolicSar( lBars, aAccFactor, aMaxAccFactor ) 
-  
+    );
+
+    const std::string lTZone(getTimeZone(aOHLCV));
