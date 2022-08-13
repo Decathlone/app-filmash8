@@ -316,3 +316,7 @@ Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFa
     );
 
     const std::string lTZone(getTimeZone(aOHLCV));
+    return PriceSeriesToXts( lResult, lTZone );
+}
+
+//----------
