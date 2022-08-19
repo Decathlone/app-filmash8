@@ -319,4 +319,5 @@ Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFa
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//--------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, c
