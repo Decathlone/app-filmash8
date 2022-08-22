@@ -320,4 +320,5 @@ Rcpp::NumericVector SAR( const Rcpp::NumericMatrix & aOHLCV, const double aAccFa
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, c
+Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGap ) {
+    const TBarSeries lBars( XtsToBar
