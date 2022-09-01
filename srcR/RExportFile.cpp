@@ -326,3 +326,6 @@ Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGa
     
     const std::string lTZone(getTimeZone(aOHLCV));
     return PriceSeriesToXts( lResult, lTZone );
+}
+
+//------------------------------------------------------------------
