@@ -328,4 +328,5 @@ Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGa
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVector AbsoluteZigZag( const R
