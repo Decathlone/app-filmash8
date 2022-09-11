@@ -331,4 +331,6 @@ Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGa
 //------------------------------------------------------------------------------------------
 Rcpp::NumericVector AbsoluteZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGap ) {
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
-    const TPriceSeries lResul
+    const TPriceSeries lResult( _AbsoluteZigZag( lBars, aGap ) );
+    
+    const std::strin
