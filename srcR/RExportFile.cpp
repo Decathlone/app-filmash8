@@ -329,4 +329,5 @@ Rcpp::NumericVector ZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGa
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector AbsoluteZigZag( const R
+Rcpp::NumericVector AbsoluteZigZag( const Rcpp::NumericMatrix & aOHLCV, const double aGap ) {
+    const TBa
