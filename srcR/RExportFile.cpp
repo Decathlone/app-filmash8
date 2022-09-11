@@ -337,4 +337,5 @@ Rcpp::NumericVector AbsoluteZigZag( const Rcpp::NumericMatrix & aOHLCV, const do
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//-------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVector Stochastic( const R
