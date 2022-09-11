@@ -333,4 +333,5 @@ Rcpp::NumericVector AbsoluteZigZag( const Rcpp::NumericMatrix & aOHLCV, const do
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
     const TPriceSeries lResult( _AbsoluteZigZag( lBars, aGap ) );
     
-    const std::strin
+    const std::string lTZone(getTimeZone(aOHLCV));
+    return PriceSeriesToXts( lResult
