@@ -340,4 +340,6 @@ Rcpp::NumericVector AbsoluteZigZag( const Rcpp::NumericMatrix & aOHLCV, const do
 //------------------------------------------------------------------------------------------
 Rcpp::NumericVector Stochastic( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod ) {
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
-    const TPriceSeries lResult( _St
+    const TPriceSeries lResult( _Stochastic( lBars, aPeriod ) );
+    
+    const std::string lTZone(getTim
