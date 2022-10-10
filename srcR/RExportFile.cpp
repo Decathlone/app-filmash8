@@ -342,4 +342,5 @@ Rcpp::NumericVector Stochastic( const Rcpp::NumericMatrix & aOHLCV, const int aP
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
     const TPriceSeries lResult( _Stochastic( lBars, aPeriod ) );
     
-    const std::string lTZone(getTim
+    const std::string lTZone(getTimeZone(aOHLCV));
+    return PriceSeriesToXts( lResult, lTZone );
