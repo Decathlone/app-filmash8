@@ -355,4 +355,4 @@ Rcpp::NumericVector ADX( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod )
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//
+//---------------------------------------------------------------------------------
