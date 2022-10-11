@@ -348,4 +348,5 @@ Rcpp::NumericVector Stochastic( const Rcpp::NumericMatrix & aOHLCV, const int aP
 
 //------------------------------------------------------------------------------------------
 Rcpp::NumericVector ADX( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod ){
-    const TBa
+    const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
+    const TPriceSeries lResult( _ADX(
