@@ -347,4 +347,5 @@ Rcpp::NumericVector Stochastic( const Rcpp::NumericMatrix & aOHLCV, const int aP
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericVector ADX( const 
+Rcpp::NumericVector ADX( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod ){
+    const TBa
