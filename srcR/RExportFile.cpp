@@ -346,4 +346,5 @@ Rcpp::NumericVector Stochastic( const Rcpp::NumericMatrix & aOHLCV, const int aP
     return PriceSeriesToXts( lResult, lTZone );
 }
 
-//---------------------------------------------------------
+//------------------------------------------------------------------------------------------
+Rcpp::NumericVector ADX( const 
