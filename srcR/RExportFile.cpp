@@ -351,4 +351,8 @@ Rcpp::NumericVector ADX( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod )
     const TBarSeries lBars( XtsToBarSeries( aOHLCV ) );
     const TPriceSeries lResult( _ADX( lBars, aPeriod ) );
     
-    const std::string lTZone(getTimeZ
+    const std::string lTZone(getTimeZone(aOHLCV));
+    return PriceSeriesToXts( lResult, lTZone );
+}
+
+//
