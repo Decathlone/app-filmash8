@@ -358,4 +358,5 @@ Rcpp::NumericVector ADX( const Rcpp::NumericMatrix & aOHLCV, const int aPeriod )
 //------------------------------------------------------------------------------------------
 Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int aPeriod, const double aSigma, const int aType ) {
     const TMAPoint lMAPoint = static_cast< TMAPoint >( aType );
-  
+    std::string lTZone;
+    const TPriceSeries lPrices( XtsToP
