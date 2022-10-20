@@ -361,4 +361,8 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     std::string lTZone;
     const TPriceSeries lPrices( XtsToPriceSeries( aXts, lMAPoint, lTZone ) );
     
-    TPriceSe
+    TPriceSeries lMin;
+    TPriceSeries lMean;
+    TPriceSeries lMax;
+    
+    const bo
