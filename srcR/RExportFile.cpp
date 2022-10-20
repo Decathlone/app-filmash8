@@ -365,4 +365,9 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     TPriceSeries lMean;
     TPriceSeries lMax;
     
-    const bool lRes( _BollingerBands(lPrices, aPeriod, aSigma, lMin,lMean,lMa
+    const bool lRes( _BollingerBands(lPrices, aPeriod, aSigma, lMin,lMean,lMax) );
+    if( not lRes){
+        return R_NilValue;
+    }
+    
+    Rcpp:
