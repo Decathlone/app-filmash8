@@ -373,4 +373,5 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     Rcpp::NumericMatrix lResult( ToInt(lPrices.size()), 3 );
     Rcpp::NumericVector lIndex( ToInt(lPrices.size()) );
     for( size_t i=0; i < lPrices.size(); ++i ) {
-        lResult( i, 0 ) = IsEqual( lMin[ i ].Price, Ge
+        lResult( i, 0 ) = IsEqual( lMin[ i ].Price, GetBadPrice() ) ? NA_REAL : lMin[ i ].Price ;
+        lResult( i, 1
