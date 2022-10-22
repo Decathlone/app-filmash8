@@ -370,4 +370,5 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
         return R_NilValue;
     }
     
-    Rcpp:
+    Rcpp::NumericMatrix lResult( ToInt(lPrices.size()), 3 );
+    Rcpp::NumericVector lIndex( 
