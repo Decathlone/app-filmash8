@@ -376,4 +376,7 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
         lResult( i, 0 ) = IsEqual( lMin[ i ].Price, GetBadPrice() ) ? NA_REAL : lMin[ i ].Price ;
         lResult( i, 1 ) = IsEqual( lMean[ i ].Price, GetBadPrice() ) ? NA_REAL : lMean[ i ].Price ;
         lResult( i, 2 ) = IsEqual( lMax[ i ].Price, GetBadPrice() ) ? NA_REAL : lMax[ i ].Price ;
-        lIndex[ i ] = lPrices[ i
+        lIndex[ i ] = lPrices[ i ].DateTime;
+    }
+    
+    lIndex.attr("tzone") = aXts.attr("tz
