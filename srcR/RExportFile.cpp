@@ -379,4 +379,5 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
         lIndex[ i ] = lPrices[ i ].DateTime;
     }
     
-    lIndex.attr("tzone") = aXts.attr("tz
+    lIndex.attr("tzone") = aXts.attr("tzone");// "Europe/Moscow"; // the index has attributes
+    lIndex.attr("tclass") =
