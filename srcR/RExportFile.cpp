@@ -382,4 +382,5 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     lIndex.attr("tzone") = aXts.attr("tzone");// "Europe/Moscow"; // the index has attributes
     lIndex.attr("tclass") = "POSIXct";
     lResult.attr("dim") = Rcpp::IntegerVector::create( lPrices.size(), 3 );
-    lResult.attr("index") = 
+    lResult.attr("index") = lIndex;
+    Rcpp::CharacterVector klass = Rcpp::CharacterVector::crea
