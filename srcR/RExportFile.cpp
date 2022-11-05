@@ -383,4 +383,6 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     lIndex.attr("tclass") = "POSIXct";
     lResult.attr("dim") = Rcpp::IntegerVector::create( lPrices.size(), 3 );
     lResult.attr("index") = lIndex;
-    Rcpp::CharacterVector klass = Rcpp::CharacterVector::crea
+    Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
+    lResult.attr("class") = klass;
+    lRe
