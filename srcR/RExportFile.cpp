@@ -386,4 +386,5 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
     lResult.attr("class") = klass;
     lResult.attr(".indexCLASS") = "POSIXct";
-    lResult.attr("tcla
+    lResult.attr("tclass") = "POSIXct";
+    lResult.attr(".indexTZ") = aXts.attr("tzone"); //"Europe/
