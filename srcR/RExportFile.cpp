@@ -394,4 +394,4 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
     return lResult;
 }
 
-//-----------------------
+//----------------------------------------------------------------------------------
