@@ -397,4 +397,6 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
 //------------------------------------------------------------------------------------------
 Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPeriod ) {
     
-    TBarSeries
+    TBarSeries lNewBars;
+    
+    if( aPeriod > static_cast< int >( TBarPeriod::minValue )
