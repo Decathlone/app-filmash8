@@ -395,4 +395,6 @@ Rcpp::NumericMatrix BollingerBands( const Rcpp::NumericMatrix & aXts, const int 
 }
 
 //------------------------------------------------------------------------------------------
-Rcpp::NumericMatrix ConvertBars( const Rcpp::N
+Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPeriod ) {
+    
+    TBarSeries
