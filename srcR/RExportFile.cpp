@@ -399,4 +399,7 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     
     TBarSeries lNewBars;
     
-    if( aPeriod > static_cast< int >( TBarPeriod::minValue )
+    if( aPeriod > static_cast< int >( TBarPeriod::minValue ) and 
+        aPeriod < static_cast< int >( TBarPeriod::maxValue ) ) {
+        
+ 
