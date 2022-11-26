@@ -406,3 +406,6 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
         lNewBars = _CreateBars( aOldBars, static_cast< TBarPeriod >( aPeriod ) );
     }
   
+    Rcpp::NumericMatrix lResult( ToInt(lNewBars.size()), 5 );
+    
+#prag
