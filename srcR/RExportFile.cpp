@@ -403,4 +403,6 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
         aPeriod < static_cast< int >( TBarPeriod::maxValue ) ) {
         
         const TBarSeries aOldBars = XtsToBarSeries( aXts );
-        lNe
+        lNewBars = _CreateBars( aOldBars, static_cast< TBarPeriod >( aPeriod ) );
+    }
+  
