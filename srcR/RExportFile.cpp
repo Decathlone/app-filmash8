@@ -408,4 +408,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
   
     Rcpp::NumericMatrix lResult( ToInt(lNewBars.size()), 5 );
     
-#prag
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wzero-as-
