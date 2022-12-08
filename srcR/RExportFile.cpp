@@ -410,4 +410,7 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wzero-as-null-pointer-constant"
-    Rcpp::NumericVector lIndex( lNewBars
+    Rcpp::NumericVector lIndex( lNewBars.size() );
+#pragma GCC diagnostic pop    
+    
+    for( size_
