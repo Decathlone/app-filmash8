@@ -413,4 +413,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     Rcpp::NumericVector lIndex( lNewBars.size() );
 #pragma GCC diagnostic pop    
     
-    for( size_
+    for( size_t i=0; i < lNewBars.size(); ++i ) {
+        lResult( i,
