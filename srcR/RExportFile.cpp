@@ -417,4 +417,4 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
         lResult( i, 0 ) = IsEqual( lNewBars[ i ].Open, GetBadPrice() ) ? NA_REAL : lNewBars[ i ].Open ;
         lResult( i, 1 ) = IsEqual( lNewBars[ i ].High, GetBadPrice() ) ? NA_REAL : lNewBars[ i ].High ;
         lResult( i, 2 ) = IsEqual( lNewBars[ i ].Low, GetBadPrice() ) ? NA_REAL : lNewBars[ i ].Low ;
-      
+        lResult( i, 3 ) = IsEqual( lNewBars[ i ].Close, GetBadPrice() ) ? NA_REAL : lN
