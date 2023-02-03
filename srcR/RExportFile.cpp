@@ -419,3 +419,7 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
         lResult( i, 2 ) = IsEqual( lNewBars[ i ].Low, GetBadPrice() ) ? NA_REAL : lNewBars[ i ].Low ;
         lResult( i, 3 ) = IsEqual( lNewBars[ i ].Close, GetBadPrice() ) ? NA_REAL : lNewBars[ i ].Close ;
         lResult( i, 4 ) = lNewBars[ i ].Volume;
+        lIndex[ i ] = lNewBars[ i ].DateTime;
+    }
+    
+    lIndex.att
