@@ -426,4 +426,6 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     lIndex.attr("tclass") = "POSIXct";
     lResult.attr("dim") = Rcpp::IntegerVector::create( lNewBars.size(), 5 );
     lResult.attr("index") = lIndex;
-    Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "
+    Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
+    lResult.attr("class") = klass;
+    lResult.a
