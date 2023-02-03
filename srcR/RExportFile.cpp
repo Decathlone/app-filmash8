@@ -424,4 +424,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     
     lIndex.attr("tzone") = aXts.attr("tzone");// "Europe/Moscow"; // the index has attributes
     lIndex.attr("tclass") = "POSIXct";
-    lResult.attr("
+    lResult.attr("dim") = Rcpp::IntegerVector::create( lNewBars.size(), 5 );
+    lResult.attr("index
