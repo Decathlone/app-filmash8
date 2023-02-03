@@ -422,4 +422,4 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
         lIndex[ i ] = lNewBars[ i ].DateTime;
     }
     
-    lIndex.att
+    lIndex.attr("tzone") = aXts.attr("tzone");// "Europe/Moscow"; // the index ha
