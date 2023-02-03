@@ -428,4 +428,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     lResult.attr("index") = lIndex;
     Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
     lResult.attr("class") = klass;
-    lResult.a
+    lResult.attr(".indexCLASS") = "POSIXct";
+    lResult.attr("tclass") = "PO
