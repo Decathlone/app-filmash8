@@ -429,4 +429,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     Rcpp::CharacterVector klass = Rcpp::CharacterVector::create( "xts", "zoo" );
     lResult.attr("class") = klass;
     lResult.attr(".indexCLASS") = "POSIXct";
-    lResult.attr("tclass") = "PO
+    lResult.attr("tclass") = "POSIXct";
+    lResult.attr(".indexTZ") = aXts.attr("tzone"); //"Europe/M
