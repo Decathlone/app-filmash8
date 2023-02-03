@@ -430,4 +430,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     lResult.attr("class") = klass;
     lResult.attr(".indexCLASS") = "POSIXct";
     lResult.attr("tclass") = "POSIXct";
-    lResult.attr(".indexTZ") = aXts.attr("tzone"); //"Europe/M
+    lResult.attr(".indexTZ") = aXts.attr("tzone"); //"Europe/Moscow";
+    lResult.attr("tzone") = aXts.attr("tzone"); //"Europe/Moscow";
