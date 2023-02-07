@@ -434,4 +434,7 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     lResult.attr("tzone") = aXts.attr("tzone"); //"Europe/Moscow";
     colnames( lResult ) = Rcpp::CharacterVector::create( "Open", "High", "Low", "Close", "Volume" );
     
-    retu
+    return lResult;
+}
+
+//-------------------------------------------------------
