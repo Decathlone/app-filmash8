@@ -437,4 +437,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
     return lResult;
 }
 
-//-------------------------------------------------------
+//------------------------------------------------------------------------------------------
+bool SaveData( const Rcpp::Numer
