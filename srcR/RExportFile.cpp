@@ -438,4 +438,5 @@ Rcpp::NumericMatrix ConvertBars( const Rcpp::NumericMatrix & aXts, const int aPe
 }
 
 //------------------------------------------------------------------------------------------
-bool SaveData( const Rcpp::Numer
+bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName ) {
+    const TBarSeries lBars(
