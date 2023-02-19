@@ -445,4 +445,4 @@ bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName ) {
     
     try {
         std::ofstream out( lName );
-        std::copy( lBars.begin(),
+        std::copy( lBars.begin(), lBars.end(), std::ostream_iterator< TWrapFileData< TSimpleBar > >(
