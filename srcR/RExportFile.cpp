@@ -444,4 +444,5 @@ bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName ) {
     std::cout << "Data saved to " << lName << " row(s):" << lBars.size() << std::endl;
     
     try {
-       
+        std::ofstream out( lName );
+        std::copy( lBars.begin(),
