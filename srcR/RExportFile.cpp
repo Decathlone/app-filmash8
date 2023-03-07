@@ -449,4 +449,9 @@ bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName ) {
         out.close();
         return true;
     
-    } catch (..
+    } catch (...) {
+        return false;
+    }
+}  
+
+//--------------------------
