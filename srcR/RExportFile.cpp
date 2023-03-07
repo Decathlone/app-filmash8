@@ -454,4 +454,5 @@ bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName ) {
     }
 }  
 
-//--------------------------
+//------------------------------------------------------------------------------------------
+std::any getValueFromR
