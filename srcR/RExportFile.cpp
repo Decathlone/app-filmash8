@@ -456,3 +456,7 @@ bool SaveData( const Rcpp::NumericMatrix & aOHLCV, const SEXP & aFileName ) {
 
 //------------------------------------------------------------------------------------------
 std::any getValueFromR( Rcpp::List::NameProxy aValue, const std::type_index aType ) {
+
+    std::any lResult;
+    
+    if(aType == std::type_index(
