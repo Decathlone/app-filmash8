@@ -475,4 +475,5 @@ std::any getValueFromR( Rcpp::List::NameProxy aValue, const std::type_index aTyp
         lResult = Rcpp::as<float>(aValue);
     }
 
-    if(aTyp
+    if(aType == std::type_index(typeid(std::string))){ 
+        lResult = std::mak
