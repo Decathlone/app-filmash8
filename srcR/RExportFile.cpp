@@ -464,3 +464,7 @@ std::any getValueFromR( Rcpp::List::NameProxy aValue, const std::type_index aTyp
     }
 
     if(aType == std::type_index(typeid(int))){
+        lResult = Rcpp::as<int>(aValue);
+    }
+
+    i
