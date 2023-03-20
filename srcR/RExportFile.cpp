@@ -479,4 +479,7 @@ std::any getValueFromR( Rcpp::List::NameProxy aValue, const std::type_index aTyp
         lResult = std::make_any<std::string>(Rcpp::as<std::string>(aValue));
     }
     
-    return lRe
+    return lResult;
+}
+
+//-----------------------------------------------------------------
