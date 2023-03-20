@@ -483,4 +483,6 @@ std::any getValueFromR( Rcpp::List::NameProxy aValue, const std::type_index aTyp
 }
 
 //------------------------------------------------------------------------------------------
-std::string R2String( Rcpp::List::NameProxy aValue
+std::string R2String( Rcpp::List::NameProxy aValue, const std::type_index aType ) {
+
+    std::string lResult;
