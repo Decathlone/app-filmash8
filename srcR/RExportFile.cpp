@@ -488,4 +488,7 @@ std::string R2String( Rcpp::List::NameProxy aValue, const std::type_index aType 
     std::string lResult;
     
     if(aType == std::type_index(typeid(size_t))){ 
-        lResul
+        lResult = std::to_string(Rcpp::as<size_t>(aValue));
+    }
+
+    if(aType == std::t
