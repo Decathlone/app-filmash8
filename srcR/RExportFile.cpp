@@ -503,4 +503,5 @@ std::string R2String( Rcpp::List::NameProxy aValue, const std::type_index aType 
         lResult = std::to_string(Rcpp::as<float>(aValue));
     }
 
-    if(aType == std::ty
+    if(aType == std::type_index(typeid(std::string))){ 
+        lResult = Rcpp::as<std::string>(aVal
